@@ -1,0 +1,22 @@
+		<footer>
+			<div class="container">
+				<nav>
+					<ul>
+						{% for link in site.data.nav.pages %}<li><a href="{{ link.link | relative_url | uri_escape }}">{{ link.name | escape }}</a></li>{% endfor %}
+					</ul>
+					<ul class="social">
+						{% for link in site.data.nav.social %}<li><a href="{{ link.link | uri_escape }}"><span class="icon fab fa-{{ link.icon | escape }} fa-fw" alt="{{ link.name | escape }}" title="{{ link.name | escape }}"></span></a></li>{% endfor %}
+					</ul>
+				</nav>
+				
+				<p>Copyright &copy; 2019, Adam Rehn and the Unreal Containers community contributors. Unless otherwise noted, all content on this site is licensed under a <a class="text-light" rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+				<p>Docker and the Docker logo are trademarks or registered trademarks of Docker in the United States and other countries.</p>
+				<p>Unreal and its logo are Epic Games' trademarks or registered trademarks in the US and elsewhere.</p>
+			</div>
+		</footer>
+		
+		<script src="{{ "/" | relative_url }}assets/js/thirdparty/jquery-3.3.1.min.js"></script>
+		<script src="{{ "/" | relative_url }}assets/js/thirdparty/popper.min.js"></script>
+		<script src="{{ "/" | relative_url }}assets/js/thirdparty/bootstrap.min.js"></script>
+	</body>
+</html>

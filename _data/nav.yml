@@ -1,0 +1,42 @@
+pages:
+  -
+    name: Home
+    link: /
+  -
+    name: Support
+    link: /support
+  -
+    name: Success Stories
+    link: /success-stories
+  -
+    name: Documentation
+    link: /docs
+    icon: book
+    blurb: Extensive documentation covering a wide variety of use cases and environments.
+  -
+    name: Media
+    link: /media
+    icon: play
+    blurb: Videos and slide decks from live presentations and online training courses.
+  -
+    name: Code
+    link: /code
+    icon: code
+    blurb: Sample code repositories to demonstrate various use cases and library integrations.
+  
+social:
+  -
+    name: Unreal Slackers @ Discord
+    link: https://unrealslackers.org/
+    button: discord
+    icon: discord
+  -
+    name: Unreal Containers @ GitHub
+    link: https://github.com/UnrealContainers
+    button: dark
+    icon: github
+  -
+    name: Unreal Containers @ Twitter
+    link: https://twitter.com/UnrealContainer
+    button: twitter
+    icon: twitter

@@ -1,0 +1,2 @@
+{% assign pages = site.documents | where: "category", include.category | where: "subcategory", include.subcategory | where_exp: "page", "page.order != null" | sort: "order" %}
+{% include lists/pages.html pages=pages %}

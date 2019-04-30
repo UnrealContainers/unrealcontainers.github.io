@@ -1,0 +1,5 @@
+<ul class="provider-details">
+	<li><span class="icon fas fa-fw fa-map-marker-alt"></span> {{ include.location | escape }}</li>
+	<li><span class="icon fas fa-fw fa-link"></span> <a href="{{ include.link | uri_escape }}">{{ include.link | escape }}</a></li>
+	<li><span class="icon far fa-fw fa-envelope"></span> <a href="mailto:{{ include.email | uri_escape }}">{{ include.email | escape }}</a></li>
+</ul>

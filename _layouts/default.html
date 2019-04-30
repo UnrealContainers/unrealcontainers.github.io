@@ -1,0 +1,55 @@
+{% include header.html %}
+
+<header id="top">
+	
+	<div class="nav-wrapper-outer container">
+		<div class="container">
+			<div class="nav-wrapper-inner">
+				<p class="logos">
+					<a href="{{ "/" | relative_url }}"><img src="{{ "/" | relative_url }}assets/images/logos-compact.svg" alt="Unreal Engine and Docker Logos"></a>
+				</p>
+				<p id="navtoggle">
+					<a data-toggle="collapse" href="nav" role="button" aria-expanded="false" aria-controls="nav"><span class="fas fa-bars" title="Toggle navigation"></span></a>
+				</p>
+			</div>
+			<nav class="collapse">
+				<ul>
+					{% for link in site.data.nav.pages %}<li class="page link-{{ link.name | downcase | escape | replace: " ", "-" }}"><a href="{{ link.link | relative_url | uri_escape }}">{{ link.name | escape }}</a></li>{% endfor %}{% for link in site.data.nav.social %}<li class="social"><a href="{{ link.link | uri_escape }}"><span class="icon fab fa-{{ link.icon | escape }} fa-fw" alt="{{ link.name | escape }}" title="{{ link.name | escape }}"></span><span class="text"> {{ link.name | escape }}</span></a></li>{% endfor %}
+				</ul>
+			</nav>
+		</div>
+	</div>
+	
+	<section class="jumbotron jumbotron-fluid mb-0">
+		{% if page.subcategory != null and page.subcategory != "" and page.title != page.subcategory %}
+			{% assign category = page.subcategory %}
+		{% elsif page.category != null and page.category != "" and page.title != page.category %}
+			{% assign category = page.category %}
+		{% endif %}
+		{% if category != null %}<p class="category">{{ category | escape }}:</p>{% endif %}
+		<h1>{{ page.title | escape }}</h1>
+		<p class="lead">{{ page.tagline | escape }}</p>
+	</section>
+	
+	{% if page.category != null and page.category != "" and page.subcategory != null and page.subcategory != "" %}
+	<section class="breadcrumb-wrapper">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item"><a href="../">{{ page.category | escape }}</a></li>
+				<li class="breadcrumb-item"><a href="./">{{ page.subcategory | escape }}</a></li>
+				<li class="breadcrumb-item active">{% if page.title == page.subcategory %}Category Index{% else  %}{{ page.title | escape }}{% endif %}</li>
+			</ul>
+		</div>
+	</section>
+	{% endif %}
+</header>
+
+<main>
+	<article class="container">
+		
+		{{ content }}
+		
+	</article>
+</main>
+
+{% include footer.html %}

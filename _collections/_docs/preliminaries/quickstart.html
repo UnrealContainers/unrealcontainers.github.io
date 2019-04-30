@@ -1,0 +1,56 @@
+---
+title: Quickstart Guide
+tagline: Quickly find the information you need to start using Unreal Engine containers in your own workflows.
+pageclass: quickstart
+order: 1
+---
+
+<section class="quickstart-intro">
+	
+	<h2>What would you like to achieve?</h2>
+	
+	<div class="items-columns">
+	
+		{% for goal in site.data.quickstart %}
+		<div class="media-item icon">
+			<a href="#{{ goal.id | uri_escape }}">
+				<div class="media-image"><span class="fas fa-{{ goal.icon | escape }}"></span></div>
+				<div class="media-body">
+					<h3>{{ goal.name | escape }}</h3>
+				</div>
+			</a>
+		</div>
+		{% endfor %}
+		
+	</div>
+	
+	<p class="lead">Can't see what you're interested in? Check out the <a href="../use-cases/">full list of documented use cases</a>.</p>
+	
+</section>
+
+
+{% for goal in site.data.quickstart %}
+	
+	<h2 id="{{ goal.id | escape }}">{{ goal.name | escape }}</h2>
+	
+	{% for subcategory in page.subcategories %}
+		
+		{% assign index = site.documents | where: "category", page.category | where: "subcategory", subcategory | where_exp: "page", "page.order == null" | first %}
+		{% assign pages = site.documents | where: "category", page.category | where: "subcategory", subcategory | where_exp: "page", "page.order != null" | sort: "order" %}
+		{% assign filtered = "" | split: "" %}
+		{% for page in pages %}
+			{% if page.quickstart contains goal.id %}
+					{% assign filtered = filtered | push: page %}
+			{% endif %}
+		{% endfor %}
+		
+		{% if filtered.size > 0 %}
+			
+			<p><strong>You may be interested in the following pages in the <a href="{{ index.url | uri_escape }}">{{ subcategory | escape }}</a> category:</strong></p>
+			{% include lists/pages.html pages=filtered %}
+			
+		{% endif %}
+		
+	{% endfor %}
+	
+{% endfor %}

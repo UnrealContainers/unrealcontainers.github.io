@@ -1,0 +1,7 @@
+<div class="alert {{ include.class }}">
+	<p class="icon {{ include.icon }}"></p>
+	<div class="content">
+		{% if include.title != nil %}<p class="title">{{ include.title | escape }}</p>{% endif %}
+		{{ include.content | markdownify }}
+	</div>
+</div>

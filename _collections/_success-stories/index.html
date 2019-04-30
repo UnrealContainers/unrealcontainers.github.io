@@ -1,0 +1,14 @@
+---
+layout: default
+title: Success Stories
+tagline: See how developers are already using Docker containers to bring the power of the Unreal Engine to the cloud.
+category: ""
+---
+
+<div class="items-rows">
+		
+	{% assign stories = site.collections | where: "label", "success-stories" | first %}
+	{% assign stories = stories.docs | where_exp: "story", "story.title != 'Success Stories'" | sort: "title" %}
+	{% include lists/success-stories.html stories=stories %}
+	
+</div>

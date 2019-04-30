@@ -1,0 +1,11 @@
+{% assign filtered = "" | split: "" %}
+{% for category in site.data.media %}
+	{% if category.items != nil and category.items.size > 0 %}
+		{% for item in category.items %}
+			{% if item.related contains include.url %}
+				{% assign filtered = filtered | push: item %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endfor %}
+{% include lists/media.html items=filtered %}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="icon" type="image/svg+xml" href="{{ "/" | relative_url }}assets/images/favicon.svg">
+		<link rel="icon" type="image/png" href="{{ "/" | relative_url }}assets/images/favicon.png">
+		
+		<meta property="og:title" content="{% if page.pageclass == "home" %}{{ page.title | escape }}{% else %}{% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title | escape }}{% endif %}">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="{{ site.url | uri_escape }}{{ page.url | uri_escape }}">
+		<meta property="og:image" content="{{ site.url | uri_escape }}/assets/images/opengraph.png">
+		<meta property="og:description" content="{{ page.tagline | escape }}"> 
+		
+		<title>{% if page.pageclass == "home" %}{{ page.title | escape }}{% else %}{% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title | escape }}{% endif %}</title>
+		
+		<link href="{{ "/" | relative_url }}assets/css/thirdparty/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="{{ "/" | relative_url }}assets/css/fonts.css" rel="stylesheet" type="text/css">
+		<link href="{{ "/" | relative_url }}assets/css/base.css" rel="stylesheet" type="text/css">
+		<link href="{{ "/" | relative_url }}assets/css/content.css" rel="stylesheet" type="text/css">
+		<link href="{{ "/" | relative_url }}assets/css/responsive.css" rel="stylesheet" type="text/css">
+		<link href="{{ "/" | relative_url }}assets/css/code.css" rel="stylesheet" type="text/css">
+	</head>
+	
+	<body class="page-{{ page.pageclass | escape }}">
+		

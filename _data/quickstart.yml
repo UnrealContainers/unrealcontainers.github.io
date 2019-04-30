@@ -1,0 +1,12 @@
+-
+  id: build
+  name: Use containers to build Unreal projects
+  icon: tools
+-
+  id: run
+  name: Use containers to run Unreal projects
+  icon: desktop
+-
+  id: workflows
+  name: Enhance development workflows
+  icon: cog

@@ -1,0 +1,72 @@
+# Site settings
+title: Unreal Containers
+email: adam@adamrehn.com
+description: Unreal Containers
+url: "https://unrealcontainers.com"
+baseurl: ""
+timezone: Australia/Brisbane
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  toc_levels: [2,3,4,5,6]
+exclude: [".gitignore", "README.md"]
+
+# Configure the permalinks for each document collection
+collections_dir: _collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path
+  success-stories:
+    output: true
+    permalink: /:collection/:path
+
+# We use front matter defaults to supply the metadata for each document collection
+defaults:
+  -
+    scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "default"
+      category: "Documentation"
+      subcategories:
+        - Preliminaries
+        - Key Concepts
+        - Obtaining Container Images
+        - Use Cases
+        - Environment Setup
+  -
+    scope:
+      path: "_docs/preliminaries"
+    values:
+      subcategory: "Preliminaries"
+  -
+    scope:
+      path: "_docs/concepts"
+    values:
+      subcategory: "Key Concepts"
+  -
+    scope:
+      path: "_docs/obtaining-images"
+    values:
+      subcategory: "Obtaining Container Images"
+  -
+    scope:
+      path: "_docs/use-cases"
+    values:
+      subcategory: "Use Cases"
+  -
+    scope:
+      path: "_docs/environments"
+    values:
+      subcategory: "Environment Setup"
+  -
+    scope:
+      path: ""
+      type: "success-stories"
+    values:
+      layout: "default"
+      category: "Success Stories"

@@ -1,0 +1,11 @@
+{% assign filtered = "" | split: "" %}
+{% for implementation in site.data.repositories %}
+	{% if implementation.repos != nil and implementation.repos.size > 0 %}
+		{% for repo in implementation.repos %}
+			{% if repo.related contains include.url %}
+				{% assign filtered = filtered | push: repo %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endfor %}
+{% include lists/repositories.html repos=filtered %}

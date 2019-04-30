@@ -1,0 +1,10 @@
+{% capture _alert_content %}
+Be sure to check out the [Unreal Containers Twitter feed]({{ site.data.nav.social[2].link }}) for news about content updates.
+{% endcapture %}
+
+{% include alerts/base.html
+	class="alert-primary"
+	icon="fas fa-parachute-box"
+	title="This content is landing soon!"
+	content=_alert_content
+%}

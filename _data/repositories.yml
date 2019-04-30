@@ -1,0 +1,28 @@
+-
+  name: "ue4-docker"
+  description: "The example code in these repositories use container images built by the [ue4-docker project](/docs/obtaining-images/ue4-docker)."
+  repos:
+    -
+      name: Cloud Rendering Demo
+      url: https://github.com/adamrehn/ue4-cloud-rendering-demo
+      maintainer: Adam Rehn
+      type: github
+      description: Demonstrates performing cloud rendering using NVIDIA Docker and streaming the results to a web browser via WebRTC.
+      related:
+        - "/docs/use-cases/cloud-rendering"
+    -
+      name: gRPC Microservice Demo
+      url: https://github.com/adamrehn/ue4-grpc-demo
+      maintainer: Adam Rehn
+      type: github
+      description: Demonstrates running an Unreal Engine-powered microservice inside a Docker container.
+      related:
+        - "/docs/use-cases/microservices"
+    -
+      name: OpenCV Integration Demo
+      url: https://github.com/adamrehn/ue4-opencv-demo
+      maintainer: Adam Rehn
+      type: github
+      description: Demonstrates integrating OpenCV into the Unreal Engine and automating builds with Jenkins.
+      related:
+        - "/docs/use-cases/continuous-integration"

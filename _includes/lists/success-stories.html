@@ -1,0 +1,23 @@
+{% if include.stories == nil or include.stories.size == 0 %}
+{% include alerts/coming-soon.html %}
+{% else %}
+
+<div class="items-rows">
+	
+	{% for story in include.stories %}
+	<div class="media-item">
+		<a href="{{ story.url }}">
+			<div class="media-image"><div>
+				<img src="{{ "/" | relative_url }}assets/images/success/{{ story.image | escape }}">
+			</div></div>
+			<div class="media-body">
+				<h3>{{ story.title | escape }}</h3>
+				<p>{{ story.tagline | escape }}</p>
+			</div>
+		</a>
+	</div>
+	{% endfor %}
+	
+</div>
+
+{% endif %}

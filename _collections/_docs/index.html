@@ -1,0 +1,27 @@
+---
+title: Documentation
+tagline: Extensive documentation covering a wide variety of use cases and environments.
+---
+
+{% capture _alert_content %}
+Check out the [Quickstart Guide]({{ "/" | relative_url }}docs/preliminaries/quickstart) to quickly find the information relevant to the use case(s) you are interested in.
+{% endcapture %}
+{% include alerts/info.html title="Looking for a place to start?" content=_alert_content %}
+
+
+<h2>Contents</h2>
+
+<ul>
+	{% for subcategory in page.subcategories %}
+	<li><a href="#{{ subcategory | slugify | escape }}">{{ subcategory | escape }}</a></li>
+	{% endfor %}
+</ul>
+
+
+{% for subcategory in page.subcategories %}
+	<h2 id="{{ subcategory | slugify | escape }}">{{ subcategory | escape }}</h2>
+	{% assign index = site.documents | where: "category", page.category | where: "subcategory", subcategory | where: "layout", "subcategory" | first %}
+	<p>{{ index.tagline | escape }}</p>
+
+	{% include lists/subcategory-pages.html category=page.category subcategory=subcategory %}
+{% endfor %}

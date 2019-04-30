@@ -1,0 +1,253 @@
+@media only screen and (max-width: 768px)
+{
+	.page-support ul.provider-details li {
+		display: block;
+	}
+	
+	.page-support ul.provider-details li + li
+	{
+		margin-top: 0.25rem;
+		margin-left: 0;
+	}
+}
+
+@media only screen and (min-width: 576px)
+{
+	.page-home header .logos {
+		margin-bottom: 4rem;
+	}
+	
+	footer p {
+		text-align: left;
+	}
+	
+	footer p + p {
+		margin-top: 0.5rem;
+	}
+}
+
+@media only screen and (min-width: 40rem)
+{
+	.page-home header .logos img {
+		max-width: 35rem;
+	}
+}
+
+@media only screen and (max-width: 991.99px)
+{
+	html {
+		font-size: 0.9rem;
+	}
+	
+	article table {
+		font-size: 0.8rem;
+	}
+	
+	#navtoggle
+	{
+		font-size: 1.5rem;
+		display: block;
+	}
+	
+	header nav ul {
+		padding-top: 1rem;
+	}
+	
+	header nav ul li a
+	{
+		padding: 0.5rem 0;
+		display: block;
+	}
+	
+	header nav ul li.social .icon
+	{
+		display: inline-block;
+		padding-right: 0.5rem;
+	}
+	
+	header .calls-to-action {
+		background: transparent;
+	}
+	
+	header .breadcrumb-wrapper
+	{
+		padding-top: 4rem;
+		background: #fff;
+	}
+	
+	header .calls-to-action .btn + .btn {
+		margin-top: 2rem;
+	}
+	
+	.alert, .items-columns, .media-item a {
+		display: block;
+	}
+	
+	.alert, .alert .content p, .alert .content li {
+		text-align: center;
+	}
+	
+	.alert .content ul, .alert .content ol {
+		padding-left: 0.75rem;
+	}
+	
+	.alert .icon
+	{
+		padding: 1rem;
+		padding-bottom: 1.25rem;
+	}
+	
+	.items-columns .media-item .media-image img,
+	.items-rows .media-item .media-image img {
+		width: 100%;
+	}
+	
+	.items-rows .media-item .media-image > div
+	{
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		max-height: 10rem;
+		overflow: hidden;
+	}
+	
+	.items-columns .media-item.icon .media-image,
+	.items-rows .media-item.icon .media-image,
+	.items-columns .media-item .media-image,
+	.items-columns .media-item .media-body,
+	.items-rows .media-item .media-body
+	{
+		padding: 1rem 1rem;
+		text-align: center;
+	}
+}
+
+@media only screen and (min-width: 992px)
+{
+	.collapse:not(.show) {
+		display: block;
+	}
+	
+	#navtoggle {
+		display: none;
+	}
+	
+	header .nav-wrapper-outer .container
+	{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+	
+	header nav
+	{
+		flex-grow: 0;
+		flex-shrink: 1;
+	}
+	
+	header nav ul li, nav ul li a {
+		display: inline-block;
+	}
+	
+	header nav ul li.link-home {
+		display: none;
+	}
+	
+	header nav ul li.page a {
+		padding: 1rem 1.2rem;
+	}
+	
+	header nav ul li.social a {
+		padding: 1rem 0.5rem;
+	}
+	
+	header nav ul li.page + li.social a {
+		padding-left: 1rem;
+	}
+	
+	header nav ul li.social .text {
+		display: none;
+	}
+	
+	header nav ul li:last-child a {
+		padding-right: 0;
+	}
+	
+	header .breadcrumb {
+		border: 1px solid rgba(204,204,204,0.5);
+	}
+	
+	header .calls-to-action .container, .items-columns
+	{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	
+	/*
+		Trick to mimic space-evenly in browsers that don't support it from here:
+		<https://stackoverflow.com/a/47535338>
+	*/
+	header .calls-to-action .container::before, header .calls-to-action .container::after,
+	.items-columns::before, .items-columns::after
+	{
+		display: block;
+		content: "";
+	}
+	
+	header .calls-to-action .btn
+	{
+		-webkit-box-shadow: 0px 0px 2rem 0.25rem rgba(100,100,100,0.4);
+		-moz-box-shadow: 0px 0px 2rem 0.25rem rgba(100,100,100,0.4);
+		box-shadow: 0px 0px 2rem 0.25rem rgba(100,100,100,0.4);
+		width: 40%;
+	}
+	
+	article p {
+		text-align: justify;
+	}
+	
+	.media-item
+	{
+		-webkit-box-shadow: 0px 0px 2rem 0.25rem rgba(204,204,204,0.75);
+		-moz-box-shadow: 0px 0px 2rem 0.25rem rgba(204,204,204,0.75);
+		box-shadow: 0px 0px 2rem 0.25rem rgba(204,204,204,0.75);
+	}
+	
+	.media-item.compact
+	{
+		-webkit-box-shadow: 0px 0px 1rem 0.25rem rgba(204,204,204,0.75);
+		-moz-box-shadow: 0px 0px 1rem 0.25rem rgba(204,204,204,0.75);
+		box-shadow: 0px 0px 1rem 0.25rem rgba(204,204,204,0.75);
+	}
+	
+	.items-columns .media-item
+	{
+		width: 25%;
+		margin: 0rem 0rem;
+	}
+	
+	.items-columns .media-item a {
+		height: 100%;
+	}
+	
+	.media-item:hover
+	{
+		-webkit-box-shadow: 0px 0px 2rem 0.25rem rgba(204,204,204,1);
+		-moz-box-shadow: 0px 0px 2rem 0.25rem rgba(204,204,204,1);
+		box-shadow: 0px 0px 2rem 0.25rem rgba(204,204,204,1);
+	}
+	
+	.media-item.compact:hover
+	{
+		-webkit-box-shadow: 0px 0px 1rem 0.25rem rgba(204,204,204,1);
+		-moz-box-shadow: 0px 0px 1rem 0.25rem rgba(204,204,204,1);
+		box-shadow: 0px 0px 1rem 0.25rem rgba(204,204,204,1);
+	}
+	
+	.media-item .media-image {
+		padding: 1rem;
+	}
+}

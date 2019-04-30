@@ -1,0 +1,24 @@
+{% if include.repos == nil or include.repos.size == 0 %}
+{% include alerts/coming-soon.html %}
+{% else %}
+
+<div class="items-rows">
+	
+	{% for repo in include.repos %}
+		<div class="media-item icon compact">
+			<a href="{{ repo.url }}">
+				<div class="media-image"><div>
+					<span class="fab fa-{{ repo.type | escape }}"></span>
+				</div></div>
+				<div class="media-body">
+					<h3>{{ repo.name | escape }}</h3>
+					<p class="author"><strong>Maintainer:</strong> {{ repo.maintainer | escape }}</p>
+					<p>{{ repo.description | escape }}</p>
+				</div>
+			</a>
+		</div>
+	{% endfor %}
+	
+</div>
+
+{% endif %}

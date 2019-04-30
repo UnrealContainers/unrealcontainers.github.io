@@ -1,0 +1,107 @@
+{% include header.html %}
+
+<header id="top">
+	
+	<section class="jumbotron jumbotron-fluid mb-0">
+		
+		<p class="logos"><img src="{{ "/" | relative_url }}assets/images/logos-full.svg" alt="Unreal Engine and Docker Logos"></p>
+		<h1>The most powerful creation engine comes to the cloud.</h1>
+		<p class="lead">{{ page.tagline | escape }}</p>
+		
+	</section>
+	
+	<section class="calls-to-action">
+		<div class="container">
+			
+			<a class="btn btn-success" role="button" href="{{ "/" | relative_url }}docs/preliminaries/quickstart">
+				<h3>Get Started</h3>
+				<p>View the Quickstart Guide</p>
+			</a>
+			
+			<a class="btn btn-primary" role="button" href="{{ "/" | relative_url }}support">
+				<h3>Get Support</h3>
+				<p>Get professional support from the experts</p>
+			</a>
+			
+		</div>
+	</section>
+	
+</header>
+
+<main>
+	
+	<section class="container">
+		
+		<h2>Success Stories</h2>
+		<p class="lead">See how developers are already using Docker containers to bring the power of the Unreal Engine to the cloud.</p>
+		
+		{% assign stories = site.collections | where: "label", "success-stories" | first %}
+		{% assign stories = stories.docs | where: "featured", true | sort: "title" %}
+		{% include lists/success-stories.html stories=stories %}
+		
+		<p class="button-wrapper">
+			<a class="btn btn-secondary btn-lg" role="button" href="{{ "/" | relative_url }}success-stories">See all success stories</a>
+		</p>
+		
+	</section>
+	
+	<section class="container">
+		
+		<h2>Resources</h2>
+		<p class="lead">Access the information you need to integrate Unreal Engine containers into your own workflows.</p>
+		
+		<div class="items-columns">
+			
+			{% assign resources = site.data.nav.pages | where_exp: "resource", "resource.blurb != null" %}
+			{% for resource in resources %}
+			<div class="media-item icon">
+				<a href="{{ resource.link | relative_url | uri_escape }}">
+					<div class="media-image"><span class="fas fa-{{ resource.icon | escape }}"></span></div>
+					<div class="media-body">
+						<h3>{{ resource.name | escape }}</h3>
+						<p>{{ resource.blurb | escape }}</p>
+					</div>
+				</a>
+			</div>
+			{% endfor %}
+			
+		</div>
+		
+	</section>
+	
+	<section class="container">
+		
+		<h2>Community</h2>
+		<p class="lead">Connect with fellow developers and discuss all things related to Unreal Engine and Docker.</p>
+		
+		<p class="button-wrapper">
+			{% for link in site.data.nav.social %}
+			<a class="btn btn-{{ link.button | escape }} btn-lg btn-icon" role="button" href="{{ link.link | uri_escape }}"><span class="icon fab fa-{{ link.icon | escape }} fa-fw"></span><span>{{ link.name | escape }}</span></a>
+			{% endfor %}
+		</p>
+		
+	</section>
+	
+	<section class="container">
+		
+		<h2>Ready to jump in?</h2>
+		
+		<p class="button-wrapper">
+			<a class="btn btn-success btn-lg" role="button" href="{{ "/" | relative_url }}docs/preliminaries/quickstart">Get Started</a>
+			<a class="btn btn-primary btn-lg" role="button" href="{{ "/" | relative_url }}support">Get Support</a>
+		</p>
+		
+	</section>
+	
+</main>
+
+<section class="sponsors">
+	<div class="container">
+		<h2>Sponsors</h2>
+		<ul>
+			{% for sponsor in site.data.sponsors %}<li><a href="{{ sponsor.link | uri_escape }}"><img src="{{ "/" | relative_url }}assets/images/sponsors/{{ sponsor.logo | uri_escape }}" alt="{{ sponsor.name | escape }}" title="{{ sponsor.name | escape }}"></a></li>{% endfor %}
+		</ul>
+	</div>
+</section>
+
+{% include footer.html %}

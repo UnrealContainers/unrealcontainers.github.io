@@ -1,0 +1,17 @@
+{% capture _alert_content %}
+{% assign source = site.data.image-sources.sources | where: "Source", include.source | first %}
+This container image source supports the features listed below. For an explanation of what each of these features denotes and to compare this source to other available sources, see the page [Available Image Sources](./image-sources).
+
+<ul>
+{% for category in site.data.image-sources.features %}
+	
+	{% assign supported = "" | split: "" %}
+	{% for feature in category[1] %}
+		{% if source[feature.name] == "Yes" %}{% assign supported = supported | push: feature.name %}{% endif %}
+	{% endfor %}
+	
+	<li><strong>{{ category[0] | escape }}:</strong> {{ supported | join: ", " }}</li>
+{% endfor %}
+</ul>
+{% endcapture %}
+{% include alerts/info.html title="Features at a glance" content=_alert_content %}

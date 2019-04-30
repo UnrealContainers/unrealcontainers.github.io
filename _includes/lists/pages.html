@@ -1,0 +1,8 @@
+<ul class="page-list">
+	{% for page in include.pages %}
+	<li>
+		<p class="page-title"><a href="{{ page.url | uri_escape }}">{{ page.title | escape }}</a></p>
+		<p class="page-tagline">{{ page.tagline | escape }}</p>
+	</li>
+	{% endfor %}
+</ul>

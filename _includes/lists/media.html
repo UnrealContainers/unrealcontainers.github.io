@@ -1,0 +1,35 @@
+{% if include.items == nil or include.items.size == 0 %}
+{% include alerts/coming-soon.html %}
+{% else %}
+
+<div class="items-rows">
+	
+	{% for item in include.items %}
+		{% case item.type %}
+			{% when "video" %}
+				{% assign icon = "play" %}
+				{% assign prefix = "Video: " %}
+			{% when "playlist" %}
+				{% assign icon = "list" %}
+				{% assign prefix = "Playlist: " %}
+			{% when "slides" %}
+				{% assign icon = "clone" %}
+				{% assign prefix = "Slide Deck: " %}
+		{% endcase %}
+		<div class="media-item icon compact">
+			<a href="{{ item.link }}">
+				<div class="media-image"><div>
+					<span class="fas fa-{{ icon | escape }}"></span>
+				</div></div>
+				<div class="media-body">
+					<h3>{{ prefix | escape }}{{ item.name | escape }}</h3>
+					<p class="author"><strong>Author:</strong> {{ item.author | escape }}</p>
+					<p>{{ item.description | escape }}</p>
+				</div>
+			</a>
+		</div>
+	{% endfor %}
+	
+</div>
+
+{% endif %}
