@@ -45,6 +45,8 @@ It is worth noting that the tips on this page relate only to writing Dockerfiles
 
 - The Unreal Engine started using a bundled compiler toolchain under Linux in version 4.20.0 [^3], and a bundled version of Mono in version 4.21.0. [^4] You will need to install clang and/or Mono in your container images when building older versions of the Unreal Engine.
 
+- The bundled compiler toolchain is included automatically in Linux Installed Builds since version 4.22.1. You will need to copy the toolchain into Installed Builds manually when building older versions of the Unreal Engine.
+
 ### Tips for working with NVIDIA Docker
 
 - Container images built with [NVIDIA Docker](../concepts/nvidia-docker) support will still run correctly using the standard Docker runtime, they just won't see any available GPU devices. Deriving an image from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images doesn't force you to use NVIDIA Docker to run the resulting image. The image will work happily under the plain runtime, irrespective of whether it is run under Linux, Windows, or macOS.
