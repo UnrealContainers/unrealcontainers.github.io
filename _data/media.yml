@@ -4,3 +4,9 @@
 -
   name: Online Training Resources
   items:
+    -
+      name: Why Unreal Engine containers?
+      link: https://youtu.be/egUC21cETgo
+      author: Adam Rehn
+      type: video
+      description: Provides a brief overview of the key use cases for Unreal Engine containers. 
