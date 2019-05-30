@@ -98,7 +98,7 @@ The experimental device access functionality includes special treatment of GPU d
 
 - **Limit the number of Windows Server versions supported on container hosts:** because container images built for one version of Windows Server are not compatible with other versions of Windows Server (except through the use of Hyper-V isolation mode), every additional version of Windows Server that you support on your container hosts multiplies the number of container image configurations that need to be built and tested, significantly increasing maintenance requirements. It is recommended that you limit support to either:
     - Just the current release in the [Long-Term Servicing Channel (LTSC)](https://docs.microsoft.com/en-us/windows-server/get-started-19/servicing-channels-19#long-term-servicing-channel-ltsc) (currently Windows Server 2019), **or**
-    - Both the current LTSC release and the current release in the [Semi-Annual Channel (SAC)](https://docs.microsoft.com/en-us/windows-server/get-started-19/servicing-channels-19#semi-annual-channel) (currently Windows Server version 1809).
+    - Both the current LTSC release and the current release in the [Semi-Annual Channel (SAC)](https://docs.microsoft.com/en-us/windows-server/get-started-19/servicing-channels-19#semi-annual-channel) (currently Windows Server version 1903).
 
 
 ## References
