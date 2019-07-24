@@ -161,8 +161,10 @@ main section:last-child {
 	margin: 1rem 2rem;
 }
 
-.sponsors ul li img {
-	height: 3rem;
+.sponsors ul li img
+{
+	max-width: 90%;
+	height: 8rem;
 }
 
 footer

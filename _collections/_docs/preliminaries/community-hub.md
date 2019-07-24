@@ -29,7 +29,7 @@ The Unreal Containers community hub was founded by [Dr Adam Rehn](https://adamre
 
 ## Who sponsors the maintenance of the community hub?
 
-The following organisations provide, or have provided, financial sponsorhip to the Unreal Containers community hub:
+The following organisations and initiatives provide, or have provided, financial sponsorhip to the Unreal Containers community hub:
 
 {% for sponsor in site.data.sponsors %}
 - [**{{ sponsor.name }}**]({{ sponsor.link }}): {{ sponsor.blurb }}
