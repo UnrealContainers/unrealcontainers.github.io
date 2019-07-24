@@ -21,6 +21,11 @@ order: 6
 {:toc}
 
 
+## Blacklisted versions of Windows 10
+
+{% include alerts/warning.html content="**Do not use Windows 10 version 1903 to build Windows container images.** There is a known bug in Windows Server version 1903 and Windows 10 version 1903 that [prevents Docker from building images larger than the default limit of 20GB](https://github.com/docker/for-win/issues/3884#issuecomment-510973455). This version of Windows should be avoided when building Unreal Engine container images." %}
+
+
 ## Optimal performance warning for Windows containers
 
 {% include alerts/warning.html content="If you are using Windows 10 to build and run [Windows containers](../concepts/windows-containers) then Docker Desktop for Windows will use Hyper-V isolation mode by default, which suffers from a number of [performance and stability issues](../concepts/windows-containers#hyper-v-isolation-mode-issues) that make it poorly suited for use with Unreal Engine containers. If you are running Windows 10 version 1809 or newer then it is strongly recommended that you [instruct Docker to use process isolation mode instead](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/faq#can-i-run-windows-containers-in-process-isolated-mode-on-windows-10-enterprise-or-professional). If you are running an older version of Windows 10 that does not support this feature then it is recommended that you update to Windows 10 version 1809 or newer, or alternatively use [Windows Server](./local-windows-server) to build and run Windows containers in process isolation mode." %}

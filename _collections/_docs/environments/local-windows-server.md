@@ -20,6 +20,11 @@ order: 5
 {:toc}
 
 
+## Blacklisted versions of Windows Server
+
+{% include alerts/warning.html content="**Do not use Windows Server version 1903 to build Windows container images.** There is a known bug in Windows Server version 1903 and Windows 10 version 1903 that [prevents Docker from building images larger than the default limit of 20GB](https://github.com/docker/for-win/issues/3884#issuecomment-510973455). This version of Windows should be avoided when building Unreal Engine container images." %}
+
+
 ## Obtaining Windows Server
 
 If you don't already own a Windows Server license, you can download an evaluation copy of any version of Windows Server in the [Long-Term Servicing Channel (LTSC)](https://docs.microsoft.com/en-us/windows-server/get-started-19/servicing-channels-19#long-term-servicing-channel-ltsc) from the [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/) that will be valid for 180 days:
