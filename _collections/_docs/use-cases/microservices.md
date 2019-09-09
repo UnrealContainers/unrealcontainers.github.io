@@ -37,7 +37,7 @@ Containerised microservices are an extremely popular architectural paradigm for 
 
 ### Integrating an RPC framework
 
-{% include alerts/info.html content="Note that the [Web Remote Control](https://docs.unrealengine.com/en-US/Engine/Editor/ScriptingAndAutomation/WebControl/index.html) feature introduced in Unreal Engine 4.23 only work in the Unreal Editor, not in packaged projects. This means it cannot be used as an RPC framework for deployed microservices." %}
+{% include alerts/info.html content="Note that the [Web Remote Control](https://docs.unrealengine.com/en-US/Engine/Editor/ScriptingAndAutomation/WebControl/index.html) feature introduced in Unreal Engine 4.23 only works in the Unreal Editor, not in packaged projects. This means it cannot be used as an RPC framework for deployed microservices." %}
 
 #### Integrating RPC frameworks natively in C++
 
