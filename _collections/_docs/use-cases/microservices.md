@@ -35,7 +35,11 @@ Containerised microservices are an extremely popular architectural paradigm for 
 
 ## Approaches
 
-### Integrating RPC frameworks natively in C++
+### Integrating an RPC framework
+
+{% include alerts/info.html content="Note that the [Web Remote Control](https://docs.unrealengine.com/en-US/Engine/Editor/ScriptingAndAutomation/WebControl/index.html) feature introduced in Unreal Engine 4.23 only work in the Unreal Editor, not in packaged projects. This means it cannot be used as an RPC framework for deployed microservices." %}
+
+#### Integrating RPC frameworks natively in C++
 
 The most performant option for integrating native RPC frameworks with the Unreal Engine is to do so in C++. However, there are a number of complexities that must be addressed in order to correctly integrate third-party C++ libraries with the Unreal Engine under Linux which make manual compilation or the use of prebuilt system libraries difficult or impossible. We strongly recommend making use of infrastructure such as the [conan-ue4cli project](https://github.com/adamrehn/conan-ue4cli) to build any third-party C++ libraries in a manner that will ensure the resulting binaries are compatible with the Unreal Engine.
 
@@ -43,7 +47,7 @@ Existing solutions are available for building Unreal-compatible binaries for the
 
 - [gRPC](https://grpc.io/): developed by Google, this framework is extremely popular and has been adopted as a project of the [Cloud Native Computing Foundation](https://www.cncf.io/). gRPC provides bindings in a wide variety of languages, including C++. A recipe for building an Unreal-compatible version of the gRPC C++ bindings is [bundled with the conan-ue4cli project](https://github.com/adamrehn/ue4-conan-recipes).
 
-### Integrating RPC frameworks using other language integrations
+#### Integrating RPC frameworks using other language integrations
 
 RPC frameworks for non-native programming languages can be integrated by making use of community-maintained projects that add support for these programming languages in the Unreal Engine. Although additional complexity is introduced by the integration of another programming language, RPC frameworks written for these languages do not require special compilation to work with the Unreal Engine.
 
