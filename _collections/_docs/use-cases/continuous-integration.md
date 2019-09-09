@@ -33,7 +33,7 @@ One of the most common uses of Unreal Engine containers is to provide reproducib
 - If you're building Docker images for deploying packaged projects then you will need to make sure your chosen CI system supports building container images from Dockerfiles.
 
 
-## Approaches
+## Implementation guidelines
 
 ### Using the tools that ship with the Engine
 

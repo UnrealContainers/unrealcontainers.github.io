@@ -21,7 +21,7 @@ order: 2
 
 ## Overview
 
-The [NVIDIA Docker runtime](../concepts/nvidia-docker) allows Unreal Engine containers to run in the cloud with full GPU acceleration, facilitating server-side 2D or 3D rendering. GPU-accelerated containers augment existing cloud rendering workflows with all of the advantages inherent to containerisation, including increased density and compatibility with container orchestration technologies. Rendering results can be captured, stored, or streamed to remote devices in much the same manner as when performing cloud rendering inside VMs. Container-based cloud rendering can also be combined with existing RPC frameworks to create GPU-accelerated [microservices powered by the Unreal Engine](./microservices).
+The [NVIDIA Docker runtime](../concepts/nvidia-docker) allows Unreal Engine containers to run in the cloud with full GPU acceleration, facilitating server-side 2D or 3D rendering. GPU-accelerated containers augment existing cloud rendering workflows with all of the advantages inherent to containerisation, including increased density and compatibility with container orchestration technologies. Rendering results can be captured, stored, or streamed to remote devices in much the same manner as when performing cloud rendering inside VMs. Container-based cloud rendering can also be combined with existing RPC frameworks to create GPU-accelerated [microservices powered by the Unreal Engine](./microservices) or provide training data for [machine learning models](./machine-learning).
 
 
 ## Key considerations
@@ -37,7 +37,7 @@ The [NVIDIA Docker runtime](../concepts/nvidia-docker) allows Unreal Engine cont
 - Both X11 support and PulseAudio support require specific configuration of the host system when performing cloud rendering inside Linux VMs without desktop environments installed. See the pages in the [Environment Setup](../environments/) category of the documentation for details on performing these configuration steps.
 
 
-## Approaches
+## Implementation guidelines
 
 ### Base image selection
 

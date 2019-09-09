@@ -2,7 +2,7 @@
 title: Linux Installed Builds
 tagline: Use container images as a source of prebuilt binaries in lieu of the Epic Games Launcher under Linux.
 quickstart: ["workflows"]
-order: 4
+order: 5
 ---
 
 {% capture _alert_content %}
@@ -33,7 +33,7 @@ Under Windows and macOS, the Epic Games Launcher provides prebuilt Engine binari
 - If the Unreal Engine installation inside a given container image doesn't contain any [symbolic links](https://en.wikipedia.org/wiki/Symbolic_link) then the directory structure can simply be copied from the container filesystem to the host filesystem without any further modifications. However, if symlinks are used then additional configuration may be required to update the symlink targets to paths that are appropriate for the host filesystem. Typically, any [source of container images](../obtaining-images/image-sources) that relies on symlinks will provide export functionality that performs this configuration for you automatically.
 
 
-## Approaches
+## Implementation guidelines
 
 ### Using container images from the ue4-docker project
 

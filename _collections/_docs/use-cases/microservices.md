@@ -33,7 +33,7 @@ Containerised microservices are an extremely popular architectural paradigm for 
 - Any third-party C++ libraries that will be integrated with the Unreal Engine under Linux must be built against libc++ instead of libstdc++, since the Unreal Engine itself is built against its own bundled copy of libc++. Third-party libraries that rely on dependencies which are also bundled with the Unreal Engine may also encounter issues related to symbol interposition. See [this article discussing the creation of the conan-ue4cli project](https://adamrehn.com/articles/cross-platform-library-integration-in-unreal-engine-4/) for a detailed explanation of these issues.
 
 
-## Approaches
+## Implementation guidelines
 
 ### Integrating an RPC framework
 

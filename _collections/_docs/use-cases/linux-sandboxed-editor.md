@@ -2,7 +2,7 @@
 title: Linux Sandboxed Editor
 tagline: Run the Unreal Editor inside a container and interact with it directly from the host system.
 quickstart: ["workflows"]
-order: 5
+order: 6
 ---
 
 {% capture _alert_content %}
@@ -35,7 +35,7 @@ On Linux host systems that satisfy the requirements listed at the top of this pa
 - Container images must include the X11 runtime libraries in order for the Unreal Engine to recognise the bind-mounted X11 socket. If your container images do not include the relevant libraries then the Editor will default to offscreen rendering and no UI windows will be displayed.
 
 
-## Approaches
+## Implementation guidelines
 
 ### Implementation-agnostic commands
 
