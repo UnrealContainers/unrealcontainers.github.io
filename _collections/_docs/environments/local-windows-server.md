@@ -22,7 +22,7 @@ order: 5
 
 ## Blacklisted versions of Windows Server
 
-{% include alerts/warning.html content="**Do not use Windows Server version 1903 to build Windows container images.** There is a known bug in Windows Server version 1903 and Windows 10 version 1903 that [prevents Docker from building images larger than the default limit of 20GB](https://github.com/docker/for-win/issues/3884#issuecomment-510973455). This version of Windows should be avoided when building Unreal Engine container images." %}
+{% include alerts/warning.html content="**Do not use Windows 10 version 1903 or Windows 10 version 1909 to build Windows container images.** There is a known bug in Windows Server versions 1903 and 1909 and Windows 10 versions 1903 and 1909 that [prevents Docker from building images larger than the default limit of 20GB](https://github.com/docker/for-win/issues/4100). These versions of Windows should be avoided when building Unreal Engine container images." %}
 
 
 ## Obtaining Windows Server
