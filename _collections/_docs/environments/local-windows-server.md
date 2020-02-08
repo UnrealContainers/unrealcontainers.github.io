@@ -55,7 +55,29 @@ Older versions of Windows Server may sometimes encounter a checksum verification
 
 ## Configuring Docker for building and running Windows containers
 
-By default, Docker EE under Windows Server imposes a 20GB size limit on container images, which is too low for building and running Unreal Engine containers. You will need to follow [the instructions provided by Microsoft](https://docs.microsoft.com/en-us/visualstudio/install/build-tools-container#step-4-expand-maximum-container-disk-size) to increase the maximum container disk size. The 120GB limit specified in the instructions is sufficient for building and running Unreal Engine container images that do not include the Engine Tools, but a limit of 300GB is recommended for building container images that do include the Engine Tools.
+By default, Docker EE under Windows Server imposes a 20GB size limit on container images, which is too low for building and running Unreal Engine containers. You will need to increase the maximum container disk size to the recommended limit of 300GB by following the instructions below.
+
+**Step 1:** Stop the Docker EE service:
+
+{% highlight powershell %}
+sc.exe stop docker
+{% endhighlight %}
+
+**Step 2:** Edit the Docker daemon configuration file (which is located at `%ProgramData%\Docker\config\daemon.json` by default) and add the top-level `storage-opts` entry to any existing JSON configuration data:
+
+{% highlight json %}
+{
+  "storage-opts": [
+    "size=300GB"
+  ]
+}
+{% endhighlight %}
+
+**Step 3:** Start the Docker EE service again:
+
+{% highlight powershell %}
+sc.exe stop docker
+{% endhighlight %}
 
 
 ## Configuring Docker for building and running Linux containers

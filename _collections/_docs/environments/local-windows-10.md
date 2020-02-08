@@ -40,7 +40,23 @@ Download the [Docker Desktop for Windows installer](https://hub.docker.com/editi
 
 {% include alerts/info.html content="Remember to [switch to Windows containers mode](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) before following these instructions." %}
 
-By default, Docker Desktop for Windows imposes a 20GB size limit on container images, which is too low for building and running Unreal Engine containers. You will need to follow [the instructions provided by Microsoft](https://docs.microsoft.com/en-us/visualstudio/install/build-tools-container#step-4-expand-maximum-container-disk-size) to increase the maximum container disk size. The 120GB limit specified in the instructions is sufficient for building and running Unreal Engine container images that do not include the Engine Tools, but a limit of 300GB is recommended for building container images that do include the Engine Tools.
+By default, Docker Desktop for Windows imposes a 20GB size limit on container images, which is too low for building and running Unreal Engine containers. You will need to increase the maximum container disk size to the recommended limit of 300GB by following the instructions below.
+
+**Step 1:** Right-click on the Docker Desktop system tray icon and choose "Settings" from the context menu to open the [Docker Desktop settings dialog](https://docs.docker.com/docker-for-windows/#docker-settings-dialog).
+
+**Step 2:** Click on the "Docker Engine" tab of the settings dialog to view the Docker daemon's current JSON configuration data.
+
+**Step 3:** Add the top-level `storage-opts` entry to any existing JSON configuration data:
+
+{% highlight json %}
+{
+  "storage-opts": [
+    "size=300GB"
+  ]
+}
+{% endhighlight %}
+
+**Step 4:** Click the "Apply & Restart" button to apply the changes and restart the Docker daemon.
 
 
 ## Configuring Docker for building and running Linux containers
