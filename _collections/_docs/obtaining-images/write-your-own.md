@@ -47,6 +47,8 @@ It is worth noting that the tips on this page relate only to writing Dockerfiles
 
 - The bundled compiler toolchain is included automatically in Linux Installed Builds since version 4.22.1. You will need to copy the toolchain into Installed Builds manually when building older versions of the Unreal Engine.
 
+- If you're encountering issues due to missing shared library files, you can use the [ldd](https://en.wikipedia.org/wiki/Ldd_(Unix)) and [apt-file](https://wiki.debian.org/apt-file) tools to identify missing libraries and the system packages that provide them.
+
 ### Tips for working with the NVIDIA Container Toolkit
 
 - Container images built with the [NVIDIA Container Toolkit](../concepts/nvidia-docker) support will still run correctly using the standard Docker runtime, they just won't see any available GPU devices. Deriving an image from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images doesn't force you to use the NVIDIA Container Toolkit to run the resulting image. The image will work happily under the plain runtime, irrespective of whether it is run under Linux, Windows, or macOS.
@@ -135,6 +137,8 @@ enable-shm = false
 - If an application running inside a Windows container attempts to use the Windows API to spawn a standard system UI component such as a message box or dialog box, the process will hang indefinitely. This issue is particularly relevant to the UnrealVersionSelector tool, which is invoked by `Setup.bat` to register the Engine installation and configure Windows Explorer shell integration. This invocation must be disabled in order to prevent the script from hanging indefinitely.
 
 - Some versions of Visual Studio are quite memory-hungry and contain non-deterministically triggered bugs. It may be necessary to re-run failed builds in order to cope with these issues, which can be automated as either part of your Dockerfiles or by the infrastructure that builds your container images.
+
+- If you're encountering issues due to missing DLL files, you can use the [dlldiag](https://github.com/adamrehn/dll-diagnostics) tool to help identify missing libraries.
 
 
 ## References
