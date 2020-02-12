@@ -71,6 +71,16 @@ It is worth noting that the tips on this page relate only to writing Dockerfiles
   - `xfonts-base`
   - `xkb-data`
 
+- If you need to run automation tests for projects that use the Chromium Embedded Framework (CEF) by way of the [Web Browser Widget](https://docs.unrealengine.com/en-US/Engine/UMG/UserGuide/WidgetTypeReference/WebBrowser/index.html) then you'll need additional system packages on top of the X11 runtime libraries [^5]:
+  
+  - `libasound2`
+  - `libatk1.0-0`
+  - `libcairo2`
+  - `libnss3`
+  - `libnspr4`
+  - `libpango-1.0-0`
+  - `libpangocairo-1.0-0`
+
 - If you want to enable audio support in your containers then the simplest option is to use PulseAudio. This will require the PulseAudio client libraries, which can be installed under Debian-based distributions via the `pulseaudio-utils` system package. You will also need to add the following directives to the `/etc/pulse/client.conf` configuration file:
 
 {% highlight bash %}
@@ -111,7 +121,16 @@ enable-shm = false
   - `glu32.dll`
   - `vulkan-1.dll`
 
-- Creating an Installed Build of the Engine requires the [PDBCopy](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/pdbcopy) tool for stripping symbols from debug symbol files. As per the article referenced in the previous list item [^1], the PDBCopy executable can be obtained via the [windbg Chocolatey package](https://chocolatey.org/packages/windbg) and must be copied to the location where the Unreal Engine expects to find it, which varies based on Engine version and Visual Studio version.
+- If you need to run automation tests for projects that use the Chromium Embedded Framework (CEF) by way of the [Web Browser Widget](https://docs.unrealengine.com/en-US/Engine/UMG/UserGuide/WidgetTypeReference/WebBrowser/index.html) then you'll need additional DLL files on top of those listed above [^5]:
+  
+  - `BluetoothApis.dll`
+  - `bthprops.cpl`
+  - `dxva2.dll`
+  - `mf.dll`
+  - `mfplat.dll`
+  - `mfreadwrite.dll`
+
+- Creating an Installed Build of the Engine requires the [PDBCopy](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/pdbcopy) tool for stripping symbols from debug symbol files. As per the article referenced in the list item discussing required DLL files [^1], the PDBCopy executable can be obtained via the [windbg Chocolatey package](https://chocolatey.org/packages/windbg) and must be copied to the location where the Unreal Engine expects to find it, which varies based on Engine version and Visual Studio version.
 
 - If an application running inside a Windows container attempts to use the Windows API to spawn a standard system UI component such as a message box or dialog box, the process will hang indefinitely. This issue is particularly relevant to the UnrealVersionSelector tool, which is invoked by `Setup.bat` to register the Engine installation and configure Windows Explorer shell integration. This invocation must be disabled in order to prevent the script from hanging indefinitely.
 
@@ -124,3 +143,4 @@ enable-shm = false
 [^2]: [ue4-docker source code on GitHub: file `patch-filters-xml.py`](https://github.com/adamrehn/ue4-docker/blob/master/ue4docker/dockerfiles/ue4-minimal/windows/patch-filters-xml.py)
 [^3]: [Unreal Engine 4.20 Release Notes](https://docs.unrealengine.com/en-US/Builds/4_20)
 [^4]: [Unreal Engine 4.21 Release Notes](https://docs.unrealengine.com/en-US/Builds/4_21)
+[^5]: [ue4-docker GitHub issue #57: Failed to get CEF3 DLL handle](https://github.com/adamrehn/ue4-docker/issues/57)
