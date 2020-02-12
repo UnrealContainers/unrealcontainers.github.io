@@ -22,6 +22,8 @@ order: 2
 
 ## What is a container runtime?
 
+{% include alerts/info.html content="This section is provided for readers who are interested in the underlying mechanisms that are used to run containers and how these mechanisms relate to GPU acceleration. If you're not interested in these details, feel free to skip ahead to the [What is the NVIDIA Container Toolkit?](#what-is-the-nvidia-container-toolkit) section." %}
+
 As explained in [this article discussing container runtimes](https://www.ianlewis.org/en/container-runtimes-part-1-introduction-container-r), the term "container runtime" is used to refer to a variety of software components involved in the process of running containers. These components can be divided into two broad categories:
 
 - **"Low-level" container runtimes:** these runtimes are the software component responsible for actually running containers using the host operating system's native isolation functionality. Low-level container runtimes are typically specific to a particular operating system or family of operating systems.
@@ -68,7 +70,7 @@ The NVIDIA Container Toolkit is designed specifically for Linux containers runni
 
 ## Does the NVIDIA Container Toolkit affect the compatibility of built container images?
 
-By default, container images built on a system that has the NVIDIA Container Toolkit installed **will be identical to container images built on a system without the NVIDIA Container Toolkit.** This is because GPU acceleration is not enabled during the build process. The resulting container images can be run with GPU acceleration using the NVIDIA Container Toolkit or without GPU acceleration using any OCI-compatible container runtime.
+Container images built on a system that has the NVIDIA Container Toolkit installed **will be identical to container images built on a system without the NVIDIA Container Toolkit.** This is because GPU acceleration is not enabled during the build process. The resulting container images can be run with GPU acceleration using the NVIDIA Container Toolkit or without GPU acceleration using any OCI-compatible container runtime.
 
 Older versions of NVIDIA Docker allowed the Docker daemon to [use NVIDIA Docker as the default container runtime](https://github.com/NVIDIA/nvidia-docker/wiki/Advanced-topics#default-runtime), which enabled GPU acceleration during image builds and meant that any container images built by that Docker daemon [could be rendered non-portable](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#can-i-use-the-gpu-during-a-container-build-ie-docker-build). For this reason, it was strongly recommended that you did not reconfigure the default container runtime on hosts that were used to build containers. This option is not present in newer versions of the NVIDIA Container Toolkit.
 
