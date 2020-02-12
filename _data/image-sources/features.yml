@@ -17,8 +17,8 @@
     name: Windows containers
     description: Supports building [Windows containers](../concepts/windows-containers).
   -
-    name: NVIDIA Docker containers
-    description: Supports building Linux containers that are compatible with the [NVIDIA Docker runtime](../concepts/nvidia-docker).
+    name: NVIDIA GPU support
+    description: Supports building Linux containers that are compatible with the [NVIDIA Container Toolkit](../concepts/nvidia-docker).
   
 "Unreal Engine build tools":
   -

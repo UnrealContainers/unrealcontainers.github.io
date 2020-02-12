@@ -6,8 +6,8 @@ order: 6
 ---
 
 {% capture _alert_content %}
-- Unreal Engine container image(s) that include both [the Engine Tools and NVIDIA Docker support](../obtaining-images/image-sources) as well as the X11 runtime libraries
-- A [local Linux development environment](../environments/local-linux) configured for running containers via NVIDIA Docker and running an X11 server
+- Unreal Engine container image(s) that include both [the Engine Tools and NVIDIA Container Toolkit support](../obtaining-images/image-sources) as well as the X11 runtime libraries
+- A [local Linux development environment](../environments/local-linux) configured for running containers via the NVIDIA Container Toolkit and running an X11 server
 {% endcapture %}
 {% include alerts/required.html content=_alert_content %}
 
@@ -28,7 +28,7 @@ On Linux host systems that satisfy the requirements listed at the top of this pa
 
 ## Key considerations
 
-- This approach only works on machines that satisfy the [hardware and software requirements](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)) of the [NVIDIA Docker runtime](../concepts/nvidia-docker). By contrast, exporting [Linux Installed Builds](./linux-installed-builds) and running them natively will work on any Linux machine that is capable of running the Unreal Editor, irrespective of GPU vendor.
+- This approach only works on machines that satisfy the [hardware and software requirements](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(Native-GPU-Support)) of the [NVIDIA Container Toolkit](../concepts/nvidia-docker). By contrast, exporting [Linux Installed Builds](./linux-installed-builds) and running them natively will work on any Linux machine that is capable of running the Unreal Editor, irrespective of GPU vendor.
 
 - Because this approach makes use of a bind-mounted X11 socket, an X11 server must be running on the host system. Linux distributions that ship with an alternative display server protocol enabled by default (e.g. [Wayland](https://wayland.freedesktop.org/)) will require additional configuration to enable an X11 user session.
 
@@ -45,7 +45,7 @@ Irrespective of the [source of container images](../obtaining-images/image-sourc
 
 {% highlight bash %}
 # Starts a container running a bash shell from which the UE4Editor executable can be run
-docker run --rm -ti --runtime=nvidia -v/tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY "unreal-engine:latest" bash
+docker run --rm -ti --gpus=all -v/tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY "unreal-engine:latest" bash
 {% endhighlight %}
 
 The individual arguments to the [docker run](https://docs.docker.com/engine/reference/run/) command are explained below:
@@ -54,7 +54,7 @@ The individual arguments to the [docker run](https://docs.docker.com/engine/refe
 
 - `-ti`: Starts an interactive session.
 
-- `--runtime=nvidia`: Uses the NVIDIA Docker runtime.
+- `--gpus=all`: Enables GPU access via the NVIDIA Container Toolkit.
 
 - `-v/tmp/.X11-unix:/tmp/.X11-unix:rw`: Bind-mounts the X11 socket from the host system.
 
@@ -84,7 +84,7 @@ The [ue4-docker project](../obtaining-images/ue4-docker) supports running a sand
 
 ### Using container images built from custom Dockerfiles
 
-Check out the [Tips for working with NVIDIA Docker](../obtaining-images/write-your-own#tips-for-working-with-nvidia-docker) section of the custom Dockerfile guide for instructions on enabling X11 and/or audio output support in your own container images. Once you have built your container images then you can run them using the commands from the [Implementation-agnostic commands](#implementation-agnostic-commands) section.
+Check out the [Tips for working with the NVIDIA Container Toolkit](../obtaining-images/write-your-own#tips-for-working-with-the-nvidia-container-toolkit) section of the custom Dockerfile guide for instructions on enabling X11 and/or audio output support in your own container images. Once you have built your container images then you can run them using the commands from the [Implementation-agnostic commands](#implementation-agnostic-commands) section.
 
 
 ## Related media

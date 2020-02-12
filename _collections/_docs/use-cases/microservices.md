@@ -6,8 +6,8 @@ order: 3
 ---
 
 {% capture _alert_content %}
-- Base container image(s) that [support running packaged Unreal projects](../obtaining-images/image-sources) (the images will need NVIDIA Docker support if the microservice performs rendering)
-- An environment [configured for running containers](../environments) (a Linux environment with NVIDIA Docker if performing rendering)
+- Base container image(s) that [support running packaged Unreal projects](../obtaining-images/image-sources) (the images will need NVIDIA Container Toolkit support if the microservice performs rendering)
+- An environment [configured for running containers](../environments) (a Linux environment with the NVIDIA Container Toolkit if performing rendering)
 {% endcapture %}
 {% include alerts/required.html content=_alert_content %}
 
@@ -21,14 +21,14 @@ order: 3
 
 ## Overview
 
-Containerised microservices are an extremely popular architectural paradigm for implementing server-side applications. Unreal Engine containers allow this same architecture to be applied to microservices powered by the Unreal Engine. Infrastructure for integrating existing RPC frameworks allows developers to implement Unreal microservices using familiar technologies, while the [NVIDIA Docker runtime](../concepts/nvidia-docker) allows Unreal microservices to perform 2D or 3D rendering with full GPU acceleration. Compatibility with container orchestration technologies means developers can deploy and scale Unreal microservices in exactly the same manner as traditional microservices.
+Containerised microservices are an extremely popular architectural paradigm for implementing server-side applications. Unreal Engine containers allow this same architecture to be applied to microservices powered by the Unreal Engine. Infrastructure for integrating existing RPC frameworks allows developers to implement Unreal microservices using familiar technologies, while the [NVIDIA Container Toolkit](../concepts/nvidia-docker) allows Unreal microservices to perform 2D or 3D rendering with full GPU acceleration. Compatibility with container orchestration technologies means developers can deploy and scale Unreal microservices in exactly the same manner as traditional microservices.
 
 
 ## Key considerations
 
 - This page only discusses topics that are specifically relevant to Unreal microservices. **If you are creating microservices that perform rendering then be sure to also read the [cloud rendering](./cloud-rendering) page and familiarise yourself with the relevant details.**
 
-- Because NVIDIA Docker only works with Linux containers running under Linux host systems, microservices that perform rendering cannot run inside [Windows containers](../concepts/windows-containers). Although Windows containers can be used to run microservices that do not perform any rendering, Linux containers are still strongly recommended due to better compatibility with container orchestration technologies and easier installation of runtime dependencies using system package managers.
+- Because the NVIDIA Container Toolkit only works with Linux containers running under Linux host systems, microservices that perform rendering cannot run inside [Windows containers](../concepts/windows-containers). Although Windows containers can be used to run microservices that do not perform any rendering, Linux containers are still strongly recommended due to better compatibility with container orchestration technologies and easier installation of runtime dependencies using system package managers.
 
 - Any third-party C++ libraries that will be integrated with the Unreal Engine under Linux must be built against libc++ instead of libstdc++, since the Unreal Engine itself is built against its own bundled copy of libc++. Third-party libraries that rely on dependencies which are also bundled with the Unreal Engine may also encounter issues related to symbol interposition. See [this article discussing the creation of the conan-ue4cli project](https://adamrehn.com/articles/cross-platform-library-integration-in-unreal-engine-4/) for a detailed explanation of these issues.
 

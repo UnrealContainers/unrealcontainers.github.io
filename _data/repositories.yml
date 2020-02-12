@@ -7,7 +7,7 @@
       url: https://github.com/adamrehn/ue4-cloud-rendering-demo
       maintainer: Adam Rehn
       type: github
-      description: Demonstrates performing cloud rendering using NVIDIA Docker and streaming the results to a web browser via WebRTC.
+      description: Demonstrates performing cloud rendering using the NVIDIA Container Toolkit and streaming the results to a web browser via WebRTC.
       related:
         - "/docs/use-cases/cloud-rendering"
     -

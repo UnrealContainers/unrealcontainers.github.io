@@ -1,13 +1,13 @@
 ---
 title: Cloud Rendering
-tagline: Perform 2D or 3D rendering in the cloud with full GPU acceleration via NVIDIA Docker.
+tagline: Perform 2D or 3D rendering in the cloud with full GPU acceleration via the NVIDIA Container Toolkit.
 quickstart: ["run"]
 order: 2
 ---
 
 {% capture _alert_content %}
-- Base container image(s) that [support running packaged Unreal projects with GPU acceleration via NVIDIA Docker](../obtaining-images/image-sources)
-- A Linux environment [configured for running containers via NVIDIA Docker](../environments)
+- Base container image(s) that [support running packaged Unreal projects with GPU acceleration via the NVIDIA Container Toolkit](../obtaining-images/image-sources)
+- A Linux environment [configured for running containers via the NVIDIA Container Toolkit](../environments)
 {% endcapture %}
 {% include alerts/required.html content=_alert_content %}
 
@@ -21,14 +21,14 @@ order: 2
 
 ## Overview
 
-The [NVIDIA Docker runtime](../concepts/nvidia-docker) allows Unreal Engine containers to run in the cloud with full GPU acceleration, facilitating server-side 2D or 3D rendering. GPU-accelerated containers augment existing cloud rendering workflows with all of the advantages inherent to containerisation, including increased density and compatibility with container orchestration technologies. Rendering results can be captured, stored, or streamed to remote devices in much the same manner as when performing cloud rendering inside VMs. Container-based cloud rendering can also be combined with existing RPC frameworks to create GPU-accelerated [microservices powered by the Unreal Engine](./microservices) or provide training data for [machine learning models](./machine-learning).
+The [NVIDIA Container Toolkit](../concepts/nvidia-docker) allows Unreal Engine containers to run in the cloud with full GPU acceleration, facilitating server-side 2D or 3D rendering. GPU-accelerated containers augment existing cloud rendering workflows with all of the advantages inherent to containerisation, including increased density and compatibility with container orchestration technologies. Rendering results can be captured, stored, or streamed to remote devices in much the same manner as when performing cloud rendering inside VMs. Container-based cloud rendering can also be combined with existing RPC frameworks to create GPU-accelerated [microservices powered by the Unreal Engine](./microservices) or provide training data for [machine learning models](./machine-learning).
 
 
 ## Key considerations
 
-- Because NVIDIA Docker only works with Linux containers running under Linux host systems, cloud rendering cannot be performed inside [Windows containers](../concepts/windows-containers). Windows-based cloud rendering must be run inside VMs rather than containers.
+- Because the NVIDIA Container Toolkit only works with Linux containers running under Linux host systems, cloud rendering cannot be performed inside [Windows containers](../concepts/windows-containers). Windows-based cloud rendering must be run inside VMs rather than containers.
 
-- NVIDIA Docker currently only supports OpenGL rendering. Vulkan support [has been promised as a future addition](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#is-vulkan-supported).
+- The NVIDIA Container Toolkit currently only supports OpenGL rendering. Vulkan support is [currently in alpha](https://hub.docker.com/r/nvidia/vulkan).
 
 - The Unreal Engine will default to offscreen rendering when running in an environment without an X11 server, such as a Docker container. If your project requires X11 support then you will need to use a container image that includes the X11 runtime libraries and bind-mount the X11 socket from the host system using the flags `-v/tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY`.
 
@@ -53,7 +53,7 @@ Writing your own Dockerfiles for building runtime base images is quite straightf
 
 - **Select the appropriate NVIDIA base image for your intended usage scenario.** Choose the [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) image if CUDA support is required, or the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) image if CUDA support is not required.
 
-- **Add PulseAudio support if audio output is required and/or X11 support if X11 window creation is required.** Instructions for adding PulseAudio support and X11 support can be found in the [Tips for working with NVIDIA Docker](../obtaining-images/write-your-own#tips-for-working-with-nvidia-docker) section of the custom Dockerfile guide.
+- **Add PulseAudio support if audio output is required and/or X11 support if X11 window creation is required.** Instructions for adding PulseAudio support and X11 support can be found in the [Tips for working with the NVIDIA Container Toolkit](../obtaining-images/write-your-own#tips-for-working-with-the-nvidia-container-toolkit) section of the custom Dockerfile guide.
 
 - **Add any additional runtime dependencies.** Simply install any other required packages in exactly the same manner as when writing Dockerfiles for traditional (non GPU-accelerated) Linux container images.
 

@@ -6,8 +6,8 @@ order: 4
 ---
 
 {% capture _alert_content %}
-- Base container image(s) that [support running packaged Unreal projects with GPU acceleration via NVIDIA Docker](../obtaining-images/image-sources)
-- A Linux environment [configured for running containers via NVIDIA Docker](../environments)
+- Base container image(s) that [support running packaged Unreal projects with GPU acceleration via the NVIDIA Container Toolkit](../obtaining-images/image-sources)
+- A Linux environment [configured for running containers via the NVIDIA Container Toolkit](../environments)
 {% endcapture %}
 {% include alerts/required.html content=_alert_content %}
 
@@ -21,7 +21,7 @@ order: 4
 
 ## Overview
 
-Generation of training data for machine learning models is the single most common use of the Unreal Engine [within the context of scientific research](https://ue4research.org/publications). The algorithms underlying these models typically rely on GPU-based computation to achieve maximum performance, and GPU-accelerated containers powered by the [NVIDIA Docker runtime](../concepts/nvidia-docker) are widely used for running machine learning workloads in the cloud. Unreal Engine containers allow simulations to be packaged and deployed alongside the machine learning models that interact with them, using the same familiar technologies and deployment pipeline. Container orchestration frameworks such as Kubernetes can be used to facilitate network-based or IPC-based communication between containers and to perform training or inference at scale.
+Generation of training data for machine learning models is the single most common use of the Unreal Engine [within the context of scientific research](https://ue4research.org/publications). The algorithms underlying these models typically rely on GPU-based computation to achieve maximum performance, and GPU-accelerated containers powered by the [NVIDIA Container Toolkit](../concepts/nvidia-docker) are widely used for running machine learning workloads in the cloud. Unreal Engine containers allow simulations to be packaged and deployed alongside the machine learning models that interact with them, using the same familiar technologies and deployment pipeline. Container orchestration frameworks such as Kubernetes can be used to facilitate network-based or IPC-based communication between containers and to perform training or inference at scale.
 
 
 ## Key considerations

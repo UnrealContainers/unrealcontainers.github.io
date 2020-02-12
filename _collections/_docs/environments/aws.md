@@ -40,7 +40,7 @@ Once you have launched an instance and ensured your Docker EE installation is up
 
 #### Selecting an instance type
 
-Any EC2 instance type with a sufficient amount of memory can be used to run a Linux container host without [NVIDIA Docker](../concepts/nvidia-docker) support. For building and running Unreal Engine containers a [compute optimised instance](https://aws.amazon.com/ec2/instance-types/#Compute_Optimized) with a minimum of 8GB of memory is recommended.
+Any EC2 instance type with a sufficient amount of memory can be used to run a Linux container host without [NVIDIA Container Toolkit](../concepts/nvidia-docker) support. For building and running Unreal Engine containers a [compute optimised instance](https://aws.amazon.com/ec2/instance-types/#Compute_Optimized) with a minimum of 8GB of memory is recommended.
 
 #### Selecting a virtual machine image
 
@@ -52,7 +52,7 @@ AWS provides preconfigured VM images for Linux in the [Amazon Machine Image (AMI
 
 Once you have launched an instance running a supported Linux distribution then you will need to install Docker CE by following the instructions in the [Installing and configuring Docker](./local-linux#installing-and-configuring-docker) section of the Linux environment configuration page.
 
-### Configure a GPU-enabled instance with NVIDIA Docker
+### Configure a GPU-enabled instance with the NVIDIA Container Toolkit
 
 #### Selecting an instance type
 
@@ -66,9 +66,9 @@ As discussed in the [Configure a CPU-only instance](#configure-a-cpu-only-instan
 
 If the AMI you selected for your instance does not include the appropriate NVIDIA GPU drivers then you will need to [install or update the drivers manually](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-nvidia-driver.html).
 
-#### Installing Docker and NVIDIA Docker
+#### Installing Docker and the NVIDIA Container Toolkit
 
-Once you have ensured your instance is running the appropriate NVIDIA GPU drivers then you will need to install Docker CE and the NVIDIA Docker runtime by following the instructions provided by the [Linux environment configuration page](./local-linux).
+Once you have ensured your instance is running the appropriate NVIDIA GPU drivers then you will need to install Docker CE and the NVIDIA Container Toolkit by following the instructions provided by the [Linux environment configuration page](./local-linux).
 
 #### Optional: configuring PulseAudio support
 

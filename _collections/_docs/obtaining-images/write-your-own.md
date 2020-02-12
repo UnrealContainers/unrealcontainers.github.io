@@ -39,7 +39,7 @@ It is worth noting that the tips on this page relate only to writing Dockerfiles
 
 ### General tips
 
-- Make sure you derive your images from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) base image, even if you don't plan on performing rendering using NVIDIA Docker. If the Engine is built inside a plain Linux base image without any OpenGL libraries it will be built without OpenGL support, which means any Unreal projects built and packaged using the resulting image will be unable to perform rendering, even when run directly on a Linux host system outside of a container. *(See the first list item under [Tips for working with NVIDIA Docker](#tips-for-working-with-nvidia-docker) below for a clarification of the number one question that people usually ask about this requirement.)*
+- Make sure you derive your images from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) base image, even if you don't plan on performing rendering using the NVIDIA Container Toolkit. If the Engine is built inside a plain Linux base image without any OpenGL libraries it will be built without OpenGL support, which means any Unreal projects built and packaged using the resulting image will be unable to perform rendering, even when run directly on a Linux host system outside of a container. *(See the first list item under [Tips for working with the NVIDIA Container Toolkit](#tips-for-working-with-the-nvidia-container-toolkit) below for a clarification of the number one question that people usually ask about this requirement.)*
 
 - Both UnrealBuildTool and the Engine itself refuse to run as root under Linux. You will need to create a non-root user to run the build commands.
 
@@ -47,11 +47,11 @@ It is worth noting that the tips on this page relate only to writing Dockerfiles
 
 - The bundled compiler toolchain is included automatically in Linux Installed Builds since version 4.22.1. You will need to copy the toolchain into Installed Builds manually when building older versions of the Unreal Engine.
 
-### Tips for working with NVIDIA Docker
+### Tips for working with the NVIDIA Container Toolkit
 
-- Container images built with [NVIDIA Docker](../concepts/nvidia-docker) support will still run correctly using the standard Docker runtime, they just won't see any available GPU devices. Deriving an image from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images doesn't force you to use NVIDIA Docker to run the resulting image. The image will work happily under the plain runtime, irrespective of whether it is run under Linux, Windows, or macOS.
+- Container images built with the [NVIDIA Container Toolkit](../concepts/nvidia-docker) support will still run correctly using the standard Docker runtime, they just won't see any available GPU devices. Deriving an image from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images doesn't force you to use the NVIDIA Container Toolkit to run the resulting image. The image will work happily under the plain runtime, irrespective of whether it is run under Linux, Windows, or macOS.
 
-- By default, the Docker daemon will use the standard `runc` runtime when building containers, which means GPU acceleration is not available during the build process. Although it is possible to configure the Docker daemon to use the NVIDIA Docker runtime by default and thus enable build-time GPU access, [this is generally a bad idea because it can result in non-portable container images](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#can-i-use-the-gpu-during-a-container-build-ie-docker-build). It is best to simply avoid running commands during the build process that require GPU access.
+- GPU acceleration is not available during the build process. Although older versions of NVIDIA Docker allowed you to configure the Docker daemon to use the NVIDIA container runtime by default and thus enable build-time GPU access, [this was generally a bad idea because it could result in non-portable container images](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#can-i-use-the-gpu-during-a-container-build-ie-docker-build), and this option is not present in newer versions of the NVIDIA Container Toolkit. It is best to simply avoid running commands during the build process that require GPU access.
 
 - If you want to enable X11 support in your containers then you will need to install the relevant system packages for the X11 runtime libraries. For Debian-based distributions, the required packages are as follows:
   

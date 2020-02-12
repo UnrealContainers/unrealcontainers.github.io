@@ -42,7 +42,7 @@ Once you have launched a virtual machine and ensured your Docker EE installation
 
 #### Selecting a virtual machine size
 
-Any virtual machine size with a sufficient amount of memory can be used to run a Linux container host without [NVIDIA Docker](../concepts/nvidia-docker) support. For building and running Unreal Engine containers a size from a [compute optimised series](https://azure.microsoft.com/en-au/pricing/details/virtual-machines/linux/#fsv2-series) with a minimum of 8GB of memory is recommended.
+Any virtual machine size with a sufficient amount of memory can be used to run a Linux container host without [NVIDIA Container Toolkit](../concepts/nvidia-docker) support. For building and running Unreal Engine containers a size from a [compute optimised series](https://azure.microsoft.com/en-au/pricing/details/virtual-machines/linux/#fsv2-series) with a minimum of 8GB of memory is recommended.
 
 #### Selecting a virtual machine image
 
@@ -54,7 +54,7 @@ Microsoft does not currently provide preconfigured VM images for Linux with Dock
 
 Once you have launched a virtual machine running a supported Linux distribution then you will need to install Docker CE by following the instructions in the [Installing and configuring Docker](./local-linux#installing-and-configuring-docker) section of the Linux environment configuration page.
 
-### Configure a GPU-enabled virtual machine with NVIDIA Docker
+### Configure a GPU-enabled virtual machine with the NVIDIA Container Toolkit
 
 #### Selecting a virtual machine size
 
@@ -68,9 +68,9 @@ As discussed in the [Configure a CPU-only virtual machine](#configure-a-cpu-only
 
 If the image you selected for your virtual machine does not include the appropriate NVIDIA GPU drivers then you will need to [install or update the drivers manually](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/n-series-driver-setup).
 
-#### Installing Docker and NVIDIA Docker
+#### Installing Docker and the NVIDIA Container Toolkit
 
-Once you have ensured your virtual machine is running the appropriate NVIDIA GPU drivers then you will need to install Docker CE and the NVIDIA Docker runtime by following the instructions provided by the [Linux environment configuration page](./local-linux).
+Once you have ensured your virtual machine is running the appropriate NVIDIA GPU drivers then you will need to install Docker CE and the NVIDIA Container Toolkit by following the instructions provided by the [Linux environment configuration page](./local-linux).
 
 #### Optional: configuring PulseAudio support
 
