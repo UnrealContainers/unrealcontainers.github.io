@@ -1,5 +1,5 @@
 ---
-title: NVIDIA Docker
+title: NVIDIA Container Toolkit
 tagline: What is the NVIDIA Container Toolkit and how can it be used to run Linux containers with full GPU acceleration?
 quickstart: ["run"]
 order: 2
