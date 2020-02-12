@@ -119,6 +119,22 @@ FROM adamrehn/ue4-runtime:latest
 COPY --from=builder --chown=ue4:ue4 /tmp/project/dist/LinuxNoEditor /home/ue4/project
 {% endhighlight %}
 
+### Using prebuilt Unreal plugins
+
+Using prebuilt plugins can speed up a project's build process by avoiding the need to recompile all of the plugins the project depends on each time the project itself is rebuilt. There are two ways to obtain precompiled binaries for a plugin:
+
+- **Unreal Marketplace plugins:** plugins distributed via the [Unreal Marketplace](https://www.unrealengine.com/marketplace/) typically include precompiled binaries for Windows, although not for Linux.
+
+- **Packaging a plugin yourself:** if you have a custom plugin (or a Marketplace plugin that you want to build for Linux), you can build and package it yourself by running either the [ue4 package](https://adamrehn.com/docs/ue4cli/descriptor-commands/package) command from [ue4cli](https://github.com/adamrehn/ue4cli) or the underlying `BuildPlugin` script included with Unreal AutomationTool.
+
+Once you have obtained precompiled binaries for a plugin, you can "install" the plugin by simply copying the files to the `Engine/Plugins` directory of your Unreal Engine installation. So long as you do not include a separate copy of the plugin in the `Plugins` directory of your Unreal project, the build process will use the precompiled binaries from the Engine. It's worth noting that some Marketplace plugins (such as the [Substance plugin](https://www.unrealengine.com/marketplace/en-US/product/substance-plugin)) include hard-coded checks to ensure they've been placed in a subdirectory consistent with a Marketplace installation, so you'll need to copy any such plugins into the `Engine/Plugins/Marketplace` directory of your Unreal Engine installation specifically. Fortunately, the overwhelming majority of plugins can be placed anywhere inside the `Engine/Plugins` directory and will work without complaint.
+
+There are two common approaches for incorporating the precompiled binaries into a CI/CD pipeline:
+
+- **Download the files from a remote server.** In this approach, the packaged plugin files are uploaded to a remote server or artifact management system and then downloaded as needed when building projects that consume them. This approach is extremely flexible because each plugin can be consumed by any number of projects, but requires additional infrastructure for storing and serving the files.
+
+- **Bake the files into a container image.** In this approach, the packaged plugin files are incorporated into the container image that will be used as the build environment for a project. This approach is somewhat inflexible and can result in a large number of container images when you are building multiple projects depending on multiple plugins, but is suitable for simple projects and requires no additional infrastructure.
+
 
 ## Related media
 
