@@ -71,7 +71,7 @@ If you're already making use of Unreal Engine containers as part of a [continuou
 
 There are a variety of different mechanisms that can be utilised to capture cloud rendering output. Each mechanism is suited to different scenarios and offers different advantages and limitations:
 
-- The [Pixel Streaming](https://docs.unrealengine.com/en-us/Platforms/PixelStreaming) feature introduced in Unreal Engine 4.21.0 is currently Windows-only, **and is therefore not compatible with container-based cloud rendering.**
+- The official implementation of the [Pixel Streaming](https://docs.unrealengine.com/en-us/Platforms/PixelStreaming) feature introduced in Unreal Engine 4.21.0 is currently Windows-only, and is therefore not compatible with container-based cloud rendering. **However, [Linux support for Pixel Streaming](https://adamrehn.com/articles/pixel-streaming-in-linux-containers/) is available**, and this alternative implementation is compatible with container-based cloud rendering by design.
 
 - Traditional Linux video capture mechanisms can be used inside containers, but typically require additional configuration and sometimes even additional container security permissions. These techniques also scale poorly to large numbers of containers performing cloud rendering within a single host system, **and are not recommended.**
 
