@@ -28,9 +28,9 @@ The [NVIDIA Container Toolkit](../concepts/nvidia-docker) allows Unreal Engine c
 
 - Because the NVIDIA Container Toolkit only works with Linux containers running under Linux host systems, cloud rendering cannot be performed inside [Windows containers](../concepts/windows-containers). Windows-based cloud rendering must be run inside VMs rather than containers.
 
-- The NVIDIA Container Toolkit currently only supports OpenGL rendering. Vulkan support is [currently in alpha](https://hub.docker.com/r/nvidia/vulkan).
+- The NVIDIA Container Toolkit supports both OpenGL and Vulkan rendering. You will need to select a container base image that supports the rendering API you wish to use, either from the [official base images that NVIDIA makes available](https://hub.docker.com/u/nvidia), or from [the list of preconfigured base images available](../obtaining-images/image-sources#sources-of-base-images-for-running-packaged-unreal-projects) that are specifically designed for running packaged Unreal projects.
 
-- The Unreal Engine will default to offscreen rendering when running in an environment without an X11 server, such as a Docker container. If your project requires X11 support then you will need to use a container image that includes the X11 runtime libraries and bind-mount the X11 socket from the host system using the flags `-v/tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY`.
+- When using OpenGL, the Unreal Engine will default to offscreen rendering when running in an environment without an X11 server, such as a Docker container. (When using Vulkan, offscreen rendering must be manually enabled by specifying the `-RenderOffscreen` flag, irrespective of whether an X11 server is present or not.) If your project requires X11 support then you will need to use a container image that includes the X11 runtime libraries and bind-mount the X11 socket from the host system using the flags `-v/tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY`.
 
 - By default, containers will not have access to the audio devices from the host system and so audio output will be disabled. When using container images that include PulseAudio support, you can enable audio output by bind-mounting the PulseAudio socket from the host system using the flag `"-v/run/user/$UID/pulse:/run/user/1000/pulse"`. Note that this will not work for the root user, so you will need to run the command as a non-root user as described by the [Post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/) page of the Docker documentation.
 
@@ -41,7 +41,7 @@ The [NVIDIA Container Toolkit](../concepts/nvidia-docker) allows Unreal Engine c
 
 ### Base image selection
 
-Packaged Unreal projects do not require the Engine Tools and can run in any container image that includes the required runtime libraries. As discussed in the [Sources of base images for running packaged Unreal projects](../obtaining-images/image-sources#sources-of-base-images-for-running-packaged-unreal-projects) section of the Available Image Sources page, container images that will perform rendering must be derived from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images. Beyond this single requirement, developers are free to design their runtime base images as they see fit.
+Packaged Unreal projects do not require the Engine Tools and can run in any container image that includes the required runtime libraries. As discussed in the [Sources of base images for running packaged Unreal projects](../obtaining-images/image-sources#sources-of-base-images-for-running-packaged-unreal-projects) section of the Available Image Sources page, container images that will perform rendering must be derived from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/), [nvidia/vulkan](https://hub.docker.com/r/nvidia/vulkan/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images. Beyond this single requirement, developers are free to design their runtime base images as they see fit.
 
 #### Using a preconfigured base image
 
@@ -51,7 +51,7 @@ There are a number of pre-configured base images maintained by the community tha
 
 Writing your own Dockerfiles for building runtime base images is quite straightforward:
 
-- **Select the appropriate NVIDIA base image for your intended usage scenario.** Choose the [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) image if CUDA support is required, or the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) image if CUDA support is not required.
+- **Select the appropriate NVIDIA base image for your intended usage scenario.** Choose the [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) image if CUDA support is required, or the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) image if CUDA support is not required. (The [nvidia/vulkan](https://hub.docker.com/r/nvidia/vulkan/) image does not currently include any variants without CUDA support, so if you need Vulkan support but want to avoid the additional size overheads of CUDA then you'll need to use the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) image and add Vulkan support in your Dockerfile.)
 
 - **Add PulseAudio support if audio output is required and/or X11 support if X11 window creation is required.** Instructions for adding PulseAudio support and X11 support can be found in the [Tips for working with the NVIDIA Container Toolkit](../obtaining-images/write-your-own#tips-for-working-with-the-nvidia-container-toolkit) section of the custom Dockerfile guide.
 
@@ -66,6 +66,14 @@ There is no inherent need to use Unreal Engine containers to build and package p
 #### Creating container images as part of the build process for projects
 
 If you're already making use of Unreal Engine containers as part of a [continuous integration](./continuous-integration) workflow then you can use a [Docker multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/) to build your runtime container images as part of the overarching build process. See the [Building container images for deployment](../use-cases/continuous-integration#building-container-images-for-deployment) section of the CI/CD page for more details on this option.
+
+### Offscreen rendering flags
+
+The flags required to enable offscreen rendering vary based on the version of the Unreal Engine you are using:
+
+- **Unreal Engine versions 4.24 and older** only support offscreen rendering using OpenGL, and will default to offscreen rendering if an X11 server is not detected. If you're using a version of the Unreal Engine that defaults to Vulkan rendering in a container that also supports Vulkan then you will need to specify the `-opengl4` flag when running your packaged Unreal project to ensure it uses OpenGL. If an X11 server is present and you want to force offscreen rendering then you will need to set the `DISPLAY` environment variable to an empty value.
+
+- **Unreal Engine versions 4.25 and newer** support offscreen rendering using both OpenGL and Vulkan. When using OpenGL, the flags and environment variables from the previous list item apply. When using Vulkan, you will need to specify the `-RenderOffscreen` flag when running your packaged Unreal project to enable offscreen rendering, since it is not enabled automatically in the absence of an X11 server.
 
 ### Capturing rendering output
 

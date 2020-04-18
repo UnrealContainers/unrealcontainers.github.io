@@ -23,11 +23,11 @@ Packaged Unreal projects can run in any container image that includes the requir
 
 - **Linux containers:** any image based on a full Linux distribution should work out of the box (e.g. [Fedora](https://hub.docker.com/_/fedora), [CentOS](https://hub.docker.com/_/centos), [Ubuntu](https://hub.docker.com/_/ubuntu), etc.) but minimal distributions like [Alpine](https://hub.docker.com/_/alpine) will most likely have issues.
 
-- **Linux containers with the NVIDIA Container Toolkit:** performing offscreen rendering inside a container requires an image derived from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images. Creating X11 windows also requires the X11 runtime libraries.
+- **Linux containers with the NVIDIA Container Toolkit:** performing offscreen rendering inside a container requires an image derived from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/), [nvidia/vulkan](https://hub.docker.com/r/nvidia/vulkan/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images. Creating X11 windows also requires the X11 runtime libraries.
 
 Since runtime base images do not contain any Unreal Engine components, they can be distributed without any restrictions and shared publicly on container registries such as Docker Hub. A number of pre-configured base images are maintained by the community and are readily available for download:
 
-- [adamrehn/ue4-runtime](https://hub.docker.com/r/adamrehn/ue4-runtime): provides a variety of tags representing minimal, pre-configured environments for running packaged Unreal Engine projects with GPU acceleration via the [NVIDIA Container Toolkit](../concepts/nvidia-docker). Includes variants with CUDA and TensorFlow support for use with machine learning workloads.
+- [adamrehn/ue4-runtime](https://hub.docker.com/r/adamrehn/ue4-runtime): provides a variety of tags representing minimal, pre-configured environments for running packaged Unreal Engine projects with GPU acceleration via the [NVIDIA Container Toolkit](../concepts/nvidia-docker). Support for both OpenGL and Vulkan is provided by all image variants. Includes variants with CUDA and TensorFlow support for use with machine learning workloads.
 
 
 ## Sources of images containing the Engine Tools
