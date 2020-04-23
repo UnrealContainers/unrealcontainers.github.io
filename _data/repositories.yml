@@ -3,6 +3,15 @@
   description: "The example code in these repositories use container images built by the [ue4-docker project](/docs/obtaining-images/ue4-docker)."
   repos:
     -
+      name: Example Dockerfiles
+      url: https://github.com/adamrehn/ue4-example-dockerfiles
+      maintainer: Adam Rehn
+      type: github
+      description: Provides a variety of example Dockerfiles that demonstrate various uses cases of Unreal Engine containers.
+      related:
+        - "/docs/use-cases/cloud-rendering"
+        - "/docs/use-cases/continuous-integration"
+    -
       name: Cloud Rendering Demo
       url: https://github.com/adamrehn/ue4-cloud-rendering-demo
       maintainer: Adam Rehn
