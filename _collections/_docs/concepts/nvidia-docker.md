@@ -7,7 +7,7 @@ order: 2
 
 {% capture _alert_content %}
 - The [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker) (formerly known as NVIDIA Docker) allows containers to access full GPU acceleration.
-- OpenGL, OpenCL and CUDA are supported for production use. Vulkan support is [currently in alpha](https://hub.docker.com/r/nvidia/vulkan).
+- OpenGL, OpenCL and CUDA are supported for production use. Vulkan support is [currently in beta](https://hub.docker.com/r/nvidia/vulkan).
 - **This only works for Linux containers running on Linux host systems with NVIDIA GPUs.**
 {% endcapture %}
 {% include alerts/overview.html content=_alert_content %}
@@ -43,7 +43,7 @@ For the purposes of this discussion we are primarily interested in low-level con
 
 The [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker) (formerly known as NVIDIA Docker) is a plugin for the Docker daemon that allows containers to communicate with the GPU drivers on the host system, providing full access to all NVIDIA GPU devices. Older versions of NVIDIA Docker relied on a custom container runtime to invoke the necessary setup code when starting containers, whilst newer versions of the NVIDIA Container Toolkit rely on functionality added in Docker 19.03 that allows the Docker daemon to invoke the setup code directly without the need for a separate container runtime. 
 
-Containers running with NVIDIA GPU acceleration can use a variety of hardware-accelerated APIs including OpenGL, OpenCL and NVIDIA CUDA. Vulkan support is [currently in alpha](https://hub.docker.com/r/nvidia/vulkan).
+Containers running with NVIDIA GPU acceleration can use a variety of hardware-accelerated APIs including OpenGL, OpenCL and NVIDIA CUDA. Vulkan support is [currently in beta](https://hub.docker.com/r/nvidia/vulkan).
 
 The NVIDIA Container Toolkit is designed specifically for Linux containers running on Linux host systems. The underlying code [does not support Windows containers](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#platform-support), nor can it be used when running Linux containers under Windows or macOS due to the fact that containers are run inside a Linux VM that does not have GPU access. However, Docker clients running under Windows and macOS can still be used to connect to a Docker daemon running under Linux with the NVIDIA Container Toolkit.
 
@@ -61,8 +61,9 @@ The NVIDIA Container Toolkit is designed specifically for Linux containers runni
 5. Pull one of the NVIDIA base container images from Docker Hub:
     
     - [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) for OpenGL support
-    - [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) for OpenGL + CUDA support
     - [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda/) for CUDA support
+    - [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) for OpenGL + CUDA support
+    - [nvidia/vulkan](https://hub.docker.com/r/nvidia/vulkan/) for OpenGL + Vulkan + CUDA support
     - [nvidia/opencl](https://hub.docker.com/r/nvidia/opencl/) for OpenCL support
 
 6. Build Unreal Engine container images based on the NVIDIA base images, either using [an existing source of images](../obtaining-images/image-sources) or by [writing your own custom Dockerfiles](../obtaining-images/write-your-own).
