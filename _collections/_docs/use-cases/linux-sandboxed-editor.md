@@ -80,7 +80,7 @@ By default, the container will not have access to the audio devices from the hos
 
 ### Using container images from the ue4-docker project
 
-The [ue4-docker project](../obtaining-images/ue4-docker) supports running a sandboxed Editor using the [ue4-full container image](https://adamrehn.com/docs/ue4-docker/building-images/available-container-images#ue4-full). Once you have obtained this container image then you can run containers using the commands from the [Implementation-agnostic commands](#implementation-agnostic-commands) section.
+The [ue4-docker project](../obtaining-images/ue4-docker) supports running a sandboxed Editor using the [ue4-full container image](https://docs.adamrehn.com/ue4-docker/building-images/available-container-images#ue4-full). Once you have obtained this container image then you can run containers using the commands from the [Implementation-agnostic commands](#implementation-agnostic-commands) section.
 
 ### Using container images built from custom Dockerfiles
 

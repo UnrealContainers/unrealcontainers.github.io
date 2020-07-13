@@ -37,7 +37,7 @@ Under Windows and macOS, the Epic Games Launcher provides prebuilt Engine binari
 
 ### Using container images from the ue4-docker project
 
-The [ue4-docker project](../obtaining-images/ue4-docker) provides the [ue4-docker export](https://adamrehn.com/docs/ue4-docker/commands/export) command to export Installed Builds from the [ue4-full container image](https://adamrehn.com/docs/ue4-docker/building-images/available-container-images#ue4-full). This command works with container images for Unreal Engine 4.21.0 and newer, and performs symlink retargeting on the host system automatically. Due to the presence of symlinks in the container images built by ue4-docker, manually copying the files from the container filesystem to the host filesystem is not recommended.
+The [ue4-docker project](../obtaining-images/ue4-docker) provides the [ue4-docker export](https://docs.adamrehn.com/ue4-docker/commands/export) command to export Installed Builds from the [ue4-full container image](https://docs.adamrehn.com/ue4-docker/building-images/available-container-images#ue4-full). This command works with container images for Unreal Engine 4.21.0 and newer, and performs symlink retargeting on the host system automatically. Due to the presence of symlinks in the container images built by ue4-docker, manually copying the files from the container filesystem to the host filesystem is not recommended.
 
 ### Using container images built from custom Dockerfiles
 

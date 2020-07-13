@@ -19,7 +19,7 @@ Extensive documentation is provided for ue4-docker, including detailed guides on
 
 ## Using this container image source
 
-- Start by exploring the project's [extensive documentation](https://adamrehn.com/docs/ue4-docker/), which provides everything needed to start building container images with ue4-docker.
+- Start by exploring the project's [extensive documentation](https://docs.adamrehn.com/ue4-docker/), which provides everything needed to start building container images with ue4-docker.
 - Check out the project's [GitHub repository](https://github.com/adamrehn/ue4-docker) to browse the contents of the underlying Dockerfiles.
 - There are a series of [related articles](https://adamrehn.com/articles/tag/Unreal%20Engine/) on the author's website that provide background detail on the process of creating the initial version of the Dockerfiles and discuss the challenges that needed to be overcome.
 
