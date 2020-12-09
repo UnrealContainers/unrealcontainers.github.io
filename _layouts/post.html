@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+{% capture _alert_content %}
+<p>
+	Posted by {{ page.author | escape }} on {{ page.date | date: '%e %B %Y' }}<br>
+	Last updated on {{ page.updated | date: '%e %B %Y' }}
+</p>
+{% endcapture %}
+{% include alerts/post-metadata.html content=_alert_content %}
+
+{{ content }}

@@ -13,8 +13,14 @@ kramdown:
   toc_levels: [2,3,4,5,6]
 exclude: [".gitignore", "README.md"]
 
+# Permalink and pagination settings for blog posts
+plugins: ["jekyll-paginate"]
+permalink: "/blog/:title/"
+paginate_path: "/blog/page-:num/"
+paginate: 5
+
 # Configure the permalinks for each document collection
-collections_dir: _collections
+collections_dir: collections
 collections:
   docs:
     output: true
@@ -25,6 +31,13 @@ collections:
 
 # We use front matter defaults to supply the metadata for each document collection
 defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      category: "Blog"
   -
     scope:
       path: ""

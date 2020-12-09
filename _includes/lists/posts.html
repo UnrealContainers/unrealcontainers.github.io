@@ -1,0 +1,31 @@
+{% if include.posts == nil or include.posts.size == 0 %}
+{% include alerts/coming-soon.html %}
+{% else %}
+
+<div class="items-rows">
+	
+	{% for post in include.posts %}
+		{% if post.redirect %}
+			{% assign link = post.redirect %}
+			{% assign icon = "external-link-alt" %}
+		{% else %}
+			{% assign link = post.url %}
+			{% assign icon = "pencil-alt" %}
+		{% endif %}
+		<div class="media-item icon">
+			<a href="{{ link | uri_escape }}">
+				<div class="media-image"><div>
+					<span class="fas fa-fw fa-{{ icon }}"></span>
+				</div></div>
+				<div class="media-body">
+					<h3>{{ post.title | escape }}</h3>
+					<p class="author">Posted by {{ post.author | escape }} on {{ post.date | date: '%e %B %Y' }}{% if post.redirect %} via <strong>{{ post.redirect | replace: 'https://', '' | replace: 'http://', '' | split: '/' | first | escape }}</strong>{% endif %}</p>
+					<p>{{ post.tagline | escape }}</p>
+				</div>
+			</a>
+		</div>
+	{% endfor %}
+	
+</div>
+
+{% endif %}

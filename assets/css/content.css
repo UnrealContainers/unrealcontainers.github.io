@@ -241,6 +241,10 @@ ul.page-list .page-title
 	margin-bottom: 0;
 }
 
+.pagination {
+	margin-top: 4rem;
+}
+
 .media-item
 {
 	border: 1px solid rgba(204,204,204,0.5);

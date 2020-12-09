@@ -32,6 +32,21 @@
 	
 	<section class="container">
 		
+		<h2>Blog</h2>
+		<p class="lead">Catch up on the latest news and updates from the Unreal Containers community.</p>
+		
+		{% assign posts = site.posts | slice: 0, 3 %}
+		{% include lists/posts.html posts=posts %}
+		
+		<p class="button-wrapper">
+			<a class="btn btn-secondary btn-lg" role="button" href="{{ "/" | relative_url }}blog">See all blog posts</a>
+		</p>
+		
+	</section>
+	
+	<!--
+	<section class="container">
+		
 		<h2>Success Stories</h2>
 		<p class="lead">See how developers are already using Docker containers to bring the power of the Unreal Engine to the cloud.</p>
 		
@@ -44,6 +59,7 @@
 		</p>
 		
 	</section>
+	-->
 	
 	<section class="container">
 		

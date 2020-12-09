@@ -1,0 +1,38 @@
+---
+layout: default
+title: Blog
+tagline: Catch up on the latest news and updates from the Unreal Containers community.
+---
+
+{% include lists/posts.html posts=paginator.posts %}
+
+{% if paginator.total_pages > 1 %}
+<ul class="pagination justify-content-center">
+	
+	{% if paginator.previous_page %}
+	<li class="page-item">
+		<a class="page-link" href="{{ paginator.previous_page_path | prepend: site.baseurl }}"><span class="fas fa-arrow-left"></span></a>
+	</li>
+	{% endif %}
+	
+	{% assign trail_start = paginator.page | minus: 5 | at_least: 1 %}
+	{% assign trail_end = paginator.page | plus: 5 | at_most: paginator.total_pages %}
+	{% for page in (trail_start..trail_end) %}
+		<li class="page-item{% if page == paginator.page %} active{% endif %}">
+		{% if page == 1 %}
+			{% assign link = site.paginate_path | relative_url | replace: 'page-:num/', '' %}
+		{% else %}
+			{% assign link = site.paginate_path | relative_url | replace: ':num', page %}
+		{% endif %}
+			<a class="page-link" href="{{ link | uri_escape }}">{{ page | escape }}</a>
+		</li>
+	{% endfor %}
+	
+	{% if paginator.next_page %}
+	<li class="page-item">
+		<a class="page-link" href="{{ paginator.next_page_path | prepend: site.baseurl }}"><span class="fas fa-arrow-right"></span></a>
+	</li>
+	{% endif %}
+	
+</ul>
+{% endif %}

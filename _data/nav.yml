@@ -6,8 +6,11 @@ pages:
     name: Support
     link: /support
   -
-    name: Success Stories
-    link: /success-stories
+    name: Blog
+    link: /blog
+#  -
+#    name: Success Stories
+#    link: /success-stories
   -
     name: Documentation
     link: /docs
