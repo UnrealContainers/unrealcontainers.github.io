@@ -4,7 +4,7 @@ layout: default
 
 {% capture _alert_content %}
 <p>
-	Posted by {{ page.author | escape }} on {{ page.date | date: '%e %B %Y' }}<br>
+	Posted by <strong>{{ page.author | escape }}</strong> on {{ page.date | date: '%e %B %Y' }}<br>
 	Last updated on {{ page.updated | date: '%e %B %Y' }}
 </p>
 {% endcapture %}

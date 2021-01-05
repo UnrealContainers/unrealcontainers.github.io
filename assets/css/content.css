@@ -97,15 +97,27 @@ article strong, article table th {
 	font-weight: 600;
 }
 
-article figure {
+article figure
+{
 	margin: 3rem 0.5rem;
+	text-align: center;
+}
+
+article figure + figure {
+	margin-top: 4rem;
 }
 
 article figcaption
 {
 	text-align: center;
 	font-weight: 600;
-	margin-top: 1rem;
+	margin-top: 1.5rem;
+}
+
+article figure img
+{
+	max-height: 50rem;
+	max-width: 95%;
 }
 
 article blockquote

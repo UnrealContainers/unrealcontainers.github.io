@@ -1,0 +1,5 @@
+{% capture _table %}{{ include.table | markdownify }}{% endcapture %}
+{% include tables/base.html
+	table=_table
+	caption=include.caption
+%}
