@@ -1,4 +1,4 @@
 <figure>
-	<img src="{{ include.image | uri_escape }}" alt="{{ include.caption | escape }}">
+	<a href="{{ include.image | uri_escape }}"><img src="{{ include.image | uri_escape }}" alt="{{ include.caption | escape }}"></a>
 	<figcaption>{{ include.caption | escape }}</figcaption>
 </figure>
