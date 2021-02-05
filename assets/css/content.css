@@ -183,7 +183,7 @@ article table tbody tr:nth-child(odd) th, article table tbody tr:nth-child(odd) 
 }
 
 article table tbody tr:nth-child(even) th, article table tbody tr:nth-child(even) td {
-	background-color: rgb(246, 248, 250, 0.5);
+	background-color: rgba(246, 248, 250, 0.5);
 }
 
 article table tbody tr td.supported {
