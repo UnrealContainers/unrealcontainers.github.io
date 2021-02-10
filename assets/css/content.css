@@ -166,6 +166,12 @@ article pre, article pre code {
 	font-size: 0.95rem;
 }
 
+article .table-wrapper
+{
+	overflow-x: auto;
+	max-width: 100%;
+}
+
 article table
 {
 	background-color: #fff;
