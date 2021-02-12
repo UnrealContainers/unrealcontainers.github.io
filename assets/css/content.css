@@ -151,7 +151,7 @@ article a code
 	white-space: normal;
 }
 
-article pre
+article pre, article figure pre
 {
 	background-color: rgba(0, 0, 0, 0.03);
 	border: 1px solid rgb(214, 216, 219);
@@ -160,6 +160,7 @@ article pre
 	line-height: 1.5rem;
 	white-space: pre-wrap;
 	word-wrap: break-word;
+	text-align: left;
 }
 
 article pre, article pre code {
