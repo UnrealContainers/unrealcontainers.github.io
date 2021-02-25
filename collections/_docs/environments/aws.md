@@ -70,10 +70,6 @@ If the AMI you selected for your instance does not include the appropriate NVIDI
 
 Once you have ensured your instance is running the appropriate NVIDIA GPU drivers then you will need to install Docker CE and the NVIDIA Container Toolkit by following the instructions provided by the [Linux environment configuration page](./local-linux).
 
-#### Optional: configuring PulseAudio support
-
-{% include fragments/pulseaudio.md host="instance" %}
-
 #### Optional: configuring X11 support
 
 Configuring an X11 server with support for GPU acceleration in a VM without a desktop environment installed involves a number of steps:

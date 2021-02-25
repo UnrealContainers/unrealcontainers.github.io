@@ -138,6 +138,13 @@ article p code, article li code, article th code, article td code
 	color: #000;
 }
 
+article li pre code
+{
+	background-color: transparent;
+	padding: 0;
+	margin: 0;
+}
+
 article li code {
 	line-height: 1.25rem;
 }

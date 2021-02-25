@@ -73,7 +73,3 @@ If the VM image you selected for your instance does not include the appropriate 
 #### Installing Docker and the NVIDIA Container Toolkit
 
 Once you have ensured your instance is running the appropriate NVIDIA GPU drivers then you will need to install Docker CE and the NVIDIA Container Toolkit by following the instructions provided by the [Linux environment configuration page](./local-linux).
-
-#### Optional: configuring PulseAudio support
-
-{% include fragments/pulseaudio.md host="instance" %}
