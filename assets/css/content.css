@@ -261,6 +261,10 @@ article .footnote:after {
 	margin-top: 0;
 }
 
+.alert .title + ul li:first-child p {
+	margin-top: 1rem;
+}
+
 ul.page-list .page-title
 {
 	font-weight: 600;

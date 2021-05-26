@@ -2,7 +2,7 @@
 title: Windows Containers
 tagline: How are Windows containers different to Linux containers and how can they be used most effectively?
 quickstart: ["build"]
-order: 1
+order: 2
 ---
 
 {% capture _alert_content %}

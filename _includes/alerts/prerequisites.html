@@ -1,0 +1,12 @@
+{% capture _alert_content %}
+This page assumes the reader has read and understood the following pages:
+
+{{ include.pages }}
+{% endcapture %}
+
+{% include alerts/base.html
+	class="alert-primary"
+	icon="fas fa-book"
+	title="Prerequisite reading:"
+	content=_alert_content
+%}
