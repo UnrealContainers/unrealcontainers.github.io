@@ -61,7 +61,7 @@ Linux containers can access full GPU acceleration on NVIDIA graphics hardware us
 
 ## AMD GPU support for Linux containers
 
-{% include alerts/info.html content="The authors of this documentation are still in the process of familiarising themselves with AMD GPU acceleration in Linux containers." %}
+{% include alerts/info.html content="The authors of this documentation are still in the process of familiarising themselves with AMD GPU acceleration in Linux containers. This section will be updated when the relevant information has been gathered." %}
 
 
 ## GPU support for Windows containers
