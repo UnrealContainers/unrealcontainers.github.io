@@ -15,8 +15,7 @@
   steps:
     - "Learn **[what a runtime image is](../concepts/image-types)** and how it differs from a development image."
     - "Discover where to **[obtain runtime images](../obtaining-images/image-sources#sources-of-unreal-engine-runtime-images)**."
-    - &gpu-linux "If you want to render graphics in Linux containers then familiarise yourself with the **[NVIDIA Container Toolkit](../concepts/nvidia-docker)**."
-    - &gpu-windows "If you want to render graphics in Windows containers then familiarise yourself with **[hardware acceleration in Windows containers](../concepts/windows-containers#hardware-acceleration-support)** and its limitations."
+    - &gpu "If you want to access graphics hardware then familiarise yourself with **[how to use GPU acceleration in containers](../concepts/gpu-acceleration)**."
 -
   id: workflows
   name: Enhance development workflows or production pipelines
@@ -26,5 +25,4 @@
     - *dev-definition
     - *dev-eula
     - *dev-sources
-    - *gpu-linux
-    - *gpu-windows
+    - *gpu

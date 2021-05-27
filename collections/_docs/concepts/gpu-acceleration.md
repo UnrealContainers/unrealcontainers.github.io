@@ -1,0 +1,76 @@
+---
+title: GPU acceleration in containers
+tagline: How can GPU acceleration be used to perform rendering or computational tasks inside Linux and Windows containers?
+order: 4
+---
+
+{% capture _alert_content %}
+- Linux containers support all graphics APIs for NVIDIA GPUs using the [NVIDIA Container Toolkit](./nvidia-docker).
+
+- Windows containers support DirectX-based graphics APIs for GPUs from all vendors using [native hardware acceleration support](./windows-containers#hardware-acceleration-support).
+{% endcapture %}
+{% include alerts/overview.html content=_alert_content %}
+
+
+## Contents
+{:.no_toc}
+
+* TOC
+{:toc}
+
+
+## Graphics APIs
+
+Modern graphics hardware supports a variety of functionality including traditional rasterisation for rendering 2D or 3D graphics, raytracing for generating realisting lighting and reflections, video encoding and decoding, AI acceleration for machine learning tasks and [GPGPU](https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units) pipelines for general purpose computation. Each of these features are exposed to software through different Application Programming Interfaces (APIs) on different platforms, and understanding the purpose of these APIs is helpful when discussing GPU acceleration in the context of containers.
+
+The following APIs are used for **rendering (rasterisation and raytracing)**:
+
+- **OpenGL:** used for rasterisation on GPUs from all vendors under Windows and Linux. Does not support raytracing. It is worth noting that the Unreal Engine [dropped support for OpenGL on desktop platforms](https://docs.unrealengine.com/4.26/en-US/WhatsNew/Builds/ReleaseNotes/4_26/#removed:opengldesktoprendering) in version 4.26.0.
+
+- **Vulkan:** used for rasterisation and raytracing on GPUs from all vendors under Windows and Linux. Raytracing support was [introduced in the Vulkan SDK version 1.2.162.0](https://www.khronos.org/news/press/vulkan-sdk-tools-and-drivers-are-ray-tracing-ready) in the form of the Vulkan Ray Tracing extensions. It is worth noting that the Unreal Engine does not yet include support for raytracing with Vulkan.
+
+- **DirectX:** used for rasterisation and raytracing on GPUs from all vendors under Windows only. Raytracing support was [introduced in DirectX version 12](https://devblogs.microsoft.com/directx/announcing-microsoft-directx-raytracing/) in the form of the DirectX Raytracing (DXR) feature.
+
+The following APIs are used for **encoding and decoding video**:
+
+- **AMD Advanced Media Framework (AMF):** used for encoding and decoding video on AMD GPUs and APUs under Windows and Linux.
+
+- **NVIDIA NVENC/NVDEC:** used for encoding (NVENC) and decoding (NVDEC) video on NVIDIA GPUs under Windows and Linux.
+
+The following APIs are used for **machine learning tasks and general purpose computation**:
+
+- **OpenCL:** used for GPGPU compute on GPUs from all vendors under Windows and Linux.
+
+- **NVIDIA CUDA:** used for GPGPU compute on NVIDIA GPUs under Windows and Linux.
+
+- **DirectML:** used for machine learning tasks on GPUs from all vendors under Windows only.
+
+The set of graphics APIs that are available to software running inside a container determines which GPU features it can access. The availability of these APIs varies based on operating system and hardware vendor.
+
+
+## NVIDIA GPU support for Linux containers
+
+Linux containers can access full GPU acceleration on NVIDIA graphics hardware using the [NVIDIA Container Toolkit](./nvidia-docker), which is described in further detail on its dedicated page. The following graphics APIs are supported:
+
+- OpenGL
+- Vulkan
+- NVIDIA NVENC/NVDEC
+- OpenCL
+- NVIDIA CUDA
+
+
+## AMD GPU support for Linux containers
+
+{% include alerts/info.html content="The authors of this documentation are still in the process of familiarising themselves with AMD GPU acceleration in Linux containers." %}
+
+
+## GPU support for Windows containers
+
+Windows containers can access limited GPU acceleration on graphics hardware from any vendor using [native hardware acceleration support](./windows-containers#hardware-acceleration-support), so long as the graphics drivers are compliant with Windows Display Driver Model (WDDM) version 2.5 or newer. The following graphics APIs are supported:
+
+- DirectX
+- DirectML
+
+It is worth noting that although DirectX rasterisation functions perfectly, testing performed by the authors of this documentation found that raytracing did not function correctly under certain circumstances. This issue has been reported to Microsoft and tests are ongoing.
+
+It is important to note that **Windows containers cannot access graphics APIs for encoding and decoding video**, which means they cannot be used for tasks that require hardware accelerated video encoding such as running [Pixel Streaming](https://docs.unrealengine.com/4.26/en-US/SharingAndReleasing/PixelStreaming/) applications.
