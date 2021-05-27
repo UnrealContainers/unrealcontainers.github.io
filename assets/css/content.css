@@ -226,6 +226,10 @@ article .footnote:after {
 	margin-right: 0.5rem;
 }
 
+p + .alert {
+	margin-top: 2rem;
+}
+
 .alert .icon
 {
 	flex: 0;
