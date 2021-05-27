@@ -1,6 +1,7 @@
 ---
 title: Linux Sandboxed Editor
 tagline: Run the Unreal Editor inside a container and interact with it directly from the host system.
+quickstart: "workflows"
 order: 6
 ---
 

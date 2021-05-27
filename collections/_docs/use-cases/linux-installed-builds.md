@@ -1,6 +1,7 @@
 ---
 title: Linux Installed Builds
 tagline: Use container images as a source of prebuilt binaries in lieu of the Epic Games Launcher under Linux.
+quickstart: "workflows"
 order: 5
 ---
 
