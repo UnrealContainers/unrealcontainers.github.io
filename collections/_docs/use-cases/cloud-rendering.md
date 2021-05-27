@@ -1,7 +1,6 @@
 ---
 title: Cloud Rendering
 tagline: Perform 2D or 3D rendering in the cloud with full GPU acceleration via the NVIDIA Container Toolkit.
-quickstart: ["run"]
 order: 2
 ---
 

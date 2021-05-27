@@ -30,27 +30,25 @@ order: 1
 
 
 {% for goal in site.data.quickstart %}
+<section>
 	
 	<h2 id="{{ goal.id | escape }}">{{ goal.name | escape }}</h2>
 	
-	{% for subcategory in page.subcategories %}
-		
-		{% assign index = site.documents | where: "category", page.category | where: "subcategory", subcategory | where_exp: "page", "page.order == null" | first %}
-		{% assign pages = site.documents | where: "category", page.category | where: "subcategory", subcategory | where_exp: "page", "page.order != null" | sort: "order" %}
-		{% assign filtered = "" | split: "" %}
-		{% for page in pages %}
-			{% if page.quickstart contains goal.id %}
-					{% assign filtered = filtered | push: page %}
-			{% endif %}
-		{% endfor %}
-		
-		{% if filtered.size > 0 %}
-			
-			<p><strong>You may be interested in the following pages in the <a href="{{ index.url | uri_escape }}">{{ subcategory | escape }}</a> category:</strong></p>
-			{% include lists/pages.html pages=filtered %}
-			
-		{% endif %}
-		
-	{% endfor %}
+	<p class="quickstart-block"><span class="icon fas fa-directions"></span>{{ goal.start | markdownify | replace: '<p>', '' | replace: '</p>', '' }} Start here:</p>
 	
+	<ol>
+	{% for step in goal.steps %}
+		<li>{{ step | markdownify }}</li>
+	{% endfor %}
+		<li>
+			<p><strong><a href="../environments/">Configure your host environment</a></strong> for running the obtained images.</p>
+		</li>
+	</ol>
+	
+	<p class="quickstart-block"><span class="icon fas fa-running"></span>Once you have the images you need, take a look at the things you can do with them:</p>
+	
+	{% assign use_cases = site.documents | where: "category", page.category | where: "subcategory", "Use Cases" | where: "quickstart", goal.id | where_exp: "page", "page.order != null" | sort: "order" %}
+	{% include lists/pages.html pages=use_cases %}
+	
+</section>
 {% endfor %}

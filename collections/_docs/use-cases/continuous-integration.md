@@ -1,7 +1,6 @@
 ---
 title: Continuous Integration and Deployment (CI/CD)
 tagline: Use reproducible environments to build and deploy Unreal Engine projects and plugins.
-quickstart: ["build"]
 order: 1
 ---
 

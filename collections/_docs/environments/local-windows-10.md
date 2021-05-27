@@ -2,7 +2,6 @@
 layout: default
 title: Local Development (Windows 10)
 tagline: Configure a local Windows 10 development environment.
-quickstart: ["build"]
 order: 6
 ---
 

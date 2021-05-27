@@ -1,12 +1,30 @@
 -
   id: build
-  name: Use containers to build Unreal projects
+  name: Use containers to build and package Unreal projects or plugins
   icon: tools
+  start: &development "The type of Unreal Engine container image you'll need is a **development image**."
+  steps:
+    - &dev-definition "Learn **[what a development image is](../concepts/image-types)** and how it differs from a runtime image."
+    - &dev-eula "Make sure you understand the **[legal restrictions](../obtaining-images/eula-restrictions)** that govern how development images can be distributed."
+    - &dev-sources "Discover where to **[obtain development images](../obtaining-images/image-sources#sources-of-unreal-engine-development-images)**."
 -
   id: run
-  name: Use containers to run Unreal projects
-  icon: desktop
+  name: Use containers to run packaged Unreal projects
+  icon: box
+  start: "The type of Unreal Engine container image you'll need is a **runtime image**."
+  steps:
+    - "Learn **[what a runtime image is](../concepts/image-types)** and how it differs from a development image."
+    - "Discover where to **[obtain runtime images](../obtaining-images/image-sources#sources-of-unreal-engine-runtime-images)**."
+    - &gpu-linux "If you want to render graphics in Linux containers then familiarise yourself with the **[NVIDIA Container Toolkit](../concepts/nvidia-docker)**."
+    - &gpu-windows "If you want to render graphics in Windows containers then familiarise yourself with **[hardware acceleration in Windows containers](../concepts/windows-containers#hardware-acceleration-support)** and its limitations."
 -
   id: workflows
-  name: Enhance development workflows
-  icon: cog
+  name: Enhance development workflows or production pipelines
+  icon: shipping-fast
+  start: *development
+  steps:
+    - *dev-definition
+    - *dev-eula
+    - *dev-sources
+    - *gpu-linux
+    - *gpu-windows

@@ -514,10 +514,8 @@ ul.page-list .page-title
 	color: #aaa;
 }
 
-main article .quickstart-intro
-{
+main article .quickstart-intro {
 	margin-top: 2rem;
-	margin-bottom: 15rem;
 }
 
 article .quickstart-intro h2
@@ -535,4 +533,23 @@ article .quickstart-intro p
 
 .page-quickstart main article ul + p {
 	margin-top: 4rem;
+}
+
+.page-quickstart main article section + section {
+	margin-top: 15rem;
+}
+
+.page-quickstart main article .quickstart-block
+{
+	font-size: 1.25rem;
+	margin-top: 4rem;
+	margin-bottom: 2rem;
+}
+
+.page-quickstart main article h2 + .quickstart-block {
+	margin-top: 0;
+}
+
+.page-quickstart main article .quickstart-block .icon {
+	padding-right: 1rem;
 }

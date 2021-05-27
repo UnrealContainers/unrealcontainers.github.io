@@ -1,7 +1,6 @@
 ---
 title: macOS Containers
 tagline: Linux and Windows containers exist, but what about macOS?
-quickstart: ["build"]
 order: 3
 ---
 

@@ -2,7 +2,6 @@
 layout: default
 title: Local Development (macOS)
 tagline: Configure a local macOS development environment.
-quickstart: ["build"]
 order: 7
 ---
 

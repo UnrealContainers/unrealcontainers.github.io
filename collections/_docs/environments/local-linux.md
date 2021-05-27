@@ -2,7 +2,6 @@
 layout: default
 title: Local Development (Linux)
 tagline: Configure a local Linux development environment.
-quickstart: ["build", "workflows"]
 order: 4
 ---
 

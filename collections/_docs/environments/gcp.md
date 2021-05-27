@@ -2,7 +2,6 @@
 layout: default
 title: Google Cloud Platform (GCP)
 tagline: Configure a development or production environment running on GCP.
-quickstart: ["build", "run"]
 order: 2
 ---
 

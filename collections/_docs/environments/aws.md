@@ -2,7 +2,6 @@
 layout: default
 title: Amazon Web Services (AWS)
 tagline: Configure a development or production environment running on AWS.
-quickstart: ["build", "run"]
 order: 1
 ---
 

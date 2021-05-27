@@ -1,7 +1,6 @@
 ---
 title: Available Image Sources
 tagline: What EULA-compliant sources are available for obtaining Unreal Engine container images?
-quickstart: ["build", "run", "workflows"]
 order: 2
 ---
 

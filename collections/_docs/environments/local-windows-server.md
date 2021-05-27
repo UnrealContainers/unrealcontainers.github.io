@@ -2,7 +2,6 @@
 layout: default
 title: Local Development (Windows Server)
 tagline: Configure a local Windows Server development environment.
-quickstart: ["build"]
 order: 5
 ---
 

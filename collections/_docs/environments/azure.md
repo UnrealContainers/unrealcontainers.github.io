@@ -2,7 +2,6 @@
 layout: default
 title: Microsoft Azure
 tagline: Configure a development or production environment running on Azure.
-quickstart: ["build", "run"]
 order: 3
 ---
 

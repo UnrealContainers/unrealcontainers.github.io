@@ -1,7 +1,6 @@
 ---
 title: Microservices
 tagline: Build and deploy cloud native microservices powered by Unreal Engine technology.
-quickstart: ["build", "run"]
 order: 3
 ---
 
