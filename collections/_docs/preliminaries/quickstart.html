@@ -47,7 +47,7 @@ order: 1
 	
 	<p class="quickstart-block"><span class="icon fas fa-running"></span>Once you have the images you need, take a look at the things you can do with them:</p>
 	
-	{% assign use_cases = site.documents | where: "category", page.category | where: "subcategory", "Use Cases" | where: "quickstart", goal.id | where_exp: "page", "page.order != null" | sort: "order" %}
+	{% assign use_cases = site.documents | where: "subcategory", "Use Cases" | where: "quickstart", goal.id | where_exp: "page", "page.order != null" | sort: "order" %}
 	{% include lists/pages.html pages=use_cases %}
 	
 </section>
