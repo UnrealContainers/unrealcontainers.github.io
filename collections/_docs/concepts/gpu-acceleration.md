@@ -45,7 +45,7 @@ The following APIs are used for **machine learning tasks and general purpose com
 
 - **DirectML:** used for machine learning tasks on GPUs from all vendors under Windows only.
 
-The set of graphics APIs that are available to software running inside a container determines which GPU features it can access. The availability of these APIs varies based on operating system and hardware vendor.
+The set of graphics APIs that are available to software running inside a container determines which GPU features it can access. The availability of these APIs varies based on operating system and hardware vendor. Note that if you are unable to make use of GPU acceleration for a given configuration then it may still be possible to fall back to [software rendering](#software-rendering) as an alternative.
 
 
 ## NVIDIA GPU support for Linux containers
@@ -74,3 +74,20 @@ Windows containers can access limited GPU acceleration on graphics hardware from
 It is worth noting that although DirectX rasterisation functions perfectly, testing performed by the authors of this documentation found that raytracing did not function correctly under certain circumstances. This issue has been reported to Microsoft and tests are ongoing.
 
 It is important to note that **Windows containers cannot access graphics APIs for encoding and decoding video**, which means they cannot be used for tasks that require hardware accelerated video encoding such as running [Pixel Streaming](https://docs.unrealengine.com/4.26/en-US/SharingAndReleasing/PixelStreaming/) applications.
+
+For an example of a Windows container image suitable for use with GPU acceleration, see the runtime image Dockerfile in the Unreal Engine 4.27 source code under the [Engine/Extras/Containers/Dockerfiles/windows](https://github.com/EpicGames/UnrealEngine/tree/4.27/Engine/Extras/Containers/Dockerfiles/windows) directory. (Note that you will need to clone the source code and run `Setup.bat` in order to retrieve the Dockerfile itself, since extensionless files are currently treated as binary dependencies that are excluded from the source tree of the Unreal Engine GitHub repository.)
+
+
+## Software rendering
+
+Software rendering can be used as a fallback option in situations where access to graphics APIs for rendering is required but the real-time rendering performance of a GPU is not necessary.
+
+### Software rendering in Linux containers
+
+{% include alerts/info.html content="The authors of this documentation are still in the process of familiarising themselves with OpenGL and Vulkan software rendering in Linux containers. This section will be updated when the relevant information has been gathered." %}
+
+### Software rendering in Windows containers
+
+Under Windows, you can perform software rendering using the [Windows Advanced Rasterization Platform (WARP)](https://docs.microsoft.com/en-us/windows/win32/direct3darticles/directx-warp), which ships with DirectX. To use WARP when running the Unreal Editor or a packaged Unreal project, specify the `-warp` command-line flag. This flag is supported when using the Direct3D 12 rendering backend in Unreal Engine [version 4.14.0](https://github.com/EpicGames/UnrealEngine/blob/4.14.0-release/Engine/Source/Runtime/D3D12RHI/Private/D3D12RHIPrivate.h#L117-L122) and newer. (You can also use the `-dx12` command-line flag to force the use of the Direct3D 12 rendering backend for Unreal projects which are not configured to use it by default.)
+
+**Note that you will still need to use a Windows container image that includes the DLL files for DirectX support in order to use WARP inside a container.** As a result, Windows container images suitable for use with [GPU acceleration](#gpu-support-for-windows-containers) are also suitable for use with software rendering.
