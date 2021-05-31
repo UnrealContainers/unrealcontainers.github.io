@@ -16,6 +16,7 @@
     - "Learn **[what a runtime image is](../concepts/image-types)** and how it differs from a development image."
     - "Discover where to **[obtain runtime images](../obtaining-images/image-sources#sources-of-unreal-engine-runtime-images)**."
     - &gpu "If you want to access graphics hardware then familiarise yourself with **[how to use GPU acceleration in containers](../concepts/gpu-acceleration)**."
+    - &audio "If you want to use the Engine's audio mixer functionality then familiarise yourself with **[how to enable audio output in containers](../concepts/audio-output)**."
 -
   id: workflows
   name: Enhance development workflows or production pipelines
@@ -26,3 +27,4 @@
     - *dev-eula
     - *dev-sources
     - *gpu
+    - *audio

@@ -85,35 +85,7 @@ It is worth noting that the tips on this page relate only to writing Dockerfiles
 
 ### PulseAudio support
 
-If you want to enable audio support in your containers then the simplest option is to use PulseAudio. This will require the PulseAudio client libraries and server, which can be installed under Debian-based distributions via the `pulseaudio` system package. How you configure PulseAudio will depend on your desired use case:
-
-- If you want audio output to function **inside the container only**, then you will need to ensure the default [autospawning behaviour](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Running/#autospawning) is enabled to spawn the PulseAudio server on demand and that the [`module-always-sink` module](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#module-always-sink) is loaded when the PulseAudio server starts to ensure a virtual output device is created when there are no physical audio devices present. To enable the automatic creation of a virtual output device, ensure the folowing directive is present in the `/etc/pulse/default.pa` configuration file:
-  
-  ```bash
-  load-module module-always-sink
-  ```
-  
-  By default, the virtual output device will use different audio parameters to those used by the Unreal Engine under Linux, which may lead to audio distortion issues. To prevent such issues, it is recommended that the following directives be added to the `/etc/pulse/daemon.conf` configuration file to ensure the default audio parameters match those used by the Unreal Engine:
-  
-  ```bash
-  default-sample-format = float32le
-  default-sample-rate = 48000
-  default-sample-channels = 6
-  ```
-
-- If you want audio output to function **and get routed to the host system's audio devices** (e.g. for debugging purposes) then you will need to bind-mount the PulseAudio socket from the host system using the flag `"-v/run/user/$UID/pulse:/run/user/1000/pulse"`. To ensure communication over the bind-mounted socket functions correctly, it is recommended that you disable both the default autospawning behaviour and the use of shared memory by adding the following directives to the `/etc/pulse/client.conf` configuration file:
-  
-  ```bash
-  # Connect to the host's PulseAudio server using the mounted UNIX socket
-  default-server = unix:/run/user/1000/pulse/native
-  
-  # Prevent a PulseAudio server from running in the container
-  autospawn = no
-  daemon-binary = /bin/true
-  
-  # Prevent the use of shared memory
-  enable-shm = false
-  ```
+If you want to enable audio support in your containers then the simplest option is to use PulseAudio. This will require the PulseAudio client libraries and server, which can be installed under Debian-based distributions via the `pulseaudio` system package. How you configure PulseAudio will depend on your desired use case, see the [Linux section](../concepts/audio-output#audio-output-in-linux-containers) of the [Audio output in containers](../concepts/audio-output) page for details of the available options.
 
 ## Writing Dockerfiles for Windows containers
 
