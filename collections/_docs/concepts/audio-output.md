@@ -6,9 +6,7 @@ order: 6
 
 {% capture _alert_content %}
 - Audio output must be enabled for use cases that leverage the Unreal Engine's audio mixing functionality.
-
 - Multiple approaches are available for enabling audio output in Linux containers.
-
 - No additional configuration is required for Windows containers.
 {% endcapture %}
 {% include alerts/overview.html content=_alert_content %}

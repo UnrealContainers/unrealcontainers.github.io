@@ -24,12 +24,12 @@ Founded in 2019, the Unreal Containers community hub aims to act as a central co
 
 ## Who maintains the Unreal Containers community hub?
 
-The Unreal Containers community hub was founded by [Dr Adam Rehn](https://adamrehn.com), a university lecturer, researcher, and director of the applied research company [TensorWorks](https://tensorworks.com.au). The community hub is primarily maintained by Dr Rehn, with additional assistance from community contributors. If you would like to contribute to the maintenance of the community hub then you can either visit the [Unreal Containers GitHub organisation]({{ site.data.nav.social[1].link }}) or engage the services of one of the [support providers]({{ "/support" | relative_uri }}) who provide financial sponsorhip to the community hub.
+The Unreal Containers community hub was founded by [Dr Adam Rehn](https://adamrehn.com), a university lecturer, researcher, and director of the applied research company [TensorWorks](https://tensorworks.com.au). The community hub is primarily maintained by Dr Rehn, with additional assistance from community contributors. If you would like to contribute to the maintenance of the community hub then you can either visit the [Unreal Containers GitHub organisation]({{ site.data.nav.social[1].link }}) or engage the services of one of the [support providers]({{ "/support" | relative_uri }}) who provide financial sponsorship to the community hub.
 
 
 ## Who sponsors the maintenance of the community hub?
 
-The following organisations and initiatives provide, or have provided, financial sponsorhip to the Unreal Containers community hub:
+The following organisations and initiatives provide, or have provided, financial sponsorship to the Unreal Containers community hub:
 
 {% for sponsor in site.data.sponsors %}
 - [**{{ sponsor.name }}**]({{ sponsor.link }}): {{ sponsor.blurb }}

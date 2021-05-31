@@ -40,7 +40,7 @@ The NVIDIA Container Toolkit is designed specifically for Linux containers runni
 
 4. Install the NVIDIA Container Toolkit by following [the instructions for your specific Linux distribution](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker).
 
-5. If you would like to test out a specific graphics API, pull the revelant NVIDIA base container images from Docker Hub:
+5. If you would like to test out a specific graphics API, pull the relevant NVIDIA base container images from Docker Hub:
     
     - [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) for OpenGL support
     - [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda/) for CUDA support
@@ -50,7 +50,7 @@ The NVIDIA Container Toolkit is designed specifically for Linux containers runni
 
 6. If you intend to use the Unreal Engine with a [runtime container image](./image-types) then be sure to [choose a base image](../obtaining-images/image-sources#sources-of-unreal-engine-runtime-images) that is pre-configured to support the NVIDIA Container Toolkit.
 
-6. If you intend to use the Unreal Engine with a [development container image](./image-types) then you will need to [choose an image source](../obtaining-images/image-sources#sources-of-unreal-engine-development-images) that supports the NVIDIA Container Toolkit. Depending on the graphics APIs that you are interested in using, it may be necessary to build a development image from source that extends the revelant NVIDIA base image.
+6. If you intend to use the Unreal Engine with a [development container image](./image-types) then you will need to [choose an image source](../obtaining-images/image-sources#sources-of-unreal-engine-development-images) that supports the NVIDIA Container Toolkit. Depending on the graphics APIs that you are interested in using, it may be necessary to build a development image from source that extends the relevant NVIDIA base image.
 
 
 ## Installation under Windows with WSL2
