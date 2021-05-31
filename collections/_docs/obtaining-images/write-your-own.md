@@ -1,12 +1,12 @@
 ---
 title: Writing Dockerfiles
-tagline: Write your own Dockerfiles to build Unreal Engine containers.
+tagline: Write your own Dockerfiles to build Unreal Engine development container images.
 source: "Custom Dockerfiles"
 order: 4
 ---
 
 {% capture _alert_content %}
-Although writing your own Dockerfiles provides the greatest flexibility, it also involves understanding and addressing a number of technical complexities related to both the Unreal Engine itself and Docker containers in general. Before writing your own Dockerfiles, we strongly recommended exploring the other [available sources of container images](./image-sources) and carefully studying the existing Dockerfiles.
+Although writing your own Dockerfiles provides the greatest flexibility, it also involves understanding and addressing a number of technical complexities related to both the Unreal Engine itself and containers in general. Before writing your own Dockerfiles, we strongly recommended exploring the other [available sources of container images](./image-sources) and carefully studying the existing Dockerfiles.
 {% endcapture %}
 {% include alerts/warning.html title="This topic is not recommended for beginners." content=_alert_content %}
 
@@ -20,7 +20,7 @@ Although writing your own Dockerfiles provides the greatest flexibility, it also
 
 ## Introduction
 
-This page aims to provide general guidance for developers who wish to write their own Dockerfiles for building Unreal Engine containers that include the Engine Build Tools. This guidance takes the form of a set of brief tips, organised into platform-based sections below. Most of these tips are derived from experience gained during the development of the [ue4-docker project](./ue4-docker), and contain a number of references to the documentation and source code for that project. Nevertheless, the information presented on this page is designed to be implementation-agnostic, and applies to any Dockerfiles written for the Unreal Engine, irrespective of the infrastructure that is used to build them.
+This page aims to provide general guidance for developers who wish to write their own Dockerfiles for building Unreal Engine [development container images](../concepts/image-types#development-images) that include the Engine build tools. This guidance takes the form of a set of brief tips, organised into platform-based sections below. Most of these tips are derived from experience gained during the development of the [ue4-docker project](./ue4-docker), and contain a number of references to the documentation and source code for that project. Nevertheless, the information presented on this page is designed to be implementation-agnostic, and applies to any Dockerfiles written for the Unreal Engine, irrespective of the infrastructure that is used to build them.
 
 It is worth noting that the tips on this page relate only to writing Dockerfiles and not to configuring the environment or infrastructure that will be used to build the final container images. For details on environment configuration, see the [Environment Setup](../environments) section of the Unreal Containers community hub documentation.
 
@@ -51,7 +51,7 @@ It is worth noting that the tips on this page relate only to writing Dockerfiles
 
 ### Tips for working with the NVIDIA Container Toolkit
 
-- Container images built with the [NVIDIA Container Toolkit](../concepts/nvidia-docker) support will still run correctly using the standard Docker runtime, they just won't see any available GPU devices. Deriving an image from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images doesn't force you to use the NVIDIA Container Toolkit to run the resulting image. The image will work happily under the plain runtime, irrespective of whether it is run under Linux, Windows, or macOS.
+- Container images built with [NVIDIA Container Toolkit](../concepts/nvidia-docker) support will still run correctly using any OCI-compatible container runtime, they just won't see any available GPU devices. Deriving an image from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images **does not** force you to use the NVIDIA Container Toolkit to run the resulting image. Built images will work happily under any runtime, irrespective of whether it is run under Linux, Windows, or macOS.
 
 - GPU acceleration is not available during the build process. Although older versions of NVIDIA Docker allowed you to configure the Docker daemon to use the NVIDIA container runtime by default and thus enable build-time GPU access, [this was generally a bad idea because it could result in non-portable container images](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#can-i-use-the-gpu-during-a-container-build-ie-docker-build), and this option is not present in newer versions of the NVIDIA Container Toolkit. It is best to simply avoid running commands during the build process that require GPU access.
 
@@ -91,7 +91,7 @@ If you want to enable audio support in your containers then the simplest option 
 
 - If it is feasible to do so, we recommend restricting support to Windows Server 2019 and newer. There are several reasons for this:
   
-  - Windows Server 2019 introduced the [mcr.microsoft.com/windows](https://hub.docker.com/_/microsoft-windows) base image, which provides a number of DLL files required by the Unreal Engine. This base image can either be used directly or the DLL files can be copied into the [mcr.microsoft.com/windows/servercore](https://hub.docker.com/_/microsoft-windows-servercore) base image to minimise the final image size. When building images for older versions of Windows Server, only the [mcr.microsoft.com/windows/servercore](https://hub.docker.com/_/microsoft-windows-servercore) base image is available and the required DLL files must be copied from another source, such as the host system.
+  - Windows Server 2019 introduced the [mcr.microsoft.com/windows](https://hub.docker.com/_/microsoft-windows) base image, which provides a number of DLL files required by the Unreal Engine. This base image can either be used directly or the relevant DLL files can be copied into the [mcr.microsoft.com/windows/servercore](https://hub.docker.com/_/microsoft-windows-servercore) base image to minimise the final image size. When building images for older versions of Windows Server, only the [mcr.microsoft.com/windows/servercore](https://hub.docker.com/_/microsoft-windows-servercore) base image is available and the required DLL files must be copied from another source, such as the host system.
   
   - Container images built for one version of Windows Server [are not compatible with other versions of Windows Server](https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/version-compatibility), except through the use of Hyper-V isolation mode. Every additional version of Windows Server that you support multiplies the number of configurations that need to be built and tested, increasing maintenance requirements.
   
