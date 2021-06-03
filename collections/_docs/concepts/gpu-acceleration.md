@@ -75,7 +75,7 @@ It is worth noting that although DirectX rasterisation functions perfectly, test
 
 It is important to note that **Windows containers cannot access graphics APIs for encoding and decoding video**, which means they cannot be used for tasks that require hardware accelerated video encoding such as running [Pixel Streaming](https://docs.unrealengine.com/4.26/en-US/SharingAndReleasing/PixelStreaming/) applications.
 
-For an example of a Windows container image suitable for use with GPU acceleration, see the runtime image Dockerfile in the Unreal Engine 4.27 source code under the [Engine/Extras/Containers/Dockerfiles/windows](https://github.com/EpicGames/UnrealEngine/tree/4.27/Engine/Extras/Containers/Dockerfiles/windows) directory. (Note that you will need to clone the source code and run `Setup.bat` in order to retrieve the Dockerfile itself, since extensionless files are currently treated as binary dependencies that are excluded from the source tree of the Unreal Engine GitHub repository.)
+For an example of a Windows container image suitable for use with GPU acceleration, see the blog post [Offscreen rendering in Windows containers](../../blog/offscreen-rendering-in-windows-containers/).
 
 
 ## Software rendering
