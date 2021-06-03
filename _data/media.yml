@@ -9,4 +9,15 @@
       link: https://youtu.be/egUC21cETgo
       author: Adam Rehn
       type: video
-      description: Provides a brief overview of the key use cases for Unreal Engine containers. 
+      description: Provides a brief overview of the key use cases for Unreal Engine containers.
+-
+  name: Announcements and News
+  items:
+    -
+      name: Pixel Streaming under Linux
+      link: https://youtu.be/tcGJMiPxq5A
+      author: Adam Rehn
+      type: video
+      description: The original announcement video for Pixel Streaming for Linux, version 4.23.
+      related:
+          - "/docs/use-cases/pixel-streaming"

@@ -11,6 +11,7 @@
       related:
         - "/docs/use-cases/cloud-rendering"
         - "/docs/use-cases/continuous-integration"
+        - "/docs/use-cases/pixel-streaming"
     -
       name: Cloud Rendering Demo
       url: https://github.com/adamrehn/ue4-cloud-rendering-demo
