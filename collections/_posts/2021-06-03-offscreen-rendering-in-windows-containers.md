@@ -2,7 +2,7 @@
 layout: post
 title: Offscreen rendering in Windows containers
 author: Adam Rehn and Luke Bermingham
-updated: 2021-06-03
+updated: 2021-06-07
 tagline: An overview of performing offscreen rendering with Unreal Engine projects in Windows containers.
 ---
 
@@ -12,6 +12,8 @@ tagline: An overview of performing offscreen rendering with Unreal Engine projec
 GPU accelerated Linux containers have been available for many years thanks to technologies such as the [NVIDIA Container Toolkit](../../docs/concepts/nvidia-docker), and the Unreal Containers community hub features a great deal of information about performing rendering with Unreal Engine projects in Linux containers. Support for [GPU acceleration in Windows containers](../../docs/concepts/gpu-acceleration#gpu-support-for-windows-containers) is far newer and the use of the Unreal Engine for rendering inside Windows containers has received relatively little attention by the authors of the community hub documentation. This blog post aims to address this gap by providing an overview of how to perform offscreen rendering with Unreal projects inside both GPU accelerated Windows containers and inside regular Windows containers through the use of software rendering.
 
 ***Special thanks to the team at Epic Games for their feedback on this blog post and for providing the authors with details of the Unreal Engine's support for the Windows Advanced Rasterization Platform (WARP).***
+
+{% include alerts/info.html title="Correction: DirectX Raytracing (DXR) support" content="The original wording of this blog post indicated that the Unreal Engine's DirectX 12 raytracing support did not function correctly inside GPU accelerated Windows containers and caused the Engine to crash due to an assertion failure when it was enabled. The authors have subsequently discovered that this was caused by the absence of the required library files `dxcompiler.dll` and `dxil.dll` from the [DirectX Shader Compiler project](https://github.com/microsoft/DirectXShaderCompiler), and that raytracing functions as expected once these files are present in the container. The example Dockerfile code and surrounding text have been revised to reflect this information." %}
 
 
 ## Contents
@@ -72,7 +74,12 @@ FROM mcr.microsoft.com/windows:${BASETAG} AS full
 # Gather the system DLLs that we need from the full Windows base image
 RUN xcopy /y C:\Windows\System32\dsound.dll C:\GatheredDlls\ && `
 	xcopy /y C:\Windows\System32\opengl32.dll C:\GatheredDlls\ && `
-	xcopy /y C:\Windows\System32\glu32.dll C:\GatheredDlls\
+	xcopy /y C:\Windows\System32\glu32.dll C:\GatheredDlls\ && `
+	xcopy /y C:\Windows\System32\MF.dll C:\GatheredDlls\ && `
+	xcopy /y C:\Windows\System32\MFPlat.dll C:\GatheredDlls\ && `
+	xcopy /y C:\Windows\System32\MFReadWrite.dll C:\GatheredDlls\ && `
+	xcopy /y C:\Windows\System32\msdmo.dll C:\GatheredDlls\ && `
+	xcopy /y C:\Windows\System32\dxva2.dll C:\GatheredDlls\
 
 # Retrieve the DirectX runtime files required by the Unreal Engine,
 # since even the full Windows base image does not include them
@@ -83,6 +90,12 @@ RUN curl --progress -L "https://download.microsoft.com/download/8/4/A/84A35BF1-D
 	expand %TEMP%\DirectX\Feb2010_X3DAudio_x64.cab -F:X3DAudio1_7.dll C:\GatheredDlls\ && `
 	expand %TEMP%\DirectX\Jun2010_XAudio_x64.cab -F:XAPOFX1_5.dll C:\GatheredDlls\ && `
 	expand %TEMP%\DirectX\Jun2010_XAudio_x64.cab -F:XAudio2_7.dll C:\GatheredDlls\
+
+# Retrieve the DirectX shader compiler files needed for DirectX Raytracing (DXR)
+RUN curl --progress -L "https://github.com/microsoft/DirectXShaderCompiler/releases/download/v1.6.2104/dxc_2021_04-20.zip" --output %TEMP%\dxc.zip && `
+	powershell -Command "Expand-Archive -Path \"$env:TEMP\dxc.zip\" -DestinationPath $env:TEMP" && `
+	xcopy /y %TEMP%\bin\x64\dxcompiler.dll C:\GatheredDlls\ && `
+	xcopy /y %TEMP%\bin\x64\dxil.dll C:\GatheredDlls\
 
 # Copy the required DLLs from the full Windows base image into a smaller Windows Server Core base image
 ARG BASETAG
@@ -107,8 +120,6 @@ When running packaged Unreal Engine applications inside Windows containers, we r
 
 - `-RenderOffscreen`: this flag enables offscreen rendering mode, which is required when there is no physical display device.
 
-- `-NoRaytracing`: this flag disables raytracing using [DirectX Raytracing (DXR)](https://devblogs.microsoft.com/directx/announcing-microsoft-directx-raytracing/). In our testing, the Unreal Engine's DirectX 12 raytracing support does not appear to function correctly inside GPU accelerated Windows containers and causes the Engine to crash due to an assertion failure. (It is worth noting that does not occur when using software rendering and the Engine continues to run normally.)
-
 
 ## Rendering with GPU acceleration
 
@@ -124,7 +135,7 @@ This will start an interactive container with GPU acceleration enabled and the h
 
 {% highlight powershell %}
 # Start the packaged project with offscreen rendering
-C:\hostdir\WindowsNoEditor\MyProject\Binaries\Win64\MyProject-Cmd.exe -stdout -FullStdOutLogOutput -unattended -RenderOffscreen -NoRaytracing
+C:\hostdir\WindowsNoEditor\MyProject\Binaries\Win64\MyProject-Cmd.exe -stdout -FullStdOutLogOutput -unattended -RenderOffscreen
 {% endhighlight %}
 
 You should see log output indicating that the project has loaded and is rendering with DirectX using the GPU from your host system. Note that you may see log output lines starting with the text `LogRHI: Display: New Graphics PSO` followed by a large block of numbers. These messages are normal and can be safely ignored.
