@@ -30,7 +30,7 @@ Rendering images and video with the Unreal Engine for non-interactive use is bec
 
 - The Unreal Engine does not currently support raytracing using Vulkan on Linux. If your use case requires real-time raytracing then you will need to use [GPU accelerated Windows containers](../concepts/gpu-acceleration#gpu-support-for-windows-containers).
 
-- Rendering video frames with Sequencer using Vulkan on either Windows or Linux currently prints a series of non-fatal errors to the Engine's log output. These errors do not appear to interfere with the quality of the rendered output.
+- Rendering video frames with Sequencer using Vulkan on Linux renders correctly but currently prints a series of non-fatal errors to the Engine's log output. These errors do not appear to interfere with the quality of the rendered output.
 
 - If you are rendering individual images on demand and transmitting them to users in response to incoming requests then you might be interested in exposing this functionality directly via an [Unreal-powered microservice](./microservices).
 
