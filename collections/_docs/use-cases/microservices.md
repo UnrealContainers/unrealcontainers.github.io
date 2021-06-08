@@ -2,12 +2,13 @@
 title: Microservices
 tagline: Build and deploy cloud native microservices powered by Unreal Engine technology.
 quickstart: "run"
-order: 3
+order: 4
 ---
 
 {% capture _alert_content %}
-- Base container image(s) that [support running packaged Unreal projects](../obtaining-images/image-sources) (the images will need NVIDIA Container Toolkit support if the microservice performs rendering)
-- An environment [configured for running containers](../environments) (a Linux environment with the NVIDIA Container Toolkit if performing rendering)
+- An [Unreal Engine runtime image](../concepts/image-types), with support for [GPU acceleration](../concepts/gpu-acceleration) if the microservice performs rendering
+- An environment [configured for running containers](../environments) with GPU acceleration if the microservice performs rendering
+
 {% endcapture %}
 {% include alerts/required.html content=_alert_content %}
 
@@ -21,16 +22,14 @@ order: 3
 
 ## Overview
 
-Containerised microservices are an extremely popular architectural paradigm for implementing server-side applications. Unreal Engine containers allow this same architecture to be applied to microservices powered by the Unreal Engine. Infrastructure for integrating existing RPC frameworks allows developers to implement Unreal microservices using familiar technologies, while the [NVIDIA Container Toolkit](../concepts/nvidia-docker) allows Unreal microservices to perform 2D or 3D rendering with full GPU acceleration. Compatibility with container orchestration technologies means developers can deploy and scale Unreal microservices in exactly the same manner as traditional microservices.
+Containerised microservices are an extremely popular architectural paradigm for implementing server-side applications. Unreal Engine containers allow this same architecture to be applied to microservices powered by the Unreal Engine. Infrastructure for integrating existing RPC frameworks allows developers to implement Unreal microservices using familiar technologies, while support for [GPU acceleration](../concepts/gpu-acceleration) allows Unreal microservices to perform 2D or 3D rendering. Compatibility with container orchestration technologies means developers can deploy and scale Unreal microservices in exactly the same manner as traditional microservices.
 
 
 ## Key considerations
 
-- This page only discusses topics that are specifically relevant to Unreal microservices. **If you are creating microservices that perform rendering then be sure to also read the [cloud rendering](./cloud-rendering) page and familiarise yourself with the relevant details.**
+- Although both Linux containers and Windows containers can be used to run Unreal Engine microservices, Linux containers are recommended due to better compatibility with container orchestration technologies and easier installation of runtime dependencies using system package managers. (This is particularly important for microservices that perform rendering, since container orchestration systems such as Kubernetes do not yet support [GPU accelerated Windows containers](../concepts/gpu-acceleration#gpu-support-for-windows-containers).)
 
-- Because the NVIDIA Container Toolkit only works with Linux containers running under Linux host systems, microservices that perform rendering cannot run inside [Windows containers](../concepts/windows-containers). Although Windows containers can be used to run microservices that do not perform any rendering, Linux containers are still strongly recommended due to better compatibility with container orchestration technologies and easier installation of runtime dependencies using system package managers.
-
-- Any third-party C++ libraries that will be integrated with the Unreal Engine under Linux must be built against libc++ instead of libstdc++, since the Unreal Engine itself is built against its own bundled copy of libc++. Third-party libraries that rely on dependencies which are also bundled with the Unreal Engine may also encounter issues related to symbol interposition. See [this article discussing the creation of the conan-ue4cli project](https://adamrehn.com/articles/cross-platform-library-integration-in-unreal-engine-4/) for a detailed explanation of these issues.
+- Any third-party C++ libraries that will be integrated with the Unreal Engine under Linux must be built against libc++ instead of libstdc++, since the Unreal Engine itself is built against its own bundled copy of libc++. Third-party libraries that rely on dependencies which are also bundled with the Unreal Engine may also encounter issues related to symbol interposition. See [the overview of the conan-ue4cli project](https://docs.adamrehn.com/conan-ue4cli/read-these-first/introduction-to-conan-ue4cli) for a detailed explanation of these issues.
 
 
 ## Implementation guidelines
@@ -58,10 +57,6 @@ There are a number of community-maintained projects that integrate non-native pr
 - [Unreal.js](https://github.com/ncsoft/Unreal.js): this plugin adds runtime support for the Javascript programming language and provides comprehensive bindings for the Unreal Engine API. Code running through this plugin can make use of any RPC framework with Javascript bindings.
 
 - [MonoUE](https://mono-ue.github.io/): this plugin adds runtime support for the C# and F# programming languages and provides bindings for the Unreal Engine API. Code running through this plugin can make use of any RPC framework with .NET bindings. Note that this project is still under development and there are a number of features that are yet to be implemented.
-
-### Building container images for deployment
-
-See the [relevant sections from the cloud rendering page](./cloud-rendering#approaches) for details on selecting an appropriate base image and building your own container images for deployment.
 
 
 ## Related media

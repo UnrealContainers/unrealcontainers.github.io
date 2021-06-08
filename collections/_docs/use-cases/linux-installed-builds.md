@@ -2,12 +2,13 @@
 title: Linux Installed Builds
 tagline: Use container images as a source of prebuilt binaries in lieu of the Epic Games Launcher under Linux.
 quickstart: "workflows"
-order: 5
+order: 7
 ---
 
 {% capture _alert_content %}
-- Unreal Engine container image(s) that [include a Linux Installed Build of the Engine Tools](../obtaining-images/image-sources)
-- A Linux environment [configured for running the containers](../environments) (this is just so we can extract files from the container images)
+- An [Unreal Engine development image](../concepts/image-types) that includes a Linux Installed Build of the Engine Tools
+- A Linux environment [configured for running containers](../environments) (this is just to extract files from the container images)
+
 {% endcapture %}
 {% include alerts/required.html content=_alert_content %}
 
@@ -30,7 +31,7 @@ Under Windows and macOS, the Epic Games Launcher provides prebuilt Engine binari
 
 - Unreal Engine version 4.21.0 is the first version that is completely self-contained under Linux thanks to the use of bundled versions of both Mono and the compiler toolchain. Earlier versions of the Engine will require an accompanying system installation of clang and/or Mono on any machines to which they are deployed.
 
-- If the Unreal Engine installation inside a given container image doesn't contain any [symbolic links](https://en.wikipedia.org/wiki/Symbolic_link) then the directory structure can simply be copied from the container filesystem to the host filesystem without any further modifications. However, if symlinks are used then additional configuration may be required to update the symlink targets to paths that are appropriate for the host filesystem. Typically, any [source of container images](../obtaining-images/image-sources) that relies on symlinks will provide export functionality that performs this configuration for you automatically.
+- If the Unreal Engine installation inside a given container image doesn't contain any [symbolic links](https://en.wikipedia.org/wiki/Symbolic_link) then the directory structure can simply be copied from the container filesystem to the host filesystem without any further modifications. However, if symlinks are used then additional configuration may be required to update the symlink targets to paths that are appropriate for the host filesystem. Typically, any [source of development container images](../obtaining-images/image-sources#sources-of-unreal-engine-development-images) that relies on symlinks will provide export functionality that performs this configuration for you automatically.
 
 
 ## Implementation guidelines

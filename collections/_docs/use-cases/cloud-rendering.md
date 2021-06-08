@@ -1,15 +1,20 @@
 ---
-title: Cloud Rendering
-tagline: Perform 2D or 3D rendering in the cloud with full GPU acceleration via the NVIDIA Container Toolkit.
-quickstart: "run"
-order: 2
+title: Cloud Rendering (Deprecated)
+tagline: "Note: this overview page has been deprecated and is being split into other, more specific use cases."
+order: 20
 ---
 
 {% capture _alert_content %}
-- Base container image(s) that [support running packaged Unreal projects with GPU acceleration via the NVIDIA Container Toolkit](../obtaining-images/image-sources)
-- A Linux environment [configured for running containers via the NVIDIA Container Toolkit](../environments)
+This page used to serve as an overview of several related use cases, which are now being split into separate pages with their own specific focus. The following pages cover use cases that were previously grouped by this page:
+
+- [Pixel Streaming](./pixel-streaming)
+- [Rendering Linear Media](./linear-media)
+- The rendering-related parts of [Microservices](./microservices)
+- The rendering-related parts of [AI and Machine Learning](./machine-learning)
+
+The content below (which is now outdated in several places) will remain unchanged during the transition process, and will then be removed once everything has been relocated to the appropriate pages.
 {% endcapture %}
-{% include alerts/required.html content=_alert_content %}
+{% include alerts/warning.html title="This page has been deprecated." content=_alert_content %}
 
 
 ## Contents

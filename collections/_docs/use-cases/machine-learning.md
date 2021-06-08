@@ -2,12 +2,12 @@
 title: AI and Machine Learning
 tagline: Run Unreal Engine simulations alongside machine learning workloads in the cloud.
 quickstart: "run"
-order: 4
+order: 5
 ---
 
 {% capture _alert_content %}
-- Base container image(s) that [support running packaged Unreal projects with GPU acceleration via the NVIDIA Container Toolkit](../obtaining-images/image-sources)
-- A Linux environment [configured for running containers via the NVIDIA Container Toolkit](../environments)
+- An [Unreal Engine runtime image](../concepts/image-types) with support for [GPU acceleration](../concepts/gpu-acceleration)
+- An environment [configured for running containers](../environments) with GPU acceleration
 {% endcapture %}
 {% include alerts/required.html content=_alert_content %}
 
@@ -21,14 +21,16 @@ order: 4
 
 ## Overview
 
-Generation of training data for machine learning models is the single most common use of the Unreal Engine [within the context of scientific research](https://ue4research.org/publications). The algorithms underlying these models typically rely on GPU-based computation to achieve maximum performance, and GPU-accelerated containers powered by the [NVIDIA Container Toolkit](../concepts/nvidia-docker) are widely used for running machine learning workloads in the cloud. Unreal Engine containers allow simulations to be packaged and deployed alongside the machine learning models that interact with them, using the same familiar technologies and deployment pipeline. Container orchestration frameworks such as Kubernetes can be used to facilitate network-based or IPC-based communication between containers and to perform training or inference at scale.
+Generation of training data for machine learning models is the single most common use of the Unreal Engine [within the context of scientific research](https://ue4research.org/publications). The algorithms underlying these models typically rely on GPU-based computation to achieve maximum performance, and [GPU accelerated containers](../concepts/gpu-acceleration) are widely used for running machine learning workloads in the cloud. Unreal Engine containers allow simulations to be packaged and deployed alongside the machine learning models that interact with them, using the same familiar technologies and deployment pipeline. Container orchestration frameworks such as Kubernetes can be used to facilitate network-based or IPC-based communication between containers and to perform training or inference at scale.
 
 
 ## Key considerations
 
-- If your simulations are performing rendering in order to transmit the framebuffer results to a machine learning model then be sure to check out the [cloud rendering](./cloud-rendering) page and familiarise yourself with the relevant details. If your simulations are not performing rendering then be sure to run them in headless mode by specifying the `-nullrhi` flag.
+- You will always need a container image with [GPU acceleration](../concepts/gpu-acceleration) support for training machine learning models, but whether you need GPU acceleration for your Unreal Engine simulations depends on whether they perform rendering in order to transmit image data to a model. If your simulations are not performing rendering then you can start them in headless mode by specifying the `-nullrhi` command-line flag, which will allow them to run in container images without support for GPU acceleration.
 
-- The choice of base image for your containers will depend on your deployment strategy, and also whether your simulations are performing rendering. See the [Deployment strategies](#deployment-strategies) section for a discussion of these base image requirements.
+- The choice of runtime image for your containers will depend on your deployment strategy. See the [Deployment strategies](#deployment-strategies) section for a discussion of the relevant base image requirements.
+
+- **It is strongly recommended that you use Linux containers for machine learning workloads**, since container orchestration systems such as Kubernetes do not yet support [GPU accelerated Windows containers](../concepts/gpu-acceleration#gpu-support-for-windows-containers).
 
 
 ## Implementation guidelines
@@ -59,7 +61,7 @@ In-process communication is by far the least flexible and most brittle approach.
 
 In this strategy, the simulation and the machine learning model are deployed in separate containers that are not grouped together in any way. This necessitates network-based communication, since the containers may be scheduled on different underlying host systems. The containers use network discovery to identify one another and typically operate in a client-server model.
 
-If the simulation is not performing rendering then its container can use a base image without support for GPU acceleration and can be run on a CPU-only host system, whilst the model container uses a [CUDA](https://hub.docker.com/r/nvidia/cuda/) or [OpenCL](https://hub.docker.com/r/nvidia/opencl/) equipped base image and runs on a host system with one or more GPUs attached. If the simulation is performing rendering then its container will need to use a base image with [OpenGL](https://hub.docker.com/r/nvidia/opengl/) support and run on a GPU-equipped host system.
+If the simulation is not performing rendering then its container can use a runtime image without support for GPU acceleration and can be run on a CPU-only host system, whilst the model container uses a [CUDA](https://hub.docker.com/r/nvidia/cuda/) or [OpenCL](https://hub.docker.com/r/nvidia/opencl/) equipped base image and runs on a host system with one or more GPUs attached. If the simulation is performing rendering then its container will need to use a base image with [OpenGL or Vulkan](../concepts/gpu-acceleration#graphics-apis) support and run on a GPU-equipped host system.
 
 This strategy is well-suited to scenarios where there exists a one-to-many relationship between a single simulation and multiple machine learning models, such as when multiple autonomous agents are interacting in a single shared virtual environment. Note that this strategy is **not well-suited to scenarios where multiple agents each require rendered frames from a unique camera**, since the GPUs attached to the simulation container will quickly become a bottleneck as the number of connected agents increases. In such scenarios, it is better to run an Unreal Engine [dedicated server](https://docs.unrealengine.com/en-US/Gameplay/Networking/Server/index.html) to coordinate shared state and have it communicate with multiple sets of paired containers that each tightly couple an agent with an Unreal Engine client that performs rendering on its behalf.
 
@@ -86,4 +88,4 @@ In this strategy, the simulation and the machine learning model are deployed tog
 
 - Modifications to either the simulation or the machine learning model will necessitate a rebuild of the single shared container image.
 
-- If the simulation is performing rendering then the container base image will need to [support both OpenGL and CUDA](https://hub.docker.com/r/nvidia/cudagl/). (NVIDIA does not currently provide a base image that supports both OpenGL and OpenCL, so you will need to configure a base image manually if your machine learning model requires OpenCL.) If the simulation does not perform rendering then a [CUDA](https://hub.docker.com/r/nvidia/cuda/) or [OpenCL](https://hub.docker.com/r/nvidia/opencl/) equipped base image will be sufficient.
+- If the simulation is performing rendering then the container base image will need to support both [OpenGL and CUDA/OpenCL](../concepts/gpu-acceleration#graphics-apis). If the simulation does not perform rendering then a CUDA or OpenCL equipped base image will be sufficient.

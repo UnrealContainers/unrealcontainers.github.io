@@ -6,8 +6,8 @@ order: 1
 ---
 
 {% capture _alert_content %}
-- Unreal Engine container images that [include the Engine Tools and support building for the desired target platform(s)](../obtaining-images/image-sources)
-- Environments [configured for running the containers](../environments) for each applicable host platform
+- An [Unreal Engine development image](../concepts/image-types) with support for for the desired target platform(s)
+- Environments [configured for running containers](../environments) for each applicable host platform
 {% endcapture %}
 {% include alerts/required.html content=_alert_content %}
 
@@ -21,16 +21,16 @@ order: 1
 
 ## Overview
 
-One of the most common uses of Unreal Engine containers is to provide reproducible environments within which automated builds of Unreal projects and plugins can be performed. These environments can be used with any existing CI system that supports Docker containers, allowing developers to utilise their preferred infrastructure and leverage existing CI/CD workflows. These workflows can also be extended to produce container images that can then be used to run packaged Unreal projects in the cloud, facilitating other use cases such as [cloud rendering](./cloud-rendering) and building [microservices powered by the Unreal Engine](./microservices). The built container images can also be deployed and scaled with standard container orchestration technologies, allowing developers to comply with existing best practices for running containerised applications.
+One of the most common uses of Unreal Engine containers is to provide reproducible environments within which automated builds of Unreal projects and plugins can be performed. These environments can be used with any existing CI system that supports containers, allowing developers to utilise their preferred infrastructure and leverage existing CI/CD workflows. These workflows can also be extended to produce container images that can then be used to run packaged Unreal projects in the cloud, facilitating other use cases such as [cloud rendering](./cloud-rendering) and building [microservices powered by the Unreal Engine](./microservices). The built container images can also be deployed and scaled with standard container orchestration technologies, allowing developers to comply with existing best practices for running containerised applications.
 
 
 ## Key considerations
 
-- Methods of building and packaging Unreal projects that utilise a graphical interface will not work inside containers. If you are not already accustomed to building and packaging projects via the command-line then you should take the time to familiarise yourself with this process on a host system before attempting to perform packaging inside Docker containers.
+- Methods of building and packaging Unreal projects that utilise a graphical interface will not work inside containers. If you are not already accustomed to building and packaging projects via the command-line then you should take the time to familiarise yourself with this process on a host system before attempting to perform packaging inside a container.
 
-- You will need to make sure your chosen CI system supports running build commands inside Docker containers. If you are using [Windows containers](../concepts/windows-containers) then you will also need to check that specific support for Windows containers is included, as some CI systems only include support for Linux containers.
+- You will need to make sure your chosen CI system supports running build commands inside containers. If you are using [Windows containers](../concepts/windows-containers) then you will also need to check that specific support for Windows containers is included, as some CI systems only include support for Linux containers.
 
-- If you're building Docker images for deploying packaged projects then you will need to make sure your chosen CI system supports building container images from Dockerfiles.
+- If you're building container images for deploying packaged projects then you will need to make sure your chosen CI system supports building container images from Dockerfiles.
 
 
 ## Implementation guidelines
@@ -55,7 +55,7 @@ Once a project or plugin has been built and packaged there are a number of avail
 
 - **Copying the files to bind-mounted host filesystem directories.** This is typically the most common approach, since the CI system orchestrating the build can then identify the build products on the host filesystem and take the appropriate actions to copy them to permanent storage locations.
 
-- **Copying the files to a new container image for deployment.** If you are planning to deploy a packaged Unreal project using Docker containers then you can create the container images as part of the overarching build process. See the [Building container images for deployment](#building-container-images-for-deployment) section below for more details on this option.
+- **Copying the files to a new container image for deployment.** If you are planning to deploy a packaged Unreal project using containers then you can create the runtime container images as part of the overarching build process. See the [Building runtime container images for deployment](#building-runtime-container-images-for-deployment) section below for more details on this option.
 
 #### Running tests
 
@@ -88,22 +88,22 @@ There are a number of infrastructure projects maintained by the community that a
 
 In order to use any given infrastructure project it will need to be included in your container images. Unless your Unreal Engine container images already contain these components you will need to write a Dockerfile that extends an existing Unreal Engine container image and installs the desired infrastructure.
 
-### Building container images for deployment
+### Building runtime container images for deployment
 
-In a scenario where you're packaging a project for distribution via traditional mechanisms you will most likely start a container using an existing image and run a series of build commands inside that container. However, if you're deploying a packaged project using Docker containers, the entire build process can actually take place within a [docker build](https://docs.docker.com/engine/reference/commandline/build/) command that uses [Docker multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) to copy the packaged files into a new container image at the end of the process. (In a dual-distribution scenario you can also copy the packaged files from the filesystem of the newly-built container image to the host filesystem and then deploy those files using traditional mechanisms.)
+In a scenario where you're packaging a project for distribution via traditional mechanisms you will most likely start a container using a development image and run a series of build commands inside that container. However, if you're deploying a packaged project using containers, the entire build process can actually take place within a [docker build](https://docs.docker.com/engine/reference/commandline/build/) command that uses a [Docker multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/) to copy the packaged files into a new container image at the end of the process. (In a dual-distribution scenario you can also copy the packaged files from the filesystem of the newly-built container image to the host filesystem and then deploy those files using traditional mechanisms.)
 
 Writing a Dockerfile for a multi-stage build is quite straightforward:
 
-- The container image that contains the Engine Tools and that will be used for building and packaging the project should be specified in the first `FROM` directive of the Dockerfile.
+- The development container image that will be used for building and packaging the project should be specified in the first `FROM` directive of the Dockerfile.
 
 - This directive should be followed by one or more `RUN` directives to build and package the project using your preferred mechanisms.
 
-- The Dockerfile should conclude with a second `FROM` directive that specifies the [base image that the packaged project will run inside](../obtaining-images/image-sources#sources-of-base-images-for-running-packaged-unreal-projects) and a `COPY` directive to copy the packaged files into the new image.
+- The Dockerfile should conclude with a second `FROM` directive that specifies the [runtime image that the packaged project will run inside](../obtaining-images/image-sources#sources-of-unreal-engine-runtime-images) and a `COPY` directive to copy the packaged files into the new image.
 
 An example Dockerfile is provided below that builds and packages a project in the [ue4-full container image](https://docs.adamrehn.com/ue4-docker/building-images/available-container-images#ue4-full) from the [ue4-docker project](../obtaining-images/ue4-docker) and copies the packaged files into the [adamrehn/ue4-runtime](https://hub.docker.com/r/adamrehn/ue4-runtime) runtime image.
 
 {% highlight docker %}
-# Perform the build in an Unreal Engine container image that includes the Engine Tools
+# Perform the build in an Unreal Engine development container image that includes the Engine Tools
 FROM adamrehn/ue4-full:4.21.2 AS builder
 
 # Clone the source code for our Unreal project
@@ -114,7 +114,7 @@ RUN git clone --progress --depth 1 https://github.com/adamrehn/ue4-sample-projec
 WORKDIR /tmp/project
 RUN ue4 package
 
-# Copy the packaged files into a container image that doesn't include any Unreal Engine components
+# Copy the packaged files into a runtime container image that doesn't include any Unreal Engine components
 FROM adamrehn/ue4-runtime:latest
 COPY --from=builder --chown=ue4:ue4 /tmp/project/dist/LinuxNoEditor /home/ue4/project
 {% endhighlight %}
@@ -133,7 +133,7 @@ There are two common approaches for incorporating the precompiled binaries into 
 
 - **Download the files from a remote server.** In this approach, the packaged plugin files are uploaded to a remote server or artifact management system and then downloaded as needed when building projects that consume them. This approach is extremely flexible because each plugin can be consumed by any number of projects, but requires additional infrastructure for storing and serving the files.
 
-- **Bake the files into a container image.** In this approach, the packaged plugin files are incorporated into the container image that will be used as the build environment for a project. This approach is somewhat inflexible and can result in a large number of container images when you are building multiple projects depending on multiple plugins, but is suitable for simple projects and requires no additional infrastructure.
+- **Bake the files into a development container image.** In this approach, the packaged plugin files are incorporated into the container image that will be used as the build environment for a project. This approach is somewhat inflexible and can result in a large number of container images when you are building multiple projects depending on multiple plugins, but is suitable for simple projects and requires no additional infrastructure.
 
 
 ## Related media

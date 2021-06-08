@@ -68,10 +68,8 @@ Linux containers can access full GPU acceleration on NVIDIA graphics hardware us
 
 Windows containers can access limited GPU acceleration on graphics hardware from any vendor using [native hardware acceleration support](./windows-containers#hardware-acceleration-support), so long as the graphics drivers are compliant with Windows Display Driver Model (WDDM) version 2.5 or newer. The following graphics APIs are supported:
 
-- DirectX
+- DirectX ([including DirectX Raytracing](../../blog/offscreen-rendering-in-windows-containers/))
 - DirectML
-
-It is worth noting that although DirectX rasterisation functions perfectly, testing performed by the authors of this documentation found that raytracing did not function correctly under certain circumstances. This issue has been reported to Microsoft and tests are ongoing.
 
 It is important to note that **Windows containers cannot access graphics APIs for encoding and decoding video**, which means they cannot be used for tasks that require hardware accelerated video encoding such as running [Pixel Streaming](https://docs.unrealengine.com/4.26/en-US/SharingAndReleasing/PixelStreaming/) applications.
 

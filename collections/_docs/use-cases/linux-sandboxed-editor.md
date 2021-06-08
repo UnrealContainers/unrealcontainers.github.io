@@ -2,12 +2,12 @@
 title: Linux Sandboxed Editor
 tagline: Run the Unreal Editor inside a container and interact with it directly from the host system.
 quickstart: "workflows"
-order: 6
+order: 8
 ---
 
 {% capture _alert_content %}
-- Unreal Engine container image(s) that include both [the Engine Tools and NVIDIA Container Toolkit support](../obtaining-images/image-sources) as well as the X11 runtime libraries
-- A [local Linux development environment](../environments/local-linux) configured for running containers via the NVIDIA Container Toolkit and running an X11 server
+- An [Unreal Engine development image](../concepts/image-types) with support for [GPU acceleration](../concepts/gpu-acceleration) and a copy of the X11 runtime libraries
+- A [local Linux development environment](../environments/local-linux) configured for running containers with GPU acceleration and running an X11 server
 {% endcapture %}
 {% include alerts/required.html content=_alert_content %}
 
@@ -23,16 +23,16 @@ order: 6
 
 {% include alerts/warning.html title="Simpler alternative available:" content="This approach is far more restrictive than simply copying the Engine Installation to the host system and running it natively. In the majority of situations you will be better off following the instructions provided on the [Linux Installed Builds](./linux-installed-builds) page instead." %}
 
-On Linux host systems that satisfy the requirements listed at the top of this page, it is possible to run the Unreal Editor from inside a Docker container with full GPU acceleration and have its UI windows displayed on the host system. This facilitates a deployment strategy where the Unreal Engine runs on developers' machines in a sandboxed environment that still allows users to interact with the Editor in the same manner as they would if it were running natively. This can be useful in scenarios where you need to bundle complex dependencies with the Editor (such as machine learning frameworks) or if you are using a custom Engine version that is updated very frequently and will benefit from the ability to rapidly deploy updates to developers' workstations.
+On Linux host systems that satisfy the requirements listed at the top of this page, it is possible to run the Unreal Editor from inside a container with full GPU acceleration and have its UI windows displayed on the host system. This facilitates a deployment strategy where the Unreal Engine runs on developers' machines in a sandboxed environment that still allows users to interact with the Editor in the same manner as they would if it were running natively. This can be useful in scenarios where you need to bundle complex dependencies with the Editor (such as machine learning frameworks) or if you are using a custom Engine version that is updated very frequently and will benefit from the ability to rapidly deploy updates to developers' workstations.
 
 
 ## Key considerations
 
-- This approach only works on machines that satisfy the [hardware and software requirements](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(Native-GPU-Support)) of the [NVIDIA Container Toolkit](../concepts/nvidia-docker). By contrast, exporting [Linux Installed Builds](./linux-installed-builds) and running them natively will work on any Linux machine that is capable of running the Unreal Editor, irrespective of GPU vendor.
+- This approach only works on machines that satisfy the hardware and software requirements for running [GPU accelerated Linux containers](../concepts/gpu-acceleration). By contrast, exporting [Linux Installed Builds](./linux-installed-builds) and running them natively will work on any Linux machine that is capable of running the Unreal Editor.
 
 - Because this approach makes use of a bind-mounted X11 socket, an X11 server must be running on the host system. Linux distributions that ship with an alternative display server protocol enabled by default (e.g. [Wayland](https://wayland.freedesktop.org/)) will require additional configuration to enable an X11 user session.
 
-- Container images must include the X11 runtime libraries in order for the Unreal Engine to recognise the bind-mounted X11 socket. If your container images do not include the relevant libraries then the Editor will default to offscreen rendering and no UI windows will be displayed.
+- Development container images must include the X11 runtime libraries in order for the Unreal Engine to recognise the bind-mounted X11 socket. If your container images do not include the relevant libraries then the Editor will default to offscreen rendering and no UI windows will be displayed.
 
 
 ## Implementation guidelines
@@ -41,7 +41,7 @@ On Linux host systems that satisfy the requirements listed at the top of this pa
 
 #### Starting a container
 
-Irrespective of the [source of container images](../obtaining-images/image-sources) that is used, the following command will start a container from which the Editor can be run interactively (replace `unreal-engine:latest` with the tag for your container image):
+Irrespective of the [source of development container images](../obtaining-images/image-sources#sources-of-unreal-engine-development-images) that is used, the following command will start a container from which the Editor can be run interactively (replace `unreal-engine:latest` with the tag for your container image):
 
 {% highlight bash %}
 # Starts a container running a bash shell from which the UE4Editor executable can be run
@@ -76,7 +76,7 @@ Under Linux, the Editor stores its cache for compiled assets under the directory
 
 #### Enabling audio support
 
-By default, the container will not have access to the audio devices from the host system and so audio output will be disabled. If your container images include PulseAudio support then you can enable audio output by bind-mounting the PulseAudio socket from the host system using the flag `"-v/run/user/$UID/pulse:/run/user/1000/pulse"`. Note that this will not work for the root user, so you will need to run the command as a non-root user as described by the [Post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/) page of the Docker documentation.
+By default, the container will not have access to the audio devices from the host system and so audio output will be disabled. If your container images include PulseAudio support then you can enable audio output by bind-mounting the PulseAudio socket from the host system using the flag `"-v/run/user/$UID/pulse:/run/user/1000/pulse"`. Note that this will not work for the root user, so you will need to run the command as a non-root user as described by the [Post-installation steps for Linux](https://docs.docker.com/engine/install/linux-postinstall/) page of the Docker documentation.
 
 ### Using container images from the ue4-docker project
 

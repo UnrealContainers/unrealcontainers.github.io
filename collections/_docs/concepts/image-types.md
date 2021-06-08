@@ -52,6 +52,8 @@ Unreal Engine container images are divided into development images and runtime i
 
 ## Development images
 
+{% include alerts/info.html content="Interested in building or obtaining a development image? Take a look at the [available sources of development images](../obtaining-images/image-sources#sources-of-unreal-engine-development-images)." %}
+
 Unreal Engine development images are used for building and packaging Unreal projects and plugins. They contain the following:
 
 - ***(Required):*** The Unreal Engine build tools and Editor *(the Unreal Engine EULA refers to these as the **"Engine Tools"**)*
@@ -80,6 +82,8 @@ You **do not need to use a development image** if you want to do any of the foll
 
 
 ## Runtime images
+
+{% include alerts/info.html content="Interested in building or obtaining a runtime image? Take a look at the [available sources of runtime images](../obtaining-images/image-sources#sources-of-unreal-engine-runtime-images)." %}
 
 Unreal Engine runtime images are used for running packaged Unreal projects. These images are typically **base images**, which means they are designed to act as a foundation that is then extended by developers who build other container images atop them. (In the case of Unreal Engine runtime images specifically, this extension takes the form of providing the files for the packaged Unreal project that you want to run in a container.) They contain the following:
 
