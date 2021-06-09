@@ -75,7 +75,7 @@ sc.exe stop docker
 **Step 3:** Start the Docker EE service again:
 
 {% highlight powershell %}
-sc.exe stop docker
+sc.exe start docker
 {% endhighlight %}
 
 
