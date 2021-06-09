@@ -5,9 +5,9 @@ order: 1
 ---
 
 {% capture _alert_content %}
-- **Development images are used for building and packaging Unreal projects and plugins**. They contain the Unreal Engine build tools and Editor, and there are strict EULA restrictions that govern their distribution.
+- **Development images are used for tasks that require the Editor, such as building and packaging projects or plugins**. They contain the Unreal Engine build tools and Editor, and there are strict EULA restrictions that govern their distribution.
 
-- **Runtime images are used for running packaged Unreal projects**. They contain only packaged Unreal projects and their runtime dependencies, and can be distributed more freely than development images.
+- **Runtime images are used for running packaged projects**. They contain only packaged Unreal projects and their runtime dependencies, and can be distributed more freely than development images.
 
 - Different use cases require may either one or both of these types of container images.
 
@@ -54,7 +54,7 @@ Unreal Engine container images are divided into development images and runtime i
 
 {% include alerts/info.html content="Interested in building or obtaining a development image? Take a look at the [available sources of development images](../obtaining-images/image-sources#sources-of-unreal-engine-development-images)." %}
 
-Unreal Engine development images are used for building and packaging Unreal projects and plugins. They contain the following:
+Unreal Engine development images are used for tasks that require the Unreal Editor, such as building and packaging Unreal projects or plugins, invoking command-line features such as commandlets or cinematic renders, and running automation workflows. They contain the following:
 
 - ***(Required):*** The Unreal Engine build tools and Editor *(the Unreal Engine EULA refers to these as the **"Engine Tools"**)*
 - ***(Optional):*** Non-core Engine components such as template projects, debug symbols and [Derived Data Cache (DDC)](https://docs.unrealengine.com/en-US/ProductionPipelines/DerivedDataCache/index.html)
@@ -69,6 +69,7 @@ You **need to use a development image** if you want to perform any of the follow
 - Build and package Unreal projects or plugins inside a container
 - Run [automation tests](https://docs.unrealengine.com/en-US/TestingAndOptimization/Automation/index.html) for an Unreal project inside a container
 - Run commandlets to bake lighting, cook content or perform other tasks for an Unreal project inside a container
+- Render [Sequencer](https://docs.unrealengine.com/4.26/en-US/AnimatingObjects/Sequencer/Overview/) cinematics for an Unreal project inside a container
 - Run [Python scripts or other Editor automation utilities](https://docs.unrealengine.com/en-US/ProductionPipelines/ScriptingAndAutomation/index.html) inside a container
 {% endcapture %}
 {% include styled-lists/checks.html list=_list %}
