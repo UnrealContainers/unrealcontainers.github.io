@@ -1,5 +1,6 @@
 {% capture _image_url %}{{ "/" | relative_url }}assets/images/blog/{{ page.slug }}/{{ include.image }}{% endcapture %}
-{% include figures/base.html
-	image=_image_url
-	caption=include.caption
-%}
+{% if include.markdown %}
+{%- include figures/markdown.html image=_image_url caption=include.caption -%}
+{% else %}
+{%- include figures/base.html image=_image_url caption=include.caption -%}
+{% endif %}

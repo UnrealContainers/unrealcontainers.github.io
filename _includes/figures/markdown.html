@@ -1,0 +1,4 @@
+<figure>
+	<a href="{{ include.image | uri_escape }}"><img src="{{ include.image | uri_escape }}" alt="{{ include.caption | markdownify | strip_html | strip_newlines | escape }}"></a>
+	<figcaption>{{ include.caption | markdownify | replace: "<p>", "" | replace: "</p>", "" | strip_newlines }}</figcaption>
+</figure>
