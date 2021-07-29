@@ -62,6 +62,10 @@ article p + ul {
 	margin: 2rem 0;
 }
 
+article ul + h4 {
+	margin-top: 2.5rem;
+}
+
 article ul li ul,
 article ul li ol,
 article ol li ul,
