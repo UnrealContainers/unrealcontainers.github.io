@@ -135,7 +135,7 @@ article blockquote
 article p code, article li code, article th code, article td code
 {
 	background-color: rgba(0, 0, 0, 0.04);
-	padding: 0.25rem 0.5rem;
+	padding: 0 0.5rem;
 	border-radius: 0.25rem;
 	display: inline-block;
 	margin: 0 0.1rem;
