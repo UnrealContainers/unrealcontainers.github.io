@@ -43,6 +43,10 @@
 		font-size: 0.8rem;
 	}
 	
+	article pre, article pre code {
+		font-size: 0.8rem;
+	}
+	
 	#navtoggle
 	{
 		font-size: 1.5rem;
