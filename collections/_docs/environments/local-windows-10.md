@@ -27,7 +27,12 @@ order: 6
 
 ## Optimal performance warning for Windows containers
 
-{% include alerts/warning.html content="If you are using Windows 10 to build and run [Windows containers](../concepts/windows-containers) then Docker Desktop for Windows will use Hyper-V isolation mode by default, which suffers from a number of [performance and stability issues](../concepts/windows-containers#hyper-v-isolation-mode-issues) that make it poorly suited for use with Unreal Engine containers. If you are running Windows 10 version 1809 or newer then it is strongly recommended that you [instruct Docker to use process isolation mode instead](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/faq#can-i-run-windows-containers-in-process-isolated-mode-on-windows-10). If you are running an older version of Windows 10 that does not support this feature then it is recommended that you update to Windows 10 version 1809 or newer, or alternatively use [Windows Server](./local-windows-server) to build and run Windows containers in process isolation mode." %}
+{% capture _alert_content %}
+**Do not use Windows 10 version 1803 or older, or Windows 10 version 21H1, to build Windows container images.**
+
+If you are using Windows 10 to build and run [Windows containers](../concepts/windows-containers) then Docker Desktop for Windows will use Hyper-V isolation mode by default, which suffers from a number of [performance and stability issues](../concepts/windows-containers#hyper-v-isolation-mode-issues) that make it poorly suited for use with Unreal Engine containers. If you are running Windows 10 version 1809 or newer then it is strongly recommended that you [instruct Docker to use process isolation mode instead](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/faq#can-i-run-windows-containers-in-process-isolated-mode-on-windows-10), but **process isolation mode is not supported by Windows 10 version 21H1 [due to a lack of corresponding base images](https://github.com/microsoft/Windows-Containers/issues/117).** If you are running an older version of Windows 10 that does not support this feature then it is recommended that you update to Windows 10 version 1809, 2004 or 20H2, or alternatively use [Windows Server](./local-windows-server) to build and run Windows containers in process isolation mode.
+{% endcapture %}
+{% include alerts/warning.html content=_alert_content %}
 
 
 ## Installing Docker
