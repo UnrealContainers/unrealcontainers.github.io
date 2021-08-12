@@ -61,27 +61,27 @@ header .nav-wrapper-outer a, header .nav-wrapper-outer a:hover
 	color: #000;
 }
 
-header .nav-wrapper-inner, header .logos
+header .nav-wrapper-inner, header .logo
 {
 	flex-grow: 1;
 	flex-shrink: 1;
 }
 
-header .logos {
+header .logo {
 	text-align: left;
 }
 
-header .logos img {
-	max-width: 10rem;
+header .logo img {
+	max-width: 7rem;
 }
 
-.page-home header .logos
+.page-home header .logo
 {
 	text-align: center;
 	margin-bottom: 2rem;
 }
 
-.page-home header .logos img {
+.page-home header .logo img {
 	max-width: 80%;
 }
 

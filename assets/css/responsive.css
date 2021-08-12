@@ -13,7 +13,7 @@
 
 @media only screen and (min-width: 576px)
 {
-	.page-home header .logos {
+	.page-home header .logo {
 		margin-bottom: 4rem;
 	}
 	
@@ -28,8 +28,8 @@
 
 @media only screen and (min-width: 40rem)
 {
-	.page-home header .logos img {
-		max-width: 35rem;
+	.page-home header .logo img {
+		max-width: 20rem;
 	}
 }
 
