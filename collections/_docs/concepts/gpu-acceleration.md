@@ -66,12 +66,12 @@ Linux containers can access full GPU acceleration on NVIDIA graphics hardware us
 
 ## GPU support for Windows containers
 
-Windows containers can access limited GPU acceleration on graphics hardware from any vendor using [native hardware acceleration support](./windows-containers#hardware-acceleration-support), so long as the graphics drivers are compliant with Windows Display Driver Model (WDDM) version 2.5 or newer. The following graphics APIs are supported:
+Windows containers can access limited GPU acceleration on graphics hardware from any vendor using [native hardware acceleration support](./windows-containers#hardware-acceleration-support), so long as the graphics drivers are compliant with Windows Display Driver Model (WDDM) version 2.5 or newer. The following graphics APIs are supported by default:
 
 - DirectX ([including DirectX Raytracing](../../blog/offscreen-rendering-in-windows-containers/))
 - DirectML
 
-It is important to note that **Windows containers cannot access graphics APIs for encoding and decoding video**, which means they cannot be used for tasks that require hardware accelerated video encoding such as running [Pixel Streaming](https://docs.unrealengine.com/4.26/en-US/SharingAndReleasing/PixelStreaming/) applications.
+It is possible to enable support for additional graphics APIs as described in the blog post [Enabling vendor-specific graphics APIs in Windows containers](../../blog/enabling-vendor-specific-graphics-apis-in-windows-containers/). Please note that using graphics APIs other than DirectX inside Windows containers is not officially supported by Microsoft and is **not recommended for production use**. However, it does make it possible to access graphics APIs for encoding and decoding video, which allows Windows containers to be used for tasks that require hardware accelerated video encoding such as running [Pixel Streaming](https://docs.unrealengine.com/4.27/en-US/SharingAndReleasing/PixelStreaming/) applications.
 
 For an example of a Windows container image suitable for use with GPU acceleration, see the blog post [Offscreen rendering in Windows containers](../../blog/offscreen-rendering-in-windows-containers/).
 
