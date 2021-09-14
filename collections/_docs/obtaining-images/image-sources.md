@@ -5,7 +5,7 @@ order: 2
 ---
 
 {% capture _prerequisites %}
-- [Development images .vs. runtime images](../concepts/image-types)
+- [Development images vs. runtime images](../concepts/image-types)
 - [Unreal Engine EULA Restrictions](./eula-restrictions)
 {% endcapture %}
 {% include alerts/prerequisites.html pages=_prerequisites %}

@@ -1,5 +1,5 @@
 ---
-title: Development images .vs. runtime images
+title: Development images vs. runtime images
 tagline: What are the two types of Unreal Engine container images and how do they differ?
 order: 1
 ---
