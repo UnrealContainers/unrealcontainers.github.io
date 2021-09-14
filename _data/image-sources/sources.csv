@@ -1,3 +1,4 @@
-Source,Linux,Windows,macOS,Linux containers,Windows containers,NVIDIA GPU support,Source build,Installed Build,Windows native,Linux native,Linux cross-compilation,Android cross-compilation,HTML5 cross-compilation
-ue4-docker,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No,No
-Custom Dockerfiles,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies
+Source,Dockerfiles,Pre-built images,Linux,Windows,macOS,Linux development images,Windows development images,NVIDIA GPU support,Source build,Installed Build,Windows native,Linux native,Linux cross-compilation,Android cross-compilation
+Official Container Images,Yes,Yes,Yes,Yes,Yes,Yes,No,Yes,No,Yes,Yes,Yes,No,No
+ue4-docker,Yes,No,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Yes,No,No
+Custom Dockerfiles,Yes,No,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies,Varies

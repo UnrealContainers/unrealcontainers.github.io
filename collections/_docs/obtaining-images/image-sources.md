@@ -26,24 +26,38 @@ order: 2
 
 - **Linux containers:** any image based on a full Linux distribution should work out of the box (e.g. [Fedora](https://hub.docker.com/_/fedora), [CentOS](https://hub.docker.com/_/centos), [Ubuntu](https://hub.docker.com/_/ubuntu), etc.) but minimal distributions like [Alpine](https://hub.docker.com/_/alpine) will most likely have issues.
 
-- **Linux containers with the NVIDIA Container Toolkit:** performing offscreen rendering inside a container requires an image derived from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/), [nvidia/vulkan](https://hub.docker.com/r/nvidia/vulkan/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images. Creating X11 windows also requires the X11 runtime libraries.
+- **GPU accelerated Linux containers with the NVIDIA Container Toolkit:** performing offscreen rendering inside a container requires an image derived from the [nvidia/opengl](https://hub.docker.com/r/nvidia/opengl/), [nvidia/vulkan](https://hub.docker.com/r/nvidia/vulkan/) or [nvidia/cudagl](https://hub.docker.com/r/nvidia/cudagl/) base images. Creating X11 windows also requires the X11 runtime libraries.
 
-Since runtime base images do not contain any Unreal Engine components, they can be [distributed without any restrictions](./eula-restrictions) and shared publicly on container registries such as Docker Hub. A number of pre-configured base images are maintained by the community and are readily available for download:
+Since runtime base images do not contain any Unreal Engine components, they can be [distributed without any restrictions](./eula-restrictions) and shared publicly on container registries such as Docker Hub. A number of pre-configured base images are readily available for download:
 
-- [adamrehn/ue4-runtime](https://hub.docker.com/r/adamrehn/ue4-runtime): provides a variety of tags representing minimal, pre-configured environments for running packaged Unreal Engine projects with GPU acceleration via the [NVIDIA Container Toolkit](../concepts/nvidia-docker). Support for both OpenGL and Vulkan is provided by all image variants. Includes variants with CUDA support for use with machine learning workloads.
+- [Official Container Images](./official-images): the set of official Unreal Engine container images provided by Epic Games includes a number of runtime images for various use cases. The Linux runtime images are derived from the ue4-runtime repository listed immediately below.
+
+- [adamrehn/ue4-runtime](https://hub.docker.com/r/adamrehn/ue4-runtime): provides a variety of tags representing minimal, pre-configured environments for running packaged Unreal Engine projects in GPU accelerated Linux containers via the [NVIDIA Container Toolkit](../concepts/nvidia-docker). Support for both OpenGL and Vulkan is provided by all image variants. Includes variants with CUDA support for use with Pixel Streaming applications or machine learning workloads.
 
 
 ## Sources of Unreal Engine development images
 
-[Development images](../concepts/image-types#development-images) are images which contain the "Engine Tools" (Editor and build tools.) As discussed in the [Unreal Engine EULA Restrictions](./eula-restrictions) page, container images that include the Engine Tools for building and packaging Unreal projects or plugins cannot be distributed publicly. These container images must only be distributed privately to ensure compliance with the terms of the EULA. If your organisation already has prebuilt container images then you can access them via whichever private sharing mechanism is most appropriate. If you do not have access to existing container images within your organisation then you will need to build container images yourself.
+[Development images](../concepts/image-types#development-images) are images which contain the "Engine Tools" (Editor and build tools.) As discussed in the [Unreal Engine EULA Restrictions](./eula-restrictions) page, container images that include the Engine Tools for building and packaging Unreal projects or plugins cannot be distributed publicly. **These container images must only be distributed privately to ensure compliance with the terms of the EULA.**
 
-The following sources are available for building Unreal Engine container images that include the Engine Tools:
+Since building development images can be a time-consuming process, it is typically preferable to use pre-built images where available. If pre-built container images that meet your requirements are not available (or you wish to create container images for a custom version of the Unreal Engine) then you will need to build images and distribute them within your organisation via whichever private sharing mechanism is most appropriate.
+
+**The following sources provide pre-built development container images**:
 
 {% assign source-pages = site.documents | where: "category", page.category | where: "subcategory", page.subcategory | where_exp: "page", "page.order > 2" %}
+{% for source in site.data.image-sources.sources %}
+{% assign page = source-pages | where: "source", source['Source'] | first %}
+{% if source['Pre-built images'] == 'Yes' %}
+- [{{ source['Source'] | escape }}]({{ page.url | relative_url }}): {{ page.tagline | escape }}
+{% endif %}
+{% endfor %}
+
+**The following sources are available for building development container images**:
 
 {% for source in site.data.image-sources.sources %}
 {% assign page = source-pages | where: "source", source['Source'] | first %}
+{% if source['Pre-built images'] != 'Yes' %}
 - [{{ source['Source'] | escape }}]({{ page.url | relative_url }}): {{ page.tagline | escape }}
+{% endif %}
 {% endfor %}
 
 For details of the features supported by these sources, see the section below.
@@ -51,7 +65,7 @@ For details of the features supported by these sources, see the section below.
 
 ## Feature support matrix
 
-The table below lists the features that are supported by each source of container images that include the Engine Tools:
+The table below lists the features that are supported by each source of development container images:
 
 {% assign cols = site.data.image-sources.sources.size | plus: 1 %}
 {::nomarkdown}

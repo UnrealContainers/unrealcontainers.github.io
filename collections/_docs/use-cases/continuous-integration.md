@@ -119,9 +119,9 @@ FROM adamrehn/ue4-runtime:latest
 COPY --from=builder --chown=ue4:ue4 /tmp/project/dist/LinuxNoEditor /home/ue4/project
 {% endhighlight %}
 
-### Using prebuilt Unreal plugins
+### Using pre-built Unreal plugins
 
-Using prebuilt plugins can speed up a project's build process by avoiding the need to recompile all of the plugins the project depends on each time the project itself is rebuilt. There are two ways to obtain precompiled binaries for a plugin:
+Using pre-built plugins can speed up a project's build process by avoiding the need to recompile all of the plugins the project depends on each time the project itself is rebuilt. There are two ways to obtain precompiled binaries for a plugin:
 
 - **Unreal Marketplace plugins:** plugins distributed via the [Unreal Marketplace](https://www.unrealengine.com/marketplace/) typically include precompiled binaries for Windows, although not for Linux.
 

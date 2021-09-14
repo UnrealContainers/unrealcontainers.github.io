@@ -1,21 +1,30 @@
+"Distribution":
+  -
+    name: Dockerfiles
+    description: Provides Dockerfiles to build development container images from source.
+  -
+    name: Pre-built images
+    description: Provides pre-built development container images.
 "Host platforms":
   -
     name: Linux
-    description: Supports building containers using Docker CE and Docker EE under Linux.
+    description: Supports building and/or running containers using Docker CE and Docker EE under Linux.
   -
     name: Windows
-    description: Supports building containers using Docker EE under Windows Server and [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/) under Windows 10.
+    description: Supports building and/or running containers using Docker EE under Windows Server and [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/) under Windows 10.
   -
     name: macOS
-    description: Supports building containers using [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/) under macOS.
+    description: Supports building and/or running containers using [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/) under macOS.
   
 "Container platforms":
   -
-    name: Linux containers
-    description: Supports building Linux containers.
+    name: Linux development images
+    description: Supports building Linux development container images.
   -
-    name: Windows containers
-    description: Supports building [Windows containers](../concepts/windows-containers).
+    name: Windows development images
+    description: Supports building [Windows](../concepts/windows-containers) development container images.
+
+"Hardware acceleration":
   -
     name: NVIDIA GPU support
     description: Supports building Linux containers that are compatible with the [NVIDIA Container Toolkit](../concepts/nvidia-docker).
@@ -40,7 +49,4 @@
     description: Supports cross-compiling Unreal Engine projects and plugins for Linux targets from Windows containers.
   -
     name: Android cross-compilation
-    description: Supports cross-compiling Unreal Engine projects and plugins for Android targets from Windows containers.
-  -
-    name: HTML5 cross-compilation
-    description: Supports cross-compiling Unreal Engine projects and plugins for HTML5 targets from Windows containers.
+    description: Supports cross-compiling Unreal Engine projects and plugins for Android targets from Windows or Linux containers.

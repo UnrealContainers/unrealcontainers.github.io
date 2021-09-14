@@ -1,6 +1,6 @@
 ---
 title: Linux Installed Builds
-tagline: Use container images as a source of prebuilt binaries in lieu of the Epic Games Launcher under Linux.
+tagline: Use container images as a source of pre-built binaries in lieu of the Epic Games Launcher under Linux.
 quickstart: "workflows"
 order: 7
 ---
@@ -22,7 +22,7 @@ order: 7
 
 ## Overview
 
-Under Windows and macOS, the Epic Games Launcher provides prebuilt Engine binaries for download by all Engine Licensees. However, the lack of a native Linux version of the Launcher leaves Linux users without a readily available source of prebuilt binaries. This complicates the onboarding process for Linux-based developers due to the need to compile the Engine from source. Fortunately, Unreal Engine container images can act as a source of prebuilt Engine binaries that can be copied from the container filesystem to the host and then distributed via an organisation's internal distribution mechanisms.
+Under Windows and macOS, the Epic Games Launcher provides pre-built Engine binaries for download by all Engine Licensees. However, the lack of a native Linux version of the Launcher leaves Linux users without a readily available source of pre-built binaries. This complicates the onboarding process for Linux-based developers due to the need to compile the Engine from source. Fortunately, Unreal Engine container images can act as a source of pre-built Engine binaries that can be copied from the container filesystem to the host and then distributed via an organisation's internal distribution mechanisms.
 
 
 ## Key considerations

@@ -1,8 +1,8 @@
 ---
 title: ue4-docker
-tagline: Build Unreal Engine container images using the ue4-docker project.
+tagline: Build Unreal Engine development container images using the ue4-docker project.
 source: ue4-docker
-order: 3
+order: 4
 ---
 
 {% include alerts/source-features.html source=page.source %}
