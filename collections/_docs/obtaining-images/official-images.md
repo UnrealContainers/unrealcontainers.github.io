@@ -7,8 +7,6 @@ order: 3
 
 {% include alerts/source-features.html source=page.source %}
 
-{% include alerts/warning.html title="Pre-built images coming soon!" content="Although the [Unreal Engine documentation](https://docs.unrealengine.com/4.27/en-US/SharingAndReleasing/Containers/) makes reference to pre-built container images on GitHub Container Registry, these images are not yet available. These images are expected to be available soon." %}
-
 
 ## About this container image source
 
@@ -23,6 +21,19 @@ The source code for all of the official container images can be found under the 
 The code for the official container images [was contributed to the Unreal Engine by Dr Adam Rehn](https://github.com/EpicGames/UnrealEngine/commits?author=adamrehn), the creator of the ue4-docker and ue4-runtime projects and the founder of the [Unreal Containers community hub]({{ "/" | relative_url }}).
 
 The official Unreal Engine documentation features a [section covering official container support](https://docs.unrealengine.com/4.27/en-US/SharingAndReleasing/Containers/). The documentation includes an overview of the container images that ship with the Unreal Engine, getting started guides, and how-to guides for specific tasks. To avoid unnecessary duplication of information, the Unreal Engine documentation primarily provides details specific to the official container images and links to the Unreal Containers community hub to provide general context.
+
+
+## Available container images
+
+You can view the full list of available container images and tags here: <https://github.com/orgs/EpicGames/packages>.
+
+The container image [ghcr.io/epicgames/unreal-engine](https://github.com/orgs/EpicGames/packages/container/unreal-engine/versions) stores tags for both development images and runtime images:
+
+- The `dev` and `dev-slim` tags represent Linux development images.
+
+- The `runtime` and `runtime-pixel-streaming` tags represent Linux runtime images.
+
+- The `runtime-windows` tag is a manifest list that represents Windows runtime images for different Windows kernel versions.
 
 
 ## Using this container image source
