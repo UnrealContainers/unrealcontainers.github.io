@@ -85,7 +85,7 @@ EXPOSE 7777/udp
 
 # Set the dedicated server as the container's entrypoint
 # (Replace "MyProject" with the name of your project)
-ENTRYPOINT ["/home/nonroot/server/MyProject/Binaries/Linux/MyProjectServer", "MyProject"]
+ENTRYPOINT ["/home/nonroot/project/MyProject/Binaries/Linux/MyProjectServer", "MyProject"]
 {% endhighlight %}
 
 ### Windows container compatibility
