@@ -422,16 +422,28 @@ ul.page-list .page-title
 	width: 3rem;
 }
 
-.tick-list .fa-li
+.tick-list .fa-li, .icon-advantages
 {
 	font-size: 1.25rem;
 	color: green;
 }
 
-.cross-list .fa-li
+.cross-list .fa-li, .icon-disadvantages
 {
 	font-size: 1.5rem;
 	color: red;
+}
+
+.icon-paragraph
+{
+	margin-top: 2rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.icon-paragraph .icon {
+	width: 1.75rem;
 }
 
 .button-wrapper

@@ -4,6 +4,7 @@
   icon: tools
   start: &development "The type of Unreal Engine container image you'll need is a **development image**."
   steps:
+    - &technology-selection "Verify that **[containers are suitable for your use case](./technology-selection)**, and if so whether you want to use Linux containers or Windows containers."
     - &dev-definition "Learn **[what a development image is](../concepts/image-types)** and how it differs from a runtime image."
     - &dev-eula "Make sure you understand the **[legal restrictions](../obtaining-images/eula-restrictions)** that govern how development images can be distributed."
     - &dev-sources "Discover where to **[obtain development images](../obtaining-images/image-sources#sources-of-unreal-engine-development-images)**."
@@ -13,6 +14,7 @@
   icon: box
   start: "The type of Unreal Engine container image you'll need is a **runtime image**."
   steps:
+    - *technology-selection
     - "Learn **[what a runtime image is](../concepts/image-types)** and how it differs from a development image."
     - "Discover where to **[obtain runtime images](../obtaining-images/image-sources#sources-of-unreal-engine-runtime-images)**."
     - &gpu "If you want to access graphics hardware then familiarise yourself with **[how to use GPU acceleration in containers](../concepts/gpu-acceleration)**."
@@ -23,6 +25,7 @@
   icon: shipping-fast
   start: *development
   steps:
+    - *technology-selection
     - *dev-definition
     - *dev-eula
     - *dev-sources
