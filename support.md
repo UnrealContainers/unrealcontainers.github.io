@@ -17,7 +17,7 @@ Professional support to assist developers in using Unreal Engine containers is a
 
 ## TensorWorks
 
-{% include provider-details.html location="Australia" link="https://unrealconsulting.com" email="contact@unrealconsulting.com" %}
+{% include provider-details.html location="Australia" link="https://tensorworks.com.au" email="contact@tensorworks.com.au" %}
 
 In addition to employing data scientists and machine learning practitioners, the applied research company [TensorWorks](https://tensorworks.com.au) also houses a specialist team of Unreal Engine experts with strong scientific and technical backgrounds. The TensorWorks consulting team includes [Dr Adam Rehn](https://adamrehn.com/), the world's foremost expert on Unreal Engine containers and the creator of the [ue4-docker project](./docs/obtaining-images/ue4-docker), the [Unreal Engine For Research](https://ue4research.org/) initiative, and the [Unreal Containers community hub]({{ "/" | relative_url }}). TensorWorks consultants can assist with any aspect of building and using Unreal Engine containers, including but not limited to:
 
